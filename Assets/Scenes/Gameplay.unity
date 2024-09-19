@@ -395,6 +395,7 @@ MonoBehaviour:
   dialogueManager: {fileID: 2085731922}
   gameManager: {fileID: 926031996}
   charactersManager: {fileID: 0}
+  optionsManager: {fileID: 0}
   audioTecleo: {fileID: 0}
 --- !u!114 &17082862
 MonoBehaviour:
@@ -4922,14 +4923,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.43137255}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.8627451}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2b772a0e4835f304193a7d90cc52cc02, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4f057217eb1aaf946a2599b6a99cf252, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6888,7 +6889,7 @@ MonoBehaviour:
     - "\xBFComo estuvo manejando la cuarentena?"
     - "\xBFPresent\xF3 s\xEDntomas del virus? "
     prefab: {fileID: 2573835153199593656, guid: 2c13e10de9ad66b4c8ef053671a158a3, type: 3}
-    nivel: 2
+    nivel: 1
     esAgresivo: 0
   - nombre: pj15
     estado: 1
@@ -6898,7 +6899,7 @@ MonoBehaviour:
     respuestas:
     - "Se\xF1or, calmese y tome distancia..."
     prefab: {fileID: 2573835153199593656, guid: 0e2d77ba5fb3fab47bbefc4da5d96d79, type: 3}
-    nivel: 3
+    nivel: 1
     esAgresivo: 1
   - nombre: pj16
     estado: 1
@@ -6986,7 +6987,7 @@ MonoBehaviour:
     respuestas:
     - "S\xED, \xBFDe donde viene?"
     prefab: {fileID: 841363440324422405, guid: cfc627d5ff0e33e40a141873f5d8aed5, type: 3}
-    nivel: 3
+    nivel: 2
     esAgresivo: 1
   - nombre: pj22
     estado: 1
@@ -6996,7 +6997,7 @@ MonoBehaviour:
     respuestas:
     - "No puedo dejarlo pasar as\xED nom\xE1s, primero debo evaluar su estado"
     prefab: {fileID: 1526593497047026833, guid: 018373af6d4e2f547816b99ce66d7b80, type: 3}
-    nivel: 3
+    nivel: 2
     esAgresivo: 1
   dialogueManager: {fileID: 2085731922}
   gameManager: {fileID: 926031996}
@@ -7368,7 +7369,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1066798054}
   m_OnClick:
     m_PersistentCalls:
@@ -9746,14 +9747,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.43137255}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.8627451}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c44f91683ab64ec43b09fccfb8f0b9c3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d11c95f034171be469eaefcd33e752d8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -10009,6 +10010,7 @@ MonoBehaviour:
   dialogueManager: {fileID: 2085731922}
   gameManager: {fileID: 926031996}
   charactersManager: {fileID: 0}
+  optionsManager: {fileID: 0}
   audioTecleo: {fileID: 0}
 --- !u!114 &1493280884
 MonoBehaviour:
@@ -10224,6 +10226,7 @@ MonoBehaviour:
   dialogueManager: {fileID: 0}
   gameManager: {fileID: 0}
   charactersManager: {fileID: 0}
+  optionsManager: {fileID: 0}
   audioTecleo: {fileID: 0}
 --- !u!114 &1515895188
 MonoBehaviour:
@@ -10335,6 +10338,7 @@ MonoBehaviour:
   voicesSlider: {fileID: 188373405}
   audioMixer: {fileID: 24100000, guid: d877e5208d19e2e448be4224230f5ecf, type: 2}
   panelOpciones: {fileID: 1451195207}
+  botonOpciones: {fileID: 1066798053}
 --- !u!1001 &1540513120
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10739,6 +10743,7 @@ MonoBehaviour:
   dialogueManager: {fileID: 2085731922}
   gameManager: {fileID: 926031996}
   charactersManager: {fileID: 0}
+  optionsManager: {fileID: 0}
   audioTecleo: {fileID: 0}
 --- !u!114 &1658696443
 MonoBehaviour:
@@ -11402,6 +11407,7 @@ MonoBehaviour:
   dialogueManager: {fileID: 2085731922}
   gameManager: {fileID: 926031996}
   charactersManager: {fileID: 943274571}
+  optionsManager: {fileID: 1528108909}
   audioTecleo: {fileID: 152417382}
 --- !u!4 &1709672044
 Transform:
@@ -11525,6 +11531,7 @@ MonoBehaviour:
   dialogueManager: {fileID: 0}
   gameManager: {fileID: 0}
   charactersManager: {fileID: 0}
+  optionsManager: {fileID: 0}
   audioTecleo: {fileID: 0}
 --- !u!1 &1727551767
 GameObject:
@@ -13300,7 +13307,7 @@ MonoBehaviour:
   botonIngreso: {fileID: 1228093870}
   botonRechazo: {fileID: 1941776353}
   panelSiguiente: {fileID: 1947946919}
-  velocidadTexto: 0.1
+  velocidadTexto: 0.03
   gameManager: {fileID: 0}
   audioManager: {fileID: 1168009879}
   aggressiveNPCs: {fileID: 1727551768}
