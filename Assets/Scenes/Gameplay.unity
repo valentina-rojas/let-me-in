@@ -6986,7 +6986,7 @@ MonoBehaviour:
     respuestas:
     - "S\xED, \xBFDe donde viene?"
     prefab: {fileID: 841363440324422405, guid: cfc627d5ff0e33e40a141873f5d8aed5, type: 3}
-    nivel: 2
+    nivel: 3
     esAgresivo: 1
   - nombre: pj22
     estado: 1

@@ -34,7 +34,6 @@ public class AggressiveNPCs : MonoBehaviour
 
     public float tiempoBaseTemporizador;
 
-
     public Transform cameraTransform; 
     public float shakeIntensity = 0.1f; 
     public float shakeDuration = 3f;  
@@ -178,10 +177,8 @@ public class AggressiveNPCs : MonoBehaviour
                 NPCAnimationController animController = personajeAgresivoActual.GetComponent<NPCAnimationController>();
                 animController?.StartDangerAnimation();
             }
-
         }
     }
-
 
     IEnumerator TogglePanel()
     {
@@ -208,7 +205,6 @@ public class AggressiveNPCs : MonoBehaviour
             PanelTimer.SetActive(false);
             audioSeguridad.Stop();
         }
-
 
         // Detener el temblor de la cámara
         if (shakeCoroutine != null)
