@@ -147,13 +147,15 @@ public class AggressiveNPCs : MonoBehaviour
         ActualizarTextoTemporizador();
     }
 
-    void ActualizarTextoTemporizador()
+ void ActualizarTextoTemporizador()
+{
+    if (timerText != null)
     {
-        if (timerText != null)
-        {
-            timerText.text = $"{tiempoRestante:F1}";
-        }
+        int tiempoEntero = Mathf.FloorToInt(tiempoRestante); 
+        timerText.text = tiempoEntero.ToString();  
     }
+}
+
 
     void FinTemporizador()
     {
