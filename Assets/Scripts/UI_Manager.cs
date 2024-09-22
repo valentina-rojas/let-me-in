@@ -31,6 +31,7 @@ public class UI_Manager : MonoBehaviour
     public DialogueManager dialogueManager;
     public s_GameManager gameManager;
     public CharactersManager charactersManager;
+    public OptionsManager optionsManager;
 
     public AudioSource audioTecleo;
 
@@ -147,6 +148,7 @@ public class UI_Manager : MonoBehaviour
 
         audioTecleo.Stop();
         panelInicioDia.gameObject.SetActive(false);
+        optionsManager.botonOpciones.interactable = true;
 
         //llamar iniico juego
         PanelInicioDesactivado?.Invoke();

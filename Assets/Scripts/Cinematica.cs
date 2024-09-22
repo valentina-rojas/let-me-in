@@ -7,22 +7,24 @@ using UnityEngine.SceneManagement;
 
 public class Cinematica : MonoBehaviour
 {
-    public Image imagen; // Referencia al componente Image
-    public TextMeshProUGUI texto;   // Referencia al componente Text
-    public Sprite[] imagenes; // Array de sprites para las imágenes
-    public string[] textos;   // Array de textos para mostrar
-    public float duracionPorImagen = 5f; // Duración de cada imagen en segundos
-    public float velocidadDeTipeo = 0.05f; // Velocidad de tipeo del texto
-
+    public Image imagen;
+    public TextMeshProUGUI texto;
+    public Sprite[] imagenes;
+    public string[] textos;
+    public float duracionPorImagen = 5f;
+    public float velocidadDeTipeo = 0.05f;
+    public AudioSource musica;
+    public float duracionFadeOut = 2f;
+    public Image pantallaNegra;
+    public float duracionFadePantalla = 2f;
 
     private void Start()
     {
         StartCoroutine(ReproducirCinematica());
     }
 
-  private IEnumerator ReproducirCinematica()
+    private IEnumerator ReproducirCinematica()
     {
-        // Asegúrate de que los arrays de imágenes y textos tengan la misma longitud
         if (imagenes.Length != textos.Length)
         {
             Debug.LogError("El número de imágenes y textos no coincide.");
@@ -34,27 +36,74 @@ public class Cinematica : MonoBehaviour
             // Cambia la imagen
             imagen.sprite = imagenes[i];
 
-            // Tipea el texto letra por letra
             yield return StartCoroutine(TipearTexto(textos[i]));
 
-            // Espera la duración de la imagen
             yield return new WaitForSeconds(duracionPorImagen);
         }
+
+        CerrarCinematica();
     }
 
     private IEnumerator TipearTexto(string textoCompleto)
     {
-        texto.text = ""; // Limpia el texto antes de empezar
+        texto.text = "";
         foreach (char letra in textoCompleto.ToCharArray())
         {
-            texto.text += letra; // Añade una letra al texto
-            yield return new WaitForSeconds(velocidadDeTipeo); // Espera antes de añadir la siguiente letra
+            texto.text += letra;
+            yield return new WaitForSeconds(velocidadDeTipeo);
         }
     }
 
+    private IEnumerator FadeOutMusica()
+    {
+        float inicioVolumen = musica.volume;
 
-  public void ChangeScene(string name)
+        for (float t = 0; t < duracionFadeOut; t += Time.deltaTime)
+        {
+            musica.volume = Mathf.Lerp(inicioVolumen, 0, t / duracionFadeOut);
+            yield return null;
+        }
+
+        musica.volume = 0;
+        musica.Stop();
+    }
+
+    private IEnumerator FadeOutPantalla()
+    {
+        pantallaNegra.gameObject.SetActive(true);
+
+        Color colorFinal = new Color(0, 0, 0, 1);
+        Color colorInicial = new Color(0, 0, 0, 0);
+
+        pantallaNegra.color = colorInicial;
+
+        for (float t = 0; t < duracionFadePantalla; t += Time.deltaTime)
+        {
+            pantallaNegra.color = Color.Lerp(colorInicial, colorFinal, t / duracionFadePantalla);
+            yield return null;
+        }
+
+        pantallaNegra.color = colorFinal;
+    }
+
+    public void CerrarCinematica()
+    {
+        StartCoroutine(CerrarCinematicaCoroutine());
+    }
+
+    private IEnumerator CerrarCinematicaCoroutine()
+    {
+        yield return StartCoroutine(FadeOutMusica());
+        yield return StartCoroutine(FadeOutPantalla());
+        ChangeScene("Gameplay");
+    }
+
+
+
+    public void ChangeScene(string name)
     {
         SceneManager.LoadScene(name);
     }
+
+
 }

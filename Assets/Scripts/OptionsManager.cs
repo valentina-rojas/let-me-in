@@ -12,6 +12,9 @@ public class OptionsManager : MonoBehaviour
 
     public RectTransform panelOpciones;
 
+public Button botonOpciones;
+ 
+
     void Start()
     {
         musicSlider.value = 0.5f;
@@ -30,11 +33,13 @@ public class OptionsManager : MonoBehaviour
     public void AbrirOpciones()
     {
         panelOpciones.gameObject.SetActive(true);
+        Time.timeScale = 0f;      
     }
 
     public void CerrarOpciones()
     {
         panelOpciones.gameObject.SetActive(false);
+        Time.timeScale = 1f;  
     }
 
     public void SetMusicVolume(float volume)
