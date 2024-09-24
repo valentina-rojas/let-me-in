@@ -32,6 +32,7 @@ public class CharactersManager : MonoBehaviour
     public s_GameManager gameManager;
     public UI_Manager uiManager;
     public CheckCondition checkCondition;
+    public LeverController leverController;
 
     private List<GameObject> personajesEnPantalla = new List<GameObject>();
     private List<Character> charactersForCurrentLevel = new List<Character>();
@@ -114,8 +115,12 @@ public class CharactersManager : MonoBehaviour
     {
         LimpiarPersonajes();
 
-        dialogueManager.botonIngreso.interactable = false;
-        dialogueManager.botonRechazo.interactable = false;
+        // dialogueManager.botonIngreso.interactable = false;
+        // dialogueManager.botonRechazo.interactable = false;
+
+        leverController.DesactivarPalanca();
+
+
         checkCondition.botonMedico.interactable = false;
 
         Debug.Log("Esperando antes de aparecer el siguiente personaje...");

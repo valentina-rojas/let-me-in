@@ -369,7 +369,7 @@ public class DialogueManager : MonoBehaviour
 
     }
 
-    public void ColisionBotones()
+  /*  public void ColisionBotones()
     {
         var imageIngreso = botonIngreso.GetComponent<Image>();
         var imageRechazo = botonRechazo.GetComponent<Image>();
@@ -384,6 +384,6 @@ public class DialogueManager : MonoBehaviour
         {
             imageRechazo.alphaHitTestMinimumThreshold = 0.1f;
         }
-    }
+    }*/
 }
 

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731725, g: 0.13414745, b: 0.12107873, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5240,6 +5240,7 @@ MonoBehaviour:
   audioManager: {fileID: 1168009879}
   aggressiveNPCs: {fileID: 0}
   checkCondition: {fileID: 0}
+  leverController: {fileID: 0}
   medicoUsado: 0
   intervaloCursor: 0.5
   vozGuardia: {fileID: 0}
@@ -7380,6 +7381,7 @@ MonoBehaviour:
   gameManager: {fileID: 926031996}
   uiManager: {fileID: 1709672043}
   checkCondition: {fileID: 341145152}
+  leverController: {fileID: 1043990634}
   tiempoDeEspera: 7
   moveDuration: 5
   bounceHeight: 0.2
@@ -10232,6 +10234,7 @@ MonoBehaviour:
   audioManager: {fileID: 1168009879}
   aggressiveNPCs: {fileID: 0}
   checkCondition: {fileID: 0}
+  leverController: {fileID: 0}
   medicoUsado: 0
   intervaloCursor: 0.5
   vozGuardia: {fileID: 0}
@@ -13893,6 +13896,7 @@ MonoBehaviour:
   audioManager: {fileID: 1168009879}
   aggressiveNPCs: {fileID: 1727551768}
   checkCondition: {fileID: 341145152}
+  leverController: {fileID: 1043990634}
   medicoUsado: 0
   intervaloCursor: 0.4
   vozGuardia: {fileID: 1396891849}
