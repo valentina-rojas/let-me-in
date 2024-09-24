@@ -27,7 +27,6 @@ public class s_GameManager : MonoBehaviour
     public float tiempoMovimiento = 1f; // El tiempo que tarda en levantar la capa
     public float tiempoEspera = 3f; // El tiempo que esperará antes de volver a su posición original
 
-
     private int totalEnfermos;
     public int NivelActual { get; private set; }
 
@@ -61,7 +60,7 @@ public class s_GameManager : MonoBehaviour
 
     public void OnBotonIngresoClick()
     {
-        sonidoBoton.Play();
+        //sonidoBoton.Play();
 
         StartCoroutine(DetenerSonidoPuerta(4f)); // Detener sonido después de 2 segundos
         VerificarEstadoPersonaje(true);
@@ -114,7 +113,7 @@ public class s_GameManager : MonoBehaviour
 
     public void OnBotonRechazoClick()
     {
-        sonidoBoton.Play();
+       // sonidoBoton.Play();
         VerificarEstadoPersonaje(false);
         charactersManager.MoverPersonajeAlPunto(charactersManager.spawnPoint.position);
     }

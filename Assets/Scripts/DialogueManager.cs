@@ -30,9 +30,9 @@ public class DialogueManager : MonoBehaviour
 
     public s_GameManager gameManager;
     public AudioManager audioManager;
-
     public AggressiveNPCs aggressiveNPCs;
     public CheckCondition checkCondition;
+    public LeverController leverController;
 
     public bool medicoUsado = false;
 
@@ -354,9 +354,12 @@ public class DialogueManager : MonoBehaviour
 
     void MostrarBotonSiguiente()
     {
-        botonIngreso.interactable = true;
-        botonRechazo.interactable = true;
-        ColisionBotones();
+      //  botonIngreso.interactable = true;
+      //  botonRechazo.interactable = true;
+       // ColisionBotones();
+
+       leverController.ActivarPalanca();
+       
         panelSiguiente.gameObject.SetActive(true);
 
         if (!medicoUsado)
