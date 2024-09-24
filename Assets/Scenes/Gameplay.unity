@@ -2716,6 +2716,7 @@ MonoBehaviour:
   charactersManager: {fileID: 943274571}
   dialogueManager: {fileID: 2085731922}
   gameManager: {fileID: 926031996}
+  leverController: {fileID: 1043990634}
   botonMedico: {fileID: 204005907}
   sonidoBoton: {fileID: 1897245216}
 --- !u!4 &341145153
