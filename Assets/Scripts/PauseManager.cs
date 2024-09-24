@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class PauseManager : MonoBehaviour
 {
-   public GameObject pauseMenuUI;  
+    public GameObject pauseMenuUI;
 
     private bool isPaused = false;
 
-      private AudioSource[] allAudioSources;
+    private AudioSource[] allAudioSources;
 
-       void Start()
+    void Start()
     {
         allAudioSources = FindObjectsOfType<AudioSource>();
     }
@@ -31,10 +31,10 @@ public class PauseManager : MonoBehaviour
         }
     }
 
-     public void ResumeGame()
+    public void ResumeGame()
     {
-        pauseMenuUI.SetActive(false);  
-        Time.timeScale = 1f;           
+        pauseMenuUI.SetActive(false);
+        Time.timeScale = 1f;
 
         // Reanuda todos los sonidos
         foreach (AudioSource audio in allAudioSources)
@@ -47,8 +47,8 @@ public class PauseManager : MonoBehaviour
 
     void PauseGame()
     {
-        pauseMenuUI.SetActive(true);   
-        Time.timeScale = 0f;           
+        pauseMenuUI.SetActive(true);
+        Time.timeScale = 0f;
 
         // Pausa todos los sonidos
         foreach (AudioSource audio in allAudioSources)
@@ -61,17 +61,21 @@ public class PauseManager : MonoBehaviour
 
     public void RestartGame()
     {
-        Time.timeScale = 1f;           
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);  
-        pauseMenuUI.SetActive(false);  
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        pauseMenuUI.SetActive(false);
     }
 
-   public void ReturnToMenu()
+
+
+    public void ReturnToMenu()
     {
-        Time.timeScale = 1f;        
-        SceneManager.LoadScene("MenuPrincipal"); 
-        pauseMenuUI.SetActive(false);  
+        Time.timeScale = 1f; // Restablece el tiempo al valor normal
+        GameData.NivelActual = 1; // Reinicia el nivel actual a 1
+        SceneManager.LoadScene("MenuPrincipal"); // Carga la escena del menú principal
+        pauseMenuUI.SetActive(false); // Desactiva el menú de pausa
     }
+
 }
 
 

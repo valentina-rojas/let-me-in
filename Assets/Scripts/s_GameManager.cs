@@ -48,6 +48,7 @@ public class s_GameManager : MonoBehaviour
         }
     }
 
+
     public void ChangeScene(string name)
     {
         SceneManager.LoadScene(name);
@@ -221,4 +222,6 @@ public class s_GameManager : MonoBehaviour
             return "Mensaje de inicio no definido para este nivel.";
         }
     }
+
+
 }

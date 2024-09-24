@@ -18,6 +18,11 @@ public class Cinematica : MonoBehaviour
     public Image pantallaNegra;
     public float duracionFadePantalla = 2f;
 
+
+    public AudioClip[] sonidos;
+    public AudioSource audioSource;
+
+
     private void Start()
     {
         StartCoroutine(ReproducirCinematica());
@@ -35,6 +40,15 @@ public class Cinematica : MonoBehaviour
         {
             // Cambia la imagen
             imagen.sprite = imagenes[i];
+
+
+            // Si hay un sonido asociado a la imagen, lo reproduce
+            if (i < sonidos.Length && sonidos[i] != null)
+            {
+                audioSource.clip = sonidos[i];
+                audioSource.Play();
+            }
+
 
             yield return StartCoroutine(TipearTexto(textos[i]));
 
