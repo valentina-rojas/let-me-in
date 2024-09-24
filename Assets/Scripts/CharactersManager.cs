@@ -33,6 +33,7 @@ public class CharactersManager : MonoBehaviour
     public UI_Manager uiManager;
     public CheckCondition checkCondition;
     public LeverController leverController;
+    public DarkeningLayer darkeningLayer;
 
     private List<GameObject> personajesEnPantalla = new List<GameObject>();
     private List<Character> charactersForCurrentLevel = new List<Character>();
@@ -109,6 +110,8 @@ public class CharactersManager : MonoBehaviour
     public void AparecerSiguientePersonaje()
     {
         StartCoroutine(AparecerConRetraso());
+
+        darkeningLayer.OnCharacterSpawned();
     }
 
     private IEnumerator AparecerConRetraso()
