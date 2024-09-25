@@ -12,6 +12,7 @@ public class DarkeningLayer : MonoBehaviour
 
     void Start()
     {
+
         spriteRenderer = GetComponent<SpriteRenderer>();
         currentColor = spriteRenderer.color;
         currentColor.a = 0f; // Comienza completamente transparente
@@ -25,7 +26,7 @@ public class DarkeningLayer : MonoBehaviour
         if (characterCount >= 2)
         {
             characterCount = 0; // Reinicia el conteo de personajes
-            StartCoroutine(FadeTo(targetAlpha)); // Comienza a oscurecer
+          //  StartCoroutine(FadeTo(targetAlpha)); // Comienza a oscurecer
         }
     }
 
