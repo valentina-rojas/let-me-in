@@ -8,6 +8,7 @@ public class s_GameManager : MonoBehaviour
     public UI_Manager uiManager;
     public CharactersManager charactersManager;
     public DialogueManager dialogueManager;
+    public RadioManager radioManager;
 
     public string[] mensajesInicioDia;
 
@@ -22,10 +23,10 @@ public class s_GameManager : MonoBehaviour
     public AudioSource puertaAbriendose;
     public AudioSource ruidoAmbiente;
 
-    public GameObject capaPuerta; // Referencia al objeto de la capa
-    public float alturaMovimiento = 7f; // La altura que se levantará la capa
-    public float tiempoMovimiento = 1f; // El tiempo que tarda en levantar la capa
-    public float tiempoEspera = 3f; // El tiempo que esperará antes de volver a su posición original
+    public GameObject capaPuerta; 
+    public float alturaMovimiento = 7f; 
+    public float tiempoMovimiento = 1f; 
+    public float tiempoEspera = 3f; 
 
     private int totalEnfermos;
     public int NivelActual { get; private set; }
@@ -118,7 +119,7 @@ public class s_GameManager : MonoBehaviour
         charactersManager.MoverPersonajeAlPunto(charactersManager.spawnPoint.position);
     }
 
-    void VerificarEstadoPersonaje(bool esIngreso)
+    public void VerificarEstadoPersonaje(bool esIngreso)
     {
         Character personajeActual = charactersManager.GetCharacter(charactersManager.CurrentCharacterIndex);
         if (personajeActual != null)
@@ -129,11 +130,14 @@ public class s_GameManager : MonoBehaviour
                 {
                     Debug.Log("¡Elección correcta! Personaje sano ingresado.");
                     sanosIngresados++;
+                     NextCharacter();
                 }
                 else if (personajeActual.estado == CharacterState.Enfermo)
                 {
                     Debug.Log("¡Elección incorrecta! Personaje enfermo ingresado.");
                     enfermosIngresados++;
+
+                   StartCoroutine(ProximoPersonajeTrasDisturbios());
                 }
             }
             else
@@ -142,18 +146,27 @@ public class s_GameManager : MonoBehaviour
                 {
                     Debug.Log("¡Elección incorrecta! Personaje sano rechazado.");
                     sanosRechazados++;
+
+                     NextCharacter();
                 }
                 else if (personajeActual.estado == CharacterState.Enfermo)
                 {
                     Debug.Log("¡Elección correcta! Personaje enfermo rechazado.");
                     enfermosRechazados++;
+                     NextCharacter();
                 }
             }
         }
-
-
-        NextCharacter();
     }
+
+    private IEnumerator ProximoPersonajeTrasDisturbios()
+{
+    // Esperar a que termine el disturbio antes de avanzar al siguiente personaje
+    yield return StartCoroutine(radioManager.ActivarDisturbiosCoroutine());
+
+    // Llamar a NextCharacter después de que haya terminado el disturbio
+    NextCharacter();
+}
 
     public void MostrarPanelReporte()
     {
