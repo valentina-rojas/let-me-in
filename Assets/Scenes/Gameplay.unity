@@ -7637,7 +7637,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.2, y: 9}
+  m_AnchoredPosition: {x: -20, y: 23}
   m_SizeDelta: {x: 513.38, y: 141.22}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &933161980
@@ -7660,7 +7660,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Utiliza estos botones para dejar ingresar o rechazar a las personas
+  m_text: Desliza a la derecha para dejar ingresar a las personas o a la izquierda
+    para rechazarlas
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a9f54d527a6fc144ca33ce1dbc79ae4c, type: 2}
   m_sharedMaterial: {fileID: 2445440937034267188, guid: a9f54d527a6fc144ca33ce1dbc79ae4c, type: 2}
@@ -7723,7 +7724,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: -6.349724, z: 12.972443, w: 29.762234}
+  m_margin: {x: 0, y: -24.917229, z: 12.972443, w: 29.762234}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -15086,8 +15087,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 641.34, y: -245.5}
-  m_SizeDelta: {x: -1371.36, y: -846.09}
+  m_AnchoredPosition: {x: 638.26, y: -197}
+  m_SizeDelta: {x: -1365.21, y: -812.47}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2115129267
 MonoBehaviour:
