@@ -21,10 +21,11 @@ public class BackgroundManager : MonoBehaviour
         MostrarCapaPorNivel();
 
         // Iniciar la corrutina si es nivel 2
-        if (GameData.NivelActual == 2)
+       
+      /*   if (GameData.NivelActual == 2)
         {
             StartCoroutine(SimularCorteDeLuz());
-        }
+        } */
     }
 
     void Update()
