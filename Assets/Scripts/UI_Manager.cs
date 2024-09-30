@@ -21,9 +21,9 @@ public class UI_Manager : MonoBehaviour
     public RectTransform indicaciones1;
     public RectTransform indicaciones2;
     public RectTransform indicaciones3;
-     public RectTransform indicaciones4;
-      public RectTransform indicaciones5;
-       public TextMeshProUGUI omitirIndicaciones;
+    public RectTransform indicaciones4;
+    public RectTransform indicaciones5;
+    public TextMeshProUGUI omitirIndicaciones;
 
     public float duracionIndicaciones = 4f;
 
@@ -42,14 +42,28 @@ public class UI_Manager : MonoBehaviour
     private bool cursorVisible = true;
     private float tiempoUltimaActualizacion;
 
+    public Image imagenInicioDia;      // Referencia al componente Image en el panel de inicio del día
+    public Sprite[] imagenesNiveles;   // Array de imágenes para los niveles
+
+
 
     public void MostrarInicioDia(string mensaje)
     {
         dialogueManager.panelDialogo.gameObject.SetActive(false);
         dialogueManager.panelRespuestas.gameObject.SetActive(false);
 
-        dialogueManager.botonIngreso.interactable = false;
-        dialogueManager.botonRechazo.interactable = false;
+
+
+        int nivelActual = gameManager.NivelActual - 1; // Si el nivel empieza en 1, resta 1 para usarlo como índice
+
+        if (nivelActual >= 0 && nivelActual < imagenesNiveles.Length)
+        {
+            imagenInicioDia.sprite = imagenesNiveles[nivelActual];  // Asigna la imagen correspondiente al nivel actual
+        }
+        else
+        {
+            Debug.LogWarning("No hay imagen asignada para este nivel.");
+        }
 
         panelReporte.gameObject.SetActive(false);
         panelPerdiste.gameObject.SetActive(false);
@@ -167,34 +181,34 @@ public class UI_Manager : MonoBehaviour
     }
 
 
-  private IEnumerator MostrarIndicacionesSecuencia()
-{
-    RectTransform[] indicaciones = { indicaciones1, indicaciones2, indicaciones3, indicaciones4, indicaciones5 };
-
-    foreach (var indicacion in indicaciones)
+    private IEnumerator MostrarIndicacionesSecuencia()
     {
-        indicacion.gameObject.SetActive(true);
-        float tiempoRestante = duracionIndicaciones;
+        RectTransform[] indicaciones = { indicaciones1, indicaciones2, indicaciones3, indicaciones4, indicaciones5 };
 
-        omitirIndicaciones.gameObject.SetActive(true);
-
-        while (tiempoRestante > 0)
+        foreach (var indicacion in indicaciones)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            indicacion.gameObject.SetActive(true);
+            float tiempoRestante = duracionIndicaciones;
+
+            omitirIndicaciones.gameObject.SetActive(true);
+
+            while (tiempoRestante > 0)
             {
-                break; // Saltar a la siguiente indicación
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    break; // Saltar a la siguiente indicación
+                }
+                tiempoRestante -= Time.deltaTime;
+                yield return null;
             }
-            tiempoRestante -= Time.deltaTime;
-            yield return null;
+
+            indicacion.gameObject.SetActive(false);
+            omitirIndicaciones.gameObject.SetActive(false);
         }
 
-        indicacion.gameObject.SetActive(false);
-        omitirIndicaciones.gameObject.SetActive(false);
+        // Iniciar el juego después de mostrar todas las indicaciones
+        IniciarJuego();
     }
-
-    // Iniciar el juego después de mostrar todas las indicaciones
-    IniciarJuego();
-}
 
 
 
