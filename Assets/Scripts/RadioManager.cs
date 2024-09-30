@@ -37,6 +37,7 @@ public class RadioManager : MonoBehaviour
 
     private int indiceMensajeActual = 0;
 
+
     void Start()
     {
         // Inicializar la barra con 0 contaminación

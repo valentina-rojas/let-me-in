@@ -23,6 +23,7 @@ public class s_GameManager : MonoBehaviour
     public AudioSource sonidoBoton;
     public AudioSource puertaAbriendose;
     public AudioSource ruidoAmbiente;
+       public AudioSource ruidoPalanca;
 
     public GameObject capaPuerta;
     public float alturaMovimiento = 7f;
@@ -63,6 +64,7 @@ public class s_GameManager : MonoBehaviour
     public void OnBotonIngresoClick()
     {
         //sonidoBoton.Play();
+        ruidoPalanca.Play();
 
         StartCoroutine(DetenerSonidoPuerta(4f)); // Detener sonido después de 2 segundos
         VerificarEstadoPersonaje(true);
@@ -116,6 +118,9 @@ public class s_GameManager : MonoBehaviour
     public void OnBotonRechazoClick()
     {
         // sonidoBoton.Play();
+
+        ruidoPalanca.Play();
+        
         VerificarEstadoPersonaje(false);
         charactersManager.MoverPersonajeAlPunto(charactersManager.spawnPoint.position);
     }

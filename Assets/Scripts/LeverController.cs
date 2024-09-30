@@ -15,6 +15,7 @@ public class LeverController : MonoBehaviour, IPointerDownHandler, IDragHandler,
 
     public s_GameManager gameManager;
 
+
     public void Start()
     {
         DesactivarPalanca();
