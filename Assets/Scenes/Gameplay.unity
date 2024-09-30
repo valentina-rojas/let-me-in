@@ -9387,7 +9387,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -307, y: -167}
+  m_AnchoredPosition: {x: -306.99994, y: -167}
   m_SizeDelta: {x: -209.71, y: 558.46}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &992450831
@@ -14480,12 +14480,19 @@ MonoBehaviour:
   audioSeguridad: {fileID: 1396891849}
   panelDialogo: {fileID: 992450829}
   textoDialogo: {fileID: 131616579}
-  mensajeDisturbios: "Un infectado gener\xF3 disturbios, ten\xE9 mas cuidado con
-    quien dejas entrar."
+  mensajesDisturbios:
+  - "Un infectado gener\xF3 disturbios, ten\xE9 m\xE1s cuidado con quien dejas entrar."
+  - "Se reportan m\xE1s incidentes dentro del b\xFAnker, la situaci\xF3n est\xE1
+    empeorando."
+  - "Otro infectado ha causado problemas, la seguridad est\xE1 en alerta."
   velocidadEscritura: 0.05
   duracionMensaje: 3
   barraContaminacion: {fileID: 1092231741}
   maxContaminacion: 5
+  fillBarImage: {fileID: 1565297164}
+  colorAmarillo: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  colorNaranja: {r: 1, g: 0.5, b: 0, a: 1}
+  colorRojo: {r: 1, g: 0, b: 0, a: 1}
   radioAnimator: {fileID: 1548452512}
 --- !u!1 &1679651561
 GameObject:

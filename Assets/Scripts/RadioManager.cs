@@ -26,6 +26,12 @@ public class RadioManager : MonoBehaviour
     public Slider barraContaminacion;
     public float maxContaminacion = 5f;  // Máximo nivel de contaminación
     private float nivelContaminacion = 0f;  // Nivel actual de contaminación
+    public Image fillBarImage; 
+
+     public Color colorAmarillo = Color.yellow;
+    public Color colorNaranja = new Color(1f, 0.5f, 0f); // Color naranja
+    public Color colorRojo = Color.red;
+
 
     public Animator radioAnimator;
 
@@ -116,6 +122,7 @@ public class RadioManager : MonoBehaviour
         if (barraContaminacion != null)
         {
             barraContaminacion.value = nivelContaminacion;
+              ActualizarColorBarra(); 
         }
 
         // Puedes agregar lógica adicional si el nivel de contaminación llega al máximo (perder el juego, etc.)
@@ -123,6 +130,25 @@ public class RadioManager : MonoBehaviour
         {
             Debug.Log("¡El búnker está completamente contaminado! Has perdido.");
             // Lógica para manejar la pérdida del juego
+        }
+    }
+
+
+     private void ActualizarColorBarra()
+    {
+        float porcentajeContaminacion = nivelContaminacion / maxContaminacion;
+
+        if (porcentajeContaminacion <= 0.5f)
+        {
+            fillBarImage.color = colorAmarillo;  // Hasta 50% amarillo
+        }
+        else if (porcentajeContaminacion <= 0.8f)
+        {
+            fillBarImage.color = colorNaranja;  // Entre 50% y 80% naranja
+        }
+        else
+        {
+            fillBarImage.color = colorRojo;  // Más del 80% rojo
         }
     }
 }
