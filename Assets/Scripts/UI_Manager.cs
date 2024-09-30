@@ -21,6 +21,9 @@ public class UI_Manager : MonoBehaviour
     public RectTransform indicaciones1;
     public RectTransform indicaciones2;
     public RectTransform indicaciones3;
+     public RectTransform indicaciones4;
+      public RectTransform indicaciones5;
+       public TextMeshProUGUI omitirIndicaciones;
 
     public float duracionIndicaciones = 4f;
 
@@ -166,12 +169,14 @@ public class UI_Manager : MonoBehaviour
 
   private IEnumerator MostrarIndicacionesSecuencia()
 {
-    RectTransform[] indicaciones = { indicaciones1, indicaciones2, indicaciones3 };
+    RectTransform[] indicaciones = { indicaciones1, indicaciones2, indicaciones3, indicaciones4, indicaciones5 };
 
     foreach (var indicacion in indicaciones)
     {
         indicacion.gameObject.SetActive(true);
         float tiempoRestante = duracionIndicaciones;
+
+        omitirIndicaciones.gameObject.SetActive(true);
 
         while (tiempoRestante > 0)
         {
@@ -184,6 +189,7 @@ public class UI_Manager : MonoBehaviour
         }
 
         indicacion.gameObject.SetActive(false);
+        omitirIndicaciones.gameObject.SetActive(false);
     }
 
     // Iniciar el juego después de mostrar todas las indicaciones
