@@ -9,6 +9,7 @@ public class s_GameManager : MonoBehaviour
     public CharactersManager charactersManager;
     public DialogueManager dialogueManager;
     public RadioManager radioManager;
+    public CheckCondition checkCondition;
 
     public string[] mensajesInicioDia;
 
@@ -137,6 +138,7 @@ public class s_GameManager : MonoBehaviour
                     Debug.Log("¡Elección incorrecta! Personaje enfermo ingresado.");
                     enfermosIngresados++;
 
+checkCondition.botonMedico.interactable = false;
                    StartCoroutine(ProximoPersonajeTrasDisturbios());
                 }
             }

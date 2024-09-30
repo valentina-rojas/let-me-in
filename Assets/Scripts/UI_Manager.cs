@@ -39,6 +39,7 @@ public class UI_Manager : MonoBehaviour
     private bool cursorVisible = true;
     private float tiempoUltimaActualizacion;
 
+
     public void MostrarInicioDia(string mensaje)
     {
         dialogueManager.panelDialogo.gameObject.SetActive(false);

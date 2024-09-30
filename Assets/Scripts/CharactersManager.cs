@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public enum CharacterState
 {
@@ -46,26 +47,16 @@ public class CharactersManager : MonoBehaviour
 
     public AudioSource sonidoPasos;
 
+    public TextMeshProUGUI contadorPersonas;
+
     void Start()
     {
         ConfigurarPersonajesParaNivel(gameManager.NivelActual);
-
-        /*  if (uiManager != null)
-          {
-              uiManager.PanelInicioDesactivado += AparecerSiguientePersonaje;
-          }
-          else
-          {
-              Debug.LogError("UI_Manager no está asignado en CharactersManager.");
-          }*/
     }
 
     void OnDestroy()
     {
-        /* if (uiManager != null)
-         {
-             uiManager.PanelInicioDesactivado -= AparecerSiguientePersonaje;
-         }*/
+
     }
 
     public void ConfigurarPersonajesParaNivel(int nivel)
@@ -89,7 +80,7 @@ public class CharactersManager : MonoBehaviour
             charactersForCurrentLevel = charactersForCurrentLevel.GetRange(0, personajesPorNivel);
         }
 
-
+        contadorPersonas.text = charactersForCurrentLevel.Count.ToString();
 
         // Mezcla la lista de personajes
         Shuffle(charactersForCurrentLevel);
@@ -148,6 +139,9 @@ public class CharactersManager : MonoBehaviour
               {
                   StartCoroutine(OscurecerLuzGradualmente());
               }*/
+
+              contadorPersonas.text = (charactersForCurrentLevel.Count - index).ToString();
+
         }
         else
         {

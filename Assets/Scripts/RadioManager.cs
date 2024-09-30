@@ -22,6 +22,8 @@ public class RadioManager : MonoBehaviour
     public float maxContaminacion = 5f;  // Máximo nivel de contaminación
     private float nivelContaminacion = 0f;  // Nivel actual de contaminación
 
+    public Animator radioAnimator;
+
 
     void Start()
     {
@@ -44,6 +46,12 @@ public class RadioManager : MonoBehaviour
         yield return new WaitForSeconds(10f);
 
         ActualizarContaminacion(1);
+
+           // Activamos la animación de la radio
+        if (radioAnimator != null)
+        {
+              radioAnimator.SetTrigger("ActivarRadio");   // El nombre "ActivarRadio" debe coincidir con el trigger en el Animator
+        }
 
         ruidosDisturbios.Play();
         audioSeguridad.Play();
