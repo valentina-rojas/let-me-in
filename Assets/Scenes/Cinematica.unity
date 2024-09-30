@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028355, g: 0.22571374, b: 0.30692255, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -746,13 +746,13 @@ MonoBehaviour:
   imagen: {fileID: 661922263}
   texto: {fileID: 843057781}
   imagenes:
-  - {fileID: 21300000, guid: 87bde0fe29a48a64093196240d0ebe56, type: 3}
-  - {fileID: 21300000, guid: a723397669db7054f9f2401ca2031f30, type: 3}
-  - {fileID: 21300000, guid: a8a0e9a48ba015b408fe850fd9b9ee33, type: 3}
-  - {fileID: 21300000, guid: 193cdb048b1f013468fe641b7e800246, type: 3}
-  - {fileID: 21300000, guid: fa7da63e267a5974cadb2214070036a9, type: 3}
-  - {fileID: 21300000, guid: 40d6d8e152f739645b2c892e0d52de68, type: 3}
-  - {fileID: 21300000, guid: 25450cf1030642e4fb728f55d02ea27f, type: 3}
+  - {fileID: 21300000, guid: 36623d1702d0b5a4a8323ce60e86e40e, type: 3}
+  - {fileID: 21300000, guid: 677c9b5525bc66942831e67a1053f361, type: 3}
+  - {fileID: 21300000, guid: 38e398bf280a8004a863d9444b54ebb6, type: 3}
+  - {fileID: 21300000, guid: 2a2836d79c1173b459cc297a76fefd2f, type: 3}
+  - {fileID: 21300000, guid: 2fe844de3b23d484e961b4cc3b60b34d, type: 3}
+  - {fileID: 21300000, guid: 93a037384dc93b3439bcf05b3d2bb5fd, type: 3}
+  - {fileID: 21300000, guid: 8975e2da2f8f47647b312d9f651152a0, type: 3}
   textos:
   - La llegada de un virus ha devastado gran parte de la sociedad
   - "la creaci\xF3n de zonas seguras entre las ciudades ya es una realidad"

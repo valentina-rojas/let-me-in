@@ -24,7 +24,7 @@ public class s_GameManager : MonoBehaviour
     public AudioSource ruidoAmbiente;
 
     public GameObject capaPuerta; 
-    public float alturaMovimiento = 7f; 
+    public float alturaMovimiento = 7f;  
     public float tiempoMovimiento = 1f; 
     public float tiempoEspera = 3f; 
 
