@@ -8,11 +8,16 @@ public class RadioManager : MonoBehaviour
 {
     public AudioSource ruidosDisturbios;
     public AudioSource audioSeguridad;
-
-
     public GameObject panelDialogo;
     public TextMeshProUGUI textoDialogo;
-    public string mensajeDisturbios = "Un infectado generó disturbios, tené mas cuidado con quien dejas entrar.";
+    public List<string> mensajesDisturbios = new List<string>
+{
+    "Un infectado generó disturbios, más cuidado con quien dejas entrar.",
+    "Se reportan más incidentes dentro del búnker, la situación está empeorando.",
+    "Otro infectado ha causado problemas, la seguridad está en alerta.",
+    "El número de infectados causando disturbios está aumentando rápidamente.",
+    "Se detectó otro brote de violencia dentro del búnker, ¡Estamos en estado de emergencia!"
+};
     public float velocidadEscritura = 0.05f;
     public float duracionMensaje = 3f;
 
@@ -24,6 +29,7 @@ public class RadioManager : MonoBehaviour
 
     public Animator radioAnimator;
 
+    private int indiceMensajeActual = 0;
 
     void Start()
     {
@@ -47,17 +53,17 @@ public class RadioManager : MonoBehaviour
 
         ActualizarContaminacion(1);
 
-           // Activamos la animación de la radio
+        // Activamos la animación de la radio
         if (radioAnimator != null)
         {
-              radioAnimator.SetTrigger("ActivarRadio");   // El nombre "ActivarRadio" debe coincidir con el trigger en el Animator
+            radioAnimator.SetTrigger("ActivarRadio");   // El nombre "ActivarRadio" debe coincidir con el trigger en el Animator
         }
 
         ruidosDisturbios.Play();
         audioSeguridad.Play();
 
         panelDialogo.SetActive(true);  // Activar el panel
-        StartCoroutine(EscribirTexto(mensajeDisturbios));  // Escribir el texto gradualmente
+        StartCoroutine(EscribirTexto(mensajesDisturbios[indiceMensajeActual]));
 
 
         // Esperar hasta que el mensaje haya sido completamente escrito
@@ -77,6 +83,7 @@ public class RadioManager : MonoBehaviour
 
         ruidosDisturbios.Stop();
 
+        indiceMensajeActual = (indiceMensajeActual + 1) % mensajesDisturbios.Count;
     }
 
 
