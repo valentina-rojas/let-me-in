@@ -627,7 +627,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
+    rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -645,8 +645,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 65
-  m_fontSizeBase: 65
+  m_fontSize: 60
+  m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -681,7 +681,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -784.4341, y: -70.289795, z: -778.81085, w: 0}
+  m_margin: {x: -784.4341, y: -33.147007, z: -778.81085, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -754,10 +754,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 93a037384dc93b3439bcf05b3d2bb5fd, type: 3}
   - {fileID: 21300000, guid: 8975e2da2f8f47647b312d9f651152a0, type: 3}
   textos:
-  - La llegada de un virus ha devastado gran parte de la sociedad
+  - La llegada de un virus ha devastado gran parte de la humanidad
   - "la creaci\xF3n de zonas seguras entre las ciudades ya es una realidad"
   - "tras una extensa investigaci\xF3n por parte de los fundadores"
-  - se confirma que no estuviste expuesto al virus y se te elige para el trabajo
+  - se confirma que no estuviste expuesto al virus y se te elige para un trabajo
   - "tu permanencia en la zona segura depender\xE1 de tu desempe\xF1o"
   - "tu tarea es determinar cu\xE1les sobrevivientes son aptos para ingresar al b\xFAnker"
   - "te dejamos esta importante misi\xF3n en tus manos."
@@ -1135,8 +1135,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 65.6, y: 37.08}
-  m_SizeDelta: {x: 52.89, y: 45.61}
+  m_AnchoredPosition: {x: 45, y: 15.7}
+  m_SizeDelta: {x: 70, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2055593665
 MonoBehaviour:
