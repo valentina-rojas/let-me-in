@@ -24,10 +24,10 @@ public class s_GameManager : MonoBehaviour
     public AudioSource puertaAbriendose;
     public AudioSource ruidoAmbiente;
 
-    public GameObject capaPuerta; 
-    public float alturaMovimiento = 7f;  
-    public float tiempoMovimiento = 1f; 
-    public float tiempoEspera = 3f; 
+    public GameObject capaPuerta;
+    public float alturaMovimiento = 7f;
+    public float tiempoMovimiento = 1f;
+    public float tiempoEspera = 3f;
 
     private int totalEnfermos;
     public int NivelActual { get; private set; }
@@ -115,7 +115,7 @@ public class s_GameManager : MonoBehaviour
 
     public void OnBotonRechazoClick()
     {
-       // sonidoBoton.Play();
+        // sonidoBoton.Play();
         VerificarEstadoPersonaje(false);
         charactersManager.MoverPersonajeAlPunto(charactersManager.spawnPoint.position);
     }
@@ -131,15 +131,15 @@ public class s_GameManager : MonoBehaviour
                 {
                     Debug.Log("¡Elección correcta! Personaje sano ingresado.");
                     sanosIngresados++;
-                     NextCharacter();
+                    NextCharacter();
                 }
                 else if (personajeActual.estado == CharacterState.Enfermo)
                 {
                     Debug.Log("¡Elección incorrecta! Personaje enfermo ingresado.");
                     enfermosIngresados++;
 
-checkCondition.botonMedico.interactable = false;
-                   StartCoroutine(ProximoPersonajeTrasDisturbios());
+                    checkCondition.botonMedico.interactable = false;
+                    StartCoroutine(ProximoPersonajeTrasDisturbios());
                 }
             }
             else
@@ -149,26 +149,26 @@ checkCondition.botonMedico.interactable = false;
                     Debug.Log("¡Elección incorrecta! Personaje sano rechazado.");
                     sanosRechazados++;
 
-                     NextCharacter();
+                    NextCharacter();
                 }
                 else if (personajeActual.estado == CharacterState.Enfermo)
                 {
                     Debug.Log("¡Elección correcta! Personaje enfermo rechazado.");
                     enfermosRechazados++;
-                     NextCharacter();
+                    NextCharacter();
                 }
             }
         }
     }
 
     private IEnumerator ProximoPersonajeTrasDisturbios()
-{
-    // Esperar a que termine el disturbio antes de avanzar al siguiente personaje
-    yield return StartCoroutine(radioManager.ActivarDisturbiosCoroutine());
+    {
+        // Esperar a que termine el disturbio antes de avanzar al siguiente personaje
+        yield return StartCoroutine(radioManager.ActivarDisturbiosCoroutine());
 
-    // Llamar a NextCharacter después de que haya terminado el disturbio
-    NextCharacter();
-}
+        // Llamar a NextCharacter después de que haya terminado el disturbio
+        NextCharacter();
+    }
 
     public void MostrarPanelReporte()
     {
