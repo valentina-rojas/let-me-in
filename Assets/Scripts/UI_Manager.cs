@@ -28,6 +28,9 @@ public class UI_Manager : MonoBehaviour
     public float duracionIndicaciones = 4f;
 
     public Button botonSiguienteNivel;
+    public Button botonGanaste;
+    public Button botonPerdiste;
+    public Button botonPerdisteDisturbios;
 
     public event Action PanelInicioDesactivado;
 

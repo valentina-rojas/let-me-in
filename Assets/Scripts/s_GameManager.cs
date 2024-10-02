@@ -23,7 +23,7 @@ public class s_GameManager : MonoBehaviour
     public AudioSource sonidoBoton;
     public AudioSource puertaAbriendose;
     public AudioSource ruidoAmbiente;
-       public AudioSource ruidoPalanca;
+    public AudioSource ruidoPalanca;
 
     public GameObject capaPuerta;
     public float alturaMovimiento = 7f;
@@ -120,7 +120,7 @@ public class s_GameManager : MonoBehaviour
         // sonidoBoton.Play();
 
         ruidoPalanca.Play();
-        
+
         VerificarEstadoPersonaje(false);
         charactersManager.MoverPersonajeAlPunto(charactersManager.spawnPoint.position);
     }
@@ -202,6 +202,12 @@ public class s_GameManager : MonoBehaviour
                 uiManager.botonSiguienteNivel.gameObject.SetActive(true);
             };
 
+            if (NivelActual == 2)
+            {
+
+                uiManager.botonGanaste.gameObject.SetActive(true);
+            }
+
         }
         else if ((enfermosIngresados >= 1 && enfermosIngresados <= 3) || (sanosRechazados >= 1 && sanosRechazados <= 3))
         {
@@ -214,10 +220,19 @@ public class s_GameManager : MonoBehaviour
             {
                 uiManager.botonSiguienteNivel.gameObject.SetActive(true);
             };
+
+            if (NivelActual == 2)
+            {
+
+                uiManager.botonGanaste.gameObject.SetActive(true);
+            }
+
         }
         else if (enfermosIngresados > 3 || sanosRechazados > 3)
         {
             uiManager.mensajeReporte.text = "Fuiste retirado del puesto de trabajo.";
+
+            uiManager.botonPerdiste.gameObject.SetActive(true);
         }
     }
 
@@ -241,6 +256,4 @@ public class s_GameManager : MonoBehaviour
             return "Mensaje de inicio no definido para este nivel.";
         }
     }
-
-
 }
