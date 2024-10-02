@@ -134,9 +134,9 @@ TextureImporter:
       name: radio-spritesheet-262x294_1
       rect:
         serializedVersion: 2
-        x: 261
+        x: 262
         y: 0
-        width: 265
+        width: 262
         height: 294
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -157,7 +157,7 @@ TextureImporter:
         serializedVersion: 2
         x: 524
         y: 0
-        width: 263
+        width: 262
         height: 294
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -176,9 +176,9 @@ TextureImporter:
       name: radio-spritesheet-262x294_3
       rect:
         serializedVersion: 2
-        x: 785
+        x: 786
         y: 0
-        width: 264
+        width: 262
         height: 294
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -197,9 +197,9 @@ TextureImporter:
       name: radio-spritesheet-262x294_4
       rect:
         serializedVersion: 2
-        x: 1047
+        x: 1048
         y: 0
-        width: 263
+        width: 262
         height: 294
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -218,9 +218,9 @@ TextureImporter:
       name: radio-spritesheet-262x294_5
       rect:
         serializedVersion: 2
-        x: 1308
+        x: 1310
         y: 0
-        width: 265
+        width: 262
         height: 294
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -241,7 +241,7 @@ TextureImporter:
         serializedVersion: 2
         x: 1572
         y: 0
-        width: 263
+        width: 262
         height: 294
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -260,9 +260,9 @@ TextureImporter:
       name: radio-spritesheet-262x294_7
       rect:
         serializedVersion: 2
-        x: 1833
+        x: 1834
         y: 0
-        width: 263
+        width: 262
         height: 294
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -281,9 +281,9 @@ TextureImporter:
       name: radio-spritesheet-262x294_8
       rect:
         serializedVersion: 2
-        x: 2095
+        x: 2096
         y: 0
-        width: 265
+        width: 262
         height: 294
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -304,7 +304,7 @@ TextureImporter:
         serializedVersion: 2
         x: 2358
         y: 0
-        width: 263
+        width: 262
         height: 294
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -323,9 +323,9 @@ TextureImporter:
       name: radio-spritesheet-262x294_10
       rect:
         serializedVersion: 2
-        x: 2619
+        x: 2620
         y: 0
-        width: 264
+        width: 262
         height: 294
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -344,9 +344,9 @@ TextureImporter:
       name: radio-spritesheet-262x294_11
       rect:
         serializedVersion: 2
-        x: 2881
+        x: 2882
         y: 0
-        width: 263
+        width: 262
         height: 294
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -365,9 +365,9 @@ TextureImporter:
       name: radio-spritesheet-262x294_12
       rect:
         serializedVersion: 2
-        x: 3142
+        x: 3144
         y: 0
-        width: 265
+        width: 262
         height: 294
       alignment: 0
       pivot: {x: 0, y: 0}

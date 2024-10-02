@@ -46,6 +46,12 @@ public class RadioManager : MonoBehaviour
             barraContaminacion.maxValue = maxContaminacion;
             barraContaminacion.value = nivelContaminacion;
         }
+
+          // Activamos la animación de la radio
+        if (radioAnimator != null)
+        {
+            radioAnimator.SetTrigger("ActivarRadio");  
+        }
     }
 
     public void ActivarDisturbios()
@@ -60,11 +66,7 @@ public class RadioManager : MonoBehaviour
 
         ActualizarContaminacion(1);
 
-        // Activamos la animación de la radio
-        if (radioAnimator != null)
-        {
-            radioAnimator.SetTrigger("ActivarRadio");   // El nombre "ActivarRadio" debe coincidir con el trigger en el Animator
-        }
+      
 
         ruidosDisturbios.Play();
         audioSeguridad.Play();
@@ -89,6 +91,7 @@ public class RadioManager : MonoBehaviour
         yield return new WaitForSeconds(4f);
 
         ruidosDisturbios.Stop();
+
 
         indiceMensajeActual = (indiceMensajeActual + 1) % mensajesDisturbios.Count;
     }
