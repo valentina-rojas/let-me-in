@@ -11121,13 +11121,14 @@ GameObject:
   - component: {fileID: 1159326993}
   - component: {fileID: 1159326995}
   - component: {fileID: 1159326994}
+  - component: {fileID: 1159326996}
   m_Layer: 5
   m_Name: radiooo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1159326993
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11167,7 +11168,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 63050467, guid: 803eb2d13e9b9b645952f1299b7fb8c0, type: 3}
+  m_Sprite: {fileID: -30262709, guid: 9ee31cf6c2429ce40b6e5b851baab802, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -11185,6 +11186,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1159326992}
   m_CullTransparentMesh: 1
+--- !u!95 &1159326996
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1159326992}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 788c00b22c3067849ba9ba9dfbb61c70, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1168009878
 GameObject:
   m_ObjectHideFlags: 0
@@ -14159,7 +14181,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1548452510
 SpriteRenderer:
   m_ObjectHideFlags: 0
