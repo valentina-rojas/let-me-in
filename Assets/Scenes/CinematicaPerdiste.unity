@@ -681,7 +681,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -784.4341, y: -33.147007, z: -778.81085, w: 0}
+  m_margin: {x: -773.25195, y: -66.69318, z: -759.24225, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -764,8 +764,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 1ff86785ab0fd7343be87d9600cfda76, type: 3}
   - {fileID: 21300000, guid: d2e604d17de6db6469943e1f1155bec0, type: 3}
   textos:
-  - ETAGJAGJK
-  - DDGJDGAJYGK
+  - "El b\xFAnker alcanz\xF3 su nivel m\xE1ximo de contaminaci\xF3n, las medidas
+    de seguridad fallaron"
+  - "debido a tu mal desempe\xF1o, ya no eres requerido, fuiste expulsado del refugio."
   duracionPorImagen: 5
   velocidadDeTipeo: 0.05
   musica: {fileID: 543313075}
@@ -895,7 +896,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1773449458
 RectTransform:
   m_ObjectHideFlags: 0

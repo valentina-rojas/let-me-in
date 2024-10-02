@@ -681,7 +681,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -784.4341, y: -33.147007, z: -778.81085, w: 0}
+  m_margin: {x: -762.07, y: -69.488686, z: -767.62866, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -765,9 +765,12 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 2e89cd8b376a9464781c5c7d66277e68, type: 3}
   - {fileID: 21300000, guid: a26e531fb642c024cb74d545aff78d19, type: 3}
   textos:
-  - dah
-  - dfh
-  - dhdsjjfj
+  - "La entrada a la fuerza al b\xFAnker desat\xF3 el caos y mas infectados lograron
+    infiltrarse"
+  - "el p\xE1nico se apoder\xF3 de los refugiados y seguridad no pudo controlar la
+    situaci\xF3n"
+  - "debido a la falta de control, fuiste destituido de tu puesto, el refugio ya
+    no conf\xEDa en vos."
   duracionPorImagen: 5
   velocidadDeTipeo: 0.05
   musica: {fileID: 543313075}
