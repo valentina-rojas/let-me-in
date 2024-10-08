@@ -8,6 +8,8 @@ public class s_GameManager : MonoBehaviour
     public UI_Manager uiManager;
     public CharactersManager charactersManager;
     public DialogueManager dialogueManager;
+    public RadioManager radioManager;
+    public CheckCondition checkCondition;
 
     public string[] mensajesInicioDia;
 
@@ -21,12 +23,12 @@ public class s_GameManager : MonoBehaviour
     public AudioSource sonidoBoton;
     public AudioSource puertaAbriendose;
     public AudioSource ruidoAmbiente;
+    public AudioSource ruidoPalanca;
 
-    public GameObject capaPuerta; // Referencia al objeto de la capa
-    public float alturaMovimiento = 7f; // La altura que se levantará la capa
-    public float tiempoMovimiento = 1f; // El tiempo que tarda en levantar la capa
-    public float tiempoEspera = 3f; // El tiempo que esperará antes de volver a su posición original
-
+    public GameObject capaPuerta;
+    public float alturaMovimiento = 7f;
+    public float tiempoMovimiento = 1f;
+    public float tiempoEspera = 3f;
 
     private int totalEnfermos;
     public int NivelActual { get; private set; }
@@ -48,6 +50,7 @@ public class s_GameManager : MonoBehaviour
         }
     }
 
+
     public void ChangeScene(string name)
     {
         SceneManager.LoadScene(name);
@@ -60,7 +63,8 @@ public class s_GameManager : MonoBehaviour
 
     public void OnBotonIngresoClick()
     {
-        sonidoBoton.Play();
+        //sonidoBoton.Play();
+        ruidoPalanca.Play();
 
         StartCoroutine(DetenerSonidoPuerta(4f)); // Detener sonido después de 2 segundos
         VerificarEstadoPersonaje(true);
@@ -113,12 +117,15 @@ public class s_GameManager : MonoBehaviour
 
     public void OnBotonRechazoClick()
     {
-        sonidoBoton.Play();
+        // sonidoBoton.Play();
+
+        ruidoPalanca.Play();
+
         VerificarEstadoPersonaje(false);
         charactersManager.MoverPersonajeAlPunto(charactersManager.spawnPoint.position);
     }
 
-    void VerificarEstadoPersonaje(bool esIngreso)
+    public void VerificarEstadoPersonaje(bool esIngreso)
     {
         Character personajeActual = charactersManager.GetCharacter(charactersManager.CurrentCharacterIndex);
         if (personajeActual != null)
@@ -129,11 +136,15 @@ public class s_GameManager : MonoBehaviour
                 {
                     Debug.Log("¡Elección correcta! Personaje sano ingresado.");
                     sanosIngresados++;
+                    NextCharacter();
                 }
                 else if (personajeActual.estado == CharacterState.Enfermo)
                 {
                     Debug.Log("¡Elección incorrecta! Personaje enfermo ingresado.");
                     enfermosIngresados++;
+
+                    checkCondition.botonMedico.interactable = false;
+                    StartCoroutine(ProximoPersonajeTrasDisturbios());
                 }
             }
             else
@@ -142,16 +153,25 @@ public class s_GameManager : MonoBehaviour
                 {
                     Debug.Log("¡Elección incorrecta! Personaje sano rechazado.");
                     sanosRechazados++;
+
+                    NextCharacter();
                 }
                 else if (personajeActual.estado == CharacterState.Enfermo)
                 {
                     Debug.Log("¡Elección correcta! Personaje enfermo rechazado.");
                     enfermosRechazados++;
+                    NextCharacter();
                 }
             }
         }
+    }
 
+    private IEnumerator ProximoPersonajeTrasDisturbios()
+    {
+        // Esperar a que termine el disturbio antes de avanzar al siguiente personaje
+        yield return StartCoroutine(radioManager.ActivarDisturbiosCoroutine());
 
+        // Llamar a NextCharacter después de que haya terminado el disturbio
         NextCharacter();
     }
 
@@ -182,6 +202,12 @@ public class s_GameManager : MonoBehaviour
                 uiManager.botonSiguienteNivel.gameObject.SetActive(true);
             };
 
+            if (NivelActual == 2)
+            {
+
+                uiManager.botonGanaste.gameObject.SetActive(true);
+            }
+
         }
         else if ((enfermosIngresados >= 1 && enfermosIngresados <= 3) || (sanosRechazados >= 1 && sanosRechazados <= 3))
         {
@@ -194,10 +220,19 @@ public class s_GameManager : MonoBehaviour
             {
                 uiManager.botonSiguienteNivel.gameObject.SetActive(true);
             };
+
+            if (NivelActual == 2)
+            {
+
+                uiManager.botonGanaste.gameObject.SetActive(true);
+            }
+
         }
         else if (enfermosIngresados > 3 || sanosRechazados > 3)
         {
             uiManager.mensajeReporte.text = "Fuiste retirado del puesto de trabajo.";
+
+            uiManager.botonPerdiste.gameObject.SetActive(true);
         }
     }
 

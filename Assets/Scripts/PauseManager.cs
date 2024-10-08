@@ -5,21 +5,19 @@ using UnityEngine;
 
 public class PauseManager : MonoBehaviour
 {
-   public GameObject pauseMenuUI;  // Referencia al panel del menú de pausa
+    public GameObject pauseMenuUI;
 
     private bool isPaused = false;
 
-      private AudioSource[] allAudioSources;
+    private AudioSource[] allAudioSources;
 
-       void Start()
+    void Start()
     {
-        // Encuentra todos los componentes AudioSource en la escena
         allAudioSources = FindObjectsOfType<AudioSource>();
     }
 
     void Update()
     {
-        // Detecta si el jugador presiona la tecla de pausa (Escape por defecto)
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (isPaused)
@@ -33,10 +31,10 @@ public class PauseManager : MonoBehaviour
         }
     }
 
-     public void ResumeGame()
+    public void ResumeGame()
     {
-        pauseMenuUI.SetActive(false);  // Oculta el menú de pausa
-        Time.timeScale = 1f;           // Restablece el tiempo normal
+        pauseMenuUI.SetActive(false);
+        Time.timeScale = 1f;
 
         // Reanuda todos los sonidos
         foreach (AudioSource audio in allAudioSources)
@@ -47,10 +45,10 @@ public class PauseManager : MonoBehaviour
         isPaused = false;
     }
 
-    void PauseGame()
+    public void PauseGame()
     {
-        pauseMenuUI.SetActive(true);   // Muestra el menú de pausa
-        Time.timeScale = 0f;           // Detiene el tiempo en el juego
+        pauseMenuUI.SetActive(true);
+        Time.timeScale = 0f;
 
         // Pausa todos los sonidos
         foreach (AudioSource audio in allAudioSources)
@@ -61,18 +59,23 @@ public class PauseManager : MonoBehaviour
         isPaused = true;
     }
 
-   /* public void RestartGame()
+    public void RestartGame()
     {
-        Time.timeScale = 1f;           // Restablece el tiempo normal
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);  // Reinicia la escena actual
-        pauseMenuUI.SetActive(false);  // Asegúrate de que el menú de pausa esté desactivado
-    }*/
-   public void ReturnToMenu()
-    {
-        Time.timeScale = 1f;           // Restablece el tiempo normal
-        SceneManager.LoadScene("MenuPrincipal");  // Carga la escena del menú principal
-        pauseMenuUI.SetActive(false);  // Asegúrate de que el menú de pausa esté desactivado
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        pauseMenuUI.SetActive(false);
     }
+
+
+
+    public void ReturnToMenu()
+    {
+        Time.timeScale = 1f; // Restablece el tiempo al valor normal
+        GameData.NivelActual = 1; // Reinicia el nivel actual a 1
+        SceneManager.LoadScene("MenuPrincipal"); // Carga la escena del menú principal
+        pauseMenuUI.SetActive(false); // Desactiva el menú de pausa
+    }
+
 }
 
 

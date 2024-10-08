@@ -51,5 +51,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "LET_ME_IN.sln"
+    "dotnet.defaultSolution": "let-me-in.sln"
 }

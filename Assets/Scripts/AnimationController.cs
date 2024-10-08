@@ -30,6 +30,8 @@ public class NPCAnimationController : MonoBehaviour
       StopCoroutine(dangerAnimationCoroutine);
       dangerAnimationCoroutine = null;
     }
+
+     spriteRenderer.sprite = sprites[0];
   }
 
   private IEnumerator PlayDangerAnimation()

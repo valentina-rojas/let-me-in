@@ -26,14 +26,16 @@ public class AggressiveNPCs : MonoBehaviour
     public AudioSource escobaSeguridad;
     public AudioSource golpe;
 
-    public GameObject vidrioRoto;
+   
+    public GameObject[] vidriosRotos;  // Array para múltiples filtros de vidrio roto
+    private int vidrioActual = 0;      // Índice para saber qué filtro activar
+
 
     public Button botonSeguridad;
 
     public AudioSource sonidoBoton;
 
     public float tiempoBaseTemporizador;
-
 
     public Transform cameraTransform; 
     public float shakeIntensity = 0.1f; 
@@ -132,9 +134,16 @@ public class AggressiveNPCs : MonoBehaviour
             ShakeCamera();
         }
 
-        if (vidrioRoto != null)
+       // Activar un nuevo filtro de vidrio roto
+        if (vidriosRotos.Length > 0)
         {
-            vidrioRoto.SetActive(true);
+
+            // Activar el siguiente filtro de vidrio roto
+            vidrioActual = (vidrioActual + 1) % vidriosRotos.Length;
+            if (vidriosRotos[vidrioActual] != null)
+            {
+                vidriosRotos[vidrioActual].SetActive(true);
+            }
         }
     }
 
@@ -147,13 +156,15 @@ public class AggressiveNPCs : MonoBehaviour
         ActualizarTextoTemporizador();
     }
 
-    void ActualizarTextoTemporizador()
+ void ActualizarTextoTemporizador()
+{
+    if (timerText != null)
     {
-        if (timerText != null)
-        {
-            timerText.text = $"{tiempoRestante:F1}";
-        }
+        int tiempoEntero = Mathf.FloorToInt(tiempoRestante); 
+        timerText.text = tiempoEntero.ToString();  
     }
+}
+
 
     void FinTemporizador()
     {
@@ -176,10 +187,8 @@ public class AggressiveNPCs : MonoBehaviour
                 NPCAnimationController animController = personajeAgresivoActual.GetComponent<NPCAnimationController>();
                 animController?.StartDangerAnimation();
             }
-
         }
     }
-
 
     IEnumerator TogglePanel()
     {
@@ -206,7 +215,6 @@ public class AggressiveNPCs : MonoBehaviour
             PanelTimer.SetActive(false);
             audioSeguridad.Stop();
         }
-
 
         // Detener el temblor de la cámara
         if (shakeCoroutine != null)
