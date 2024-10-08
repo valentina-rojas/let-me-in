@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public enum CharacterState
 {
@@ -32,6 +33,8 @@ public class CharactersManager : MonoBehaviour
     public s_GameManager gameManager;
     public UI_Manager uiManager;
     public CheckCondition checkCondition;
+    public LeverController leverController;
+    public DarkeningLayer darkeningLayer;
 
     private List<GameObject> personajesEnPantalla = new List<GameObject>();
     private List<Character> charactersForCurrentLevel = new List<Character>();
@@ -44,26 +47,16 @@ public class CharactersManager : MonoBehaviour
 
     public AudioSource sonidoPasos;
 
+    public TextMeshProUGUI contadorPersonas;
+
     void Start()
     {
         ConfigurarPersonajesParaNivel(gameManager.NivelActual);
-
-        /*  if (uiManager != null)
-          {
-              uiManager.PanelInicioDesactivado += AparecerSiguientePersonaje;
-          }
-          else
-          {
-              Debug.LogError("UI_Manager no está asignado en CharactersManager.");
-          }*/
     }
 
     void OnDestroy()
     {
-        /* if (uiManager != null)
-         {
-             uiManager.PanelInicioDesactivado -= AparecerSiguientePersonaje;
-         }*/
+
     }
 
     public void ConfigurarPersonajesParaNivel(int nivel)
@@ -87,7 +80,7 @@ public class CharactersManager : MonoBehaviour
             charactersForCurrentLevel = charactersForCurrentLevel.GetRange(0, personajesPorNivel);
         }
 
-
+        contadorPersonas.text = charactersForCurrentLevel.Count.ToString();
 
         // Mezcla la lista de personajes
         Shuffle(charactersForCurrentLevel);
@@ -108,14 +101,20 @@ public class CharactersManager : MonoBehaviour
     public void AparecerSiguientePersonaje()
     {
         StartCoroutine(AparecerConRetraso());
+
+        darkeningLayer.OnCharacterSpawned();
     }
 
     private IEnumerator AparecerConRetraso()
     {
         LimpiarPersonajes();
 
-        dialogueManager.botonIngreso.interactable = false;
-        dialogueManager.botonRechazo.interactable = false;
+        // dialogueManager.botonIngreso.interactable = false;
+        // dialogueManager.botonRechazo.interactable = false;
+
+        leverController.DesactivarPalanca();
+
+
         checkCondition.botonMedico.interactable = false;
 
         Debug.Log("Esperando antes de aparecer el siguiente personaje...");
@@ -140,6 +139,9 @@ public class CharactersManager : MonoBehaviour
               {
                   StartCoroutine(OscurecerLuzGradualmente());
               }*/
+
+              contadorPersonas.text = (charactersForCurrentLevel.Count - index).ToString();
+
         }
         else
         {

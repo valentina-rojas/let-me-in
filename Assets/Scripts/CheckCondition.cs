@@ -14,6 +14,7 @@ public class CheckCondition : MonoBehaviour
     public CharactersManager charactersManager;
     public DialogueManager dialogueManager;
     public s_GameManager gameManager;
+      public LeverController leverController;
 
     private GameObject medicoInstance;
 
@@ -41,8 +42,10 @@ public class CheckCondition : MonoBehaviour
 
     private IEnumerator MedicoEvaluacionRoutine()
     {
-        dialogueManager.botonIngreso.interactable = false;
-        dialogueManager.botonRechazo.interactable = false;
+        //dialogueManager.botonIngreso.interactable = false;
+        //dialogueManager.botonRechazo.interactable = false;
+
+        leverController.DesactivarPalanca();
 
         StartCoroutine(gameManager.AbrirPuerta(8f));
 
@@ -58,8 +61,10 @@ public class CheckCondition : MonoBehaviour
 
         Destroy(medicoInstance);
 
-        dialogueManager.botonIngreso.interactable = true;
-        dialogueManager.botonRechazo.interactable = true;
+       // dialogueManager.botonIngreso.interactable = true;
+       // dialogueManager.botonRechazo.interactable = true;
+
+       leverController.ActivarPalanca();
     }
 
     private IEnumerator MoverPersonaje(Transform personaje, Vector3 destino)

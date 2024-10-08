@@ -30,9 +30,9 @@ public class DialogueManager : MonoBehaviour
 
     public s_GameManager gameManager;
     public AudioManager audioManager;
-
     public AggressiveNPCs aggressiveNPCs;
     public CheckCondition checkCondition;
+    public LeverController leverController;
 
     public bool medicoUsado = false;
 
@@ -45,6 +45,12 @@ public class DialogueManager : MonoBehaviour
 
     private bool dialogoVisible = false;  // Verifica si hay un diálogo en pantalla
 
+    public RectTransform areaClickable; // Asigna este panel como área clickable
+
+    public Button nextDialogo;
+    public Button nextRespuesta;
+
+
     void Start()
     {
 
@@ -52,19 +58,19 @@ public class DialogueManager : MonoBehaviour
 
     void Update()
     {
-      if (dialogoVisible)
-    {
-        // Detecta si el usuario presiona Espacio para adelantar un diálogo
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (dialogoVisible)
         {
-            AdelantarDialogo();
+            // Detecta si el usuario presiona Espacio para adelantar un diálogo
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                AdelantarDialogo();
+            }
+            // Detecta si el usuario presiona Enter para omitir todos los diálogos
+            else if (Input.GetKeyDown(KeyCode.Return))
+            {
+                SaltarTodosLosDialogos();
+            }
         }
-        // Detecta si el usuario presiona Enter para omitir todos los diálogos
-        else if (Input.GetKeyDown(KeyCode.Return))
-        {
-            SaltarTodosLosDialogos();
-        }
-    }
     }
 
     public void AdelantarDialogo()
@@ -79,7 +85,7 @@ public class DialogueManager : MonoBehaviour
         StopAllCoroutines();
         panelDialogo.gameObject.SetActive(false);
         panelRespuestas.gameObject.SetActive(false);
-        dialogoVisible = false; 
+        dialogoVisible = false;
 
         PausarVoces();
 
@@ -124,7 +130,7 @@ public class DialogueManager : MonoBehaviour
     {
         panelRespuestas.gameObject.SetActive(true);
         panelDialogo.gameObject.SetActive(false);
-        dialogoVisible = true; 
+        dialogoVisible = true;
         StartCoroutine(EscribirRespuestas());
     }
 
@@ -190,12 +196,12 @@ public class DialogueManager : MonoBehaviour
             {
                 break;
             }
+
+            textoCompleto = false;
+
+            nextRespuesta.gameObject.SetActive(true);
         }
 
-        textoCompleto = false;
-
-        yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
-        PanelRespuestasClick();
     }
 
     // Función adicional para detener el audio después de 2 segundos
@@ -205,21 +211,11 @@ public class DialogueManager : MonoBehaviour
         vozGuardia.Pause();
     }
 
-    bool EstaDentroDelPanel(Vector2 posicionClic, RectTransform panel)
-    {
-        Vector2 localPoint;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(panel, posicionClic, Camera.main, out localPoint);
-
-        localPoint.x += panel.rect.width * panel.pivot.x;
-        localPoint.y += panel.rect.height * panel.pivot.y;
-
-        return panel.rect.Contains(localPoint);
-    }
 
     void MostrarPanelDialogo()
     {
         mostrandoRespuestas = false;
-        dialogoVisible = true; 
+        dialogoVisible = true;
         panelDialogo.gameObject.SetActive(true);
         panelRespuestas.gameObject.SetActive(false);
         ComenzarEscritura();
@@ -230,79 +226,78 @@ public class DialogueManager : MonoBehaviour
         StartCoroutine(EscribirLinea());
     }
 
-   IEnumerator EscribirLinea()
-{
-    textoDialogo.text = string.Empty;
-
-    vozPersonaje.Play();
-    StartCoroutine(DetenerAudioPersonaje(2));
-
-    tiempoUltimaActualizacion = Time.time; // Inicializar el tiempo del cursor
-
-    while (textoDialogo.text.Length < lineas[indexDialogo].Length)
+    IEnumerator EscribirLinea()
     {
-        if (textoCompleto)
+        textoDialogo.text = string.Empty;
+
+        vozPersonaje.Play();
+        StartCoroutine(DetenerAudioPersonaje(2));
+
+        tiempoUltimaActualizacion = Time.time; // Inicializar el tiempo del cursor
+
+        while (textoDialogo.text.Length < lineas[indexDialogo].Length)
         {
-            textoDialogo.text = lineas[indexDialogo]; // Mostrar el texto completo
-            break;
+            if (textoCompleto)
+            {
+                textoDialogo.text = lineas[indexDialogo]; // Mostrar el texto completo
+                break;
+            }
+
+            if (Time.time - tiempoUltimaActualizacion >= intervaloCursor)
+            {
+                cursorVisible = !cursorVisible;
+                tiempoUltimaActualizacion = Time.time;
+            }
+
+            string textoParcial = lineas[indexDialogo].Substring(0, textoDialogo.text.Length);
+            if (cursorVisible)
+            {
+                textoParcial += "_";
+            }
+            textoDialogo.text = textoParcial;
+
+            yield return new WaitForSeconds(velocidadTexto);
         }
 
-        if (Time.time - tiempoUltimaActualizacion >= intervaloCursor)
+        // Finalizar diálogo
+        textoDialogo.text = lineas[indexDialogo];
+
+        if (AudioManager.instance != null)
         {
-            cursorVisible = !cursorVisible;
-            tiempoUltimaActualizacion = Time.time;
+            AudioManager.instance.DetenerHablar();
         }
 
-        string textoParcial = lineas[indexDialogo].Substring(0, textoDialogo.text.Length);
-        if (cursorVisible)
-        {
-            textoParcial += "_";
-        }
-        textoDialogo.text = textoParcial;
 
-        yield return new WaitForSeconds(velocidadTexto);
+        // Mostrar el texto completo con el cursor titilante
+        while (true)
+        {
+            if (Time.time - tiempoUltimaActualizacion >= intervaloCursor)
+            {
+                cursorVisible = !cursorVisible;
+                tiempoUltimaActualizacion = Time.time;
+            }
+
+            string textoConCursorTitilante = lineas[indexDialogo];
+            if (cursorVisible)
+            {
+                textoConCursorTitilante += "_";
+            }
+            textoDialogo.text = textoConCursorTitilante;
+
+            yield return null; // Esperar al siguiente frame
+
+            // Salir del bucle cuando se haga clic
+            if (Input.GetMouseButtonDown(0))
+            {
+                break;
+            }
+
+            textoCompleto = false;
+            mostrandoRespuestas = true;
+            nextDialogo.gameObject.SetActive(true);
+        }
+
     }
-
-    // Mostrar el texto completo con el cursor titilante
-    while (true)
-    {
-        if (Time.time - tiempoUltimaActualizacion >= intervaloCursor)
-        {
-            cursorVisible = !cursorVisible;
-            tiempoUltimaActualizacion = Time.time;
-        }
-
-        string textoConCursorTitilante = lineas[indexDialogo];
-        if (cursorVisible)
-        {
-            textoConCursorTitilante += "_";
-        }
-        textoDialogo.text = textoConCursorTitilante;
-
-        yield return null; // Esperar al siguiente frame
-
-        // Salir del bucle cuando el jugador haga clic o presione una tecla
-        if (Input.GetMouseButtonDown(0))
-        {
-            break;
-        }
-    }
-
-    // Finalizar diálogo
-    textoDialogo.text = lineas[indexDialogo];
-    if (AudioManager.instance != null)
-    {
-        AudioManager.instance.DetenerHablar();
-    }
-
-    textoCompleto = false;
-    mostrandoRespuestas = true;
-
-    yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
-    PanelDialogoClick();
-}
-
-
 
     // Función adicional para detener el audio después de 2 segundos
     IEnumerator DetenerAudioPersonaje(float segundos)
@@ -319,6 +314,7 @@ public class DialogueManager : MonoBehaviour
 
     public void PanelRespuestasClick()
     {
+        nextRespuesta.gameObject.SetActive(false);
         if (mostrandoRespuestas)
         {
             mostrandoRespuestas = false;
@@ -329,6 +325,9 @@ public class DialogueManager : MonoBehaviour
 
     public void PanelDialogoClick()
     {
+
+        nextDialogo.gameObject.SetActive(false);
+
         if (mostrandoRespuestas && indexRespuestas < respuestasActuales.Count)
         {
             indexDialogo++;
@@ -339,7 +338,7 @@ public class DialogueManager : MonoBehaviour
             if (indexDialogo == lineas.Length - 1)
             {
                 panelDialogo.gameObject.SetActive(false);
-                 dialogoVisible = false;
+                dialogoVisible = false;
                 //MostrarBotonSiguiente();
                 if (esAgresivo)
                 {
@@ -355,9 +354,12 @@ public class DialogueManager : MonoBehaviour
 
     void MostrarBotonSiguiente()
     {
-        botonIngreso.interactable = true;
-        botonRechazo.interactable = true;
-        ColisionBotones();
+      //  botonIngreso.interactable = true;
+      //  botonRechazo.interactable = true;
+       // ColisionBotones();
+
+       leverController.ActivarPalanca();
+       
         panelSiguiente.gameObject.SetActive(true);
 
         if (!medicoUsado)
@@ -367,7 +369,7 @@ public class DialogueManager : MonoBehaviour
 
     }
 
-    public void ColisionBotones()
+  /*  public void ColisionBotones()
     {
         var imageIngreso = botonIngreso.GetComponent<Image>();
         var imageRechazo = botonRechazo.GetComponent<Image>();
@@ -382,6 +384,6 @@ public class DialogueManager : MonoBehaviour
         {
             imageRechazo.alphaHitTestMinimumThreshold = 0.1f;
         }
-    }
-    }
+    }*/
+}
 
