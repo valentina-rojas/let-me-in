@@ -14,6 +14,9 @@ public class OptionsManager : MonoBehaviour
     public RectTransform panelAyuda;
     public RectTransform panelSintomas;
 
+    public RectTransform panelSintomasNivel1;
+    public RectTransform panelSintomasNivel2;
+
     public Button botonOpciones;
     public Button botonAyuda;
     public Button botonSintomas;
@@ -81,6 +84,17 @@ public class OptionsManager : MonoBehaviour
     {
         CerrarTodosLosPaneles();
         panelSintomas.gameObject.SetActive(true);
+
+        if (GameData.NivelActual == 1) {
+             panelSintomasNivel2.gameObject.SetActive(false);
+            panelSintomasNivel1.gameObject.SetActive(true);
+        }
+
+        if (GameData.NivelActual == 2) {
+             panelSintomasNivel1.gameObject.SetActive(false);
+            panelSintomasNivel2.gameObject.SetActive(true);
+        }
+
     }
 
     public void CerrarSintomas()
