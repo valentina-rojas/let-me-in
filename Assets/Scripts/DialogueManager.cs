@@ -50,6 +50,8 @@ public class DialogueManager : MonoBehaviour
     public Button nextDialogo;
     public Button nextRespuesta;
 
+    public bool puedeAvanzarDialogo = true;
+    private bool esDialogoFinal = false;
 
     void Start()
     {
@@ -60,18 +62,26 @@ public class DialogueManager : MonoBehaviour
     {
         if (dialogoVisible)
         {
+
+
             // Detecta si el usuario presiona Espacio para adelantar un diálogo
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 AdelantarDialogo();
             }
-            // Detecta si el usuario presiona Enter para omitir todos los diálogos
-            else if (Input.GetKeyDown(KeyCode.Return))
+
+            if (puedeAvanzarDialogo)
             {
-                SaltarTodosLosDialogos();
+                if (Input.GetKeyDown(KeyCode.Return))
+                {
+                    SaltarTodosLosDialogos();
+                }
             }
+
         }
     }
+
+
 
     public void AdelantarDialogo()
     {
@@ -100,6 +110,18 @@ public class DialogueManager : MonoBehaviour
 
     }
 
+
+    public void OcultarDialogo()
+    {
+        panelDialogo.gameObject.SetActive(false);
+    }
+
+    public bool DialogoEstaOculto()
+    {
+        // Aquí puedes agregar la lógica para verificar si el diálogo está oculto
+        return !panelDialogo.gameObject.activeSelf; // Por ejemplo, si el diálogo está representado por un panel que se oculta
+    }
+
     public void PausarVoces()
     {
         if (vozGuardia != null)
@@ -114,16 +136,29 @@ public class DialogueManager : MonoBehaviour
     }
 
 
-    public void ComenzarDialogo(string[] dialogos, List<string> respuestas, bool esAgresivo)
+    public void ComenzarDialogo(string[] dialogos, List<string> respuestas, bool esAgresivo, bool esDialogoFinal)
     {
         lineas = dialogos;
         respuestasActuales = respuestas;
         this.esAgresivo = esAgresivo;
+        this.esDialogoFinal = esDialogoFinal;
 
         indexDialogo = 0;
         indexRespuestas = 0;
 
+       
         MostrarPanelDialogo();
+
+        // Si es el diálogo final de ingreso o rechazo, desactivar el botón y las teclas
+        if (esDialogoFinal)
+        {
+            puedeAvanzarDialogo = false; // Desactivar el avance con teclado
+        }
+        else
+        {
+            puedeAvanzarDialogo = true; // Permitir avance con teclado
+        }
+
     }
 
     void MostrarPanelRespuestas()
@@ -294,7 +329,14 @@ public class DialogueManager : MonoBehaviour
 
             textoCompleto = false;
             mostrandoRespuestas = true;
-            nextDialogo.gameObject.SetActive(true);
+
+            if (!esDialogoFinal )
+            {
+                nextDialogo.gameObject.SetActive(true);
+            } else {
+                nextDialogo.gameObject.SetActive(false);
+            }
+
         }
 
     }
@@ -354,12 +396,9 @@ public class DialogueManager : MonoBehaviour
 
     void MostrarBotonSiguiente()
     {
-      //  botonIngreso.interactable = true;
-      //  botonRechazo.interactable = true;
-       // ColisionBotones();
+        
+        leverController.ActivarPalanca();
 
-       leverController.ActivarPalanca();
-       
         panelSiguiente.gameObject.SetActive(true);
 
         if (!medicoUsado)
@@ -369,21 +408,6 @@ public class DialogueManager : MonoBehaviour
 
     }
 
-  /*  public void ColisionBotones()
-    {
-        var imageIngreso = botonIngreso.GetComponent<Image>();
-        var imageRechazo = botonRechazo.GetComponent<Image>();
-
-
-        if (imageIngreso != null)
-        {
-            imageIngreso.alphaHitTestMinimumThreshold = 0.1f;
-        }
-
-        if (imageRechazo != null)
-        {
-            imageRechazo.alphaHitTestMinimumThreshold = 0.1f;
-        }
-    }*/
+   
 }
 

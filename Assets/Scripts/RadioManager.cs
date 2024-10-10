@@ -26,18 +26,19 @@ public class RadioManager : MonoBehaviour
     public Slider barraContaminacion;
     public float maxContaminacion = 5f;  // Máximo nivel de contaminación
     private float nivelContaminacion = 0f;  // Nivel actual de contaminación
-    public Image fillBarImage; 
+    public Image fillBarImage;
 
-     public Color colorAmarillo = Color.yellow;
+    public Color colorAmarillo = Color.yellow;
     public Color colorNaranja = new Color(1f, 0.5f, 0f); // Color naranja
     public Color colorRojo = Color.red;
+
 
 
     public Animator radioAnimator;
 
     private int indiceMensajeActual = 0;
 
-
+ public s_GameManager gameManager;
     void Start()
     {
         // Inicializar la barra con 0 contaminación
@@ -47,7 +48,7 @@ public class RadioManager : MonoBehaviour
             barraContaminacion.value = nivelContaminacion;
         }
 
-    
+
     }
 
     public void ActivarDisturbios()
@@ -64,7 +65,7 @@ public class RadioManager : MonoBehaviour
 
         if (radioAnimator != null)
         {
-            radioAnimator.SetTrigger("ActivarRadio");  
+            radioAnimator.SetTrigger("ActivarRadio");
         }
 
         ruidosDisturbios.Play();
@@ -92,12 +93,18 @@ public class RadioManager : MonoBehaviour
         ruidosDisturbios.Stop();
 
 
-  if (radioAnimator != null)
-    {
-        radioAnimator.SetTrigger("IdleRadio"); // Asumiendo que tienes un estado 'idle' en tu animación
-    }
+        if (radioAnimator != null)
+        {
+            radioAnimator.SetTrigger("IdleRadio"); // Asumiendo que tienes un estado 'idle' en tu animación
+        }
 
         indiceMensajeActual = (indiceMensajeActual + 1) % mensajesDisturbios.Count;
+
+        
+        yield return new WaitForSeconds(2f);
+
+        gameManager.NextCharacter();
+
     }
 
 
@@ -130,7 +137,7 @@ public class RadioManager : MonoBehaviour
         if (barraContaminacion != null)
         {
             barraContaminacion.value = nivelContaminacion;
-              ActualizarColorBarra(); 
+            ActualizarColorBarra();
         }
 
         // Puedes agregar lógica adicional si el nivel de contaminación llega al máximo (perder el juego, etc.)
@@ -142,7 +149,7 @@ public class RadioManager : MonoBehaviour
     }
 
 
-     private void ActualizarColorBarra()
+    private void ActualizarColorBarra()
     {
         float porcentajeContaminacion = nivelContaminacion / maxContaminacion;
 

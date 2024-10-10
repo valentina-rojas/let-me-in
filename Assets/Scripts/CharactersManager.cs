@@ -16,6 +16,10 @@ public class Character
     public CharacterState estado;
     public List<string> dialogos;
     public List<string> respuestas;
+
+     public string[] dialogosIngreso;  // Diálogo cuando el personaje es aceptado
+    public string[] dialogosRechazo; 
+
     public GameObject prefab;
     public int nivel;
     public bool esAgresivo;
@@ -49,8 +53,11 @@ public class CharactersManager : MonoBehaviour
 
     public TextMeshProUGUI contadorPersonas;
 
+   
+
     void Start()
     {
+      
         ConfigurarPersonajesParaNivel(gameManager.NivelActual);
     }
 
@@ -98,6 +105,7 @@ public class CharactersManager : MonoBehaviour
     }
 
 
+
     public void AparecerSiguientePersonaje()
     {
         StartCoroutine(AparecerConRetraso());
@@ -107,7 +115,7 @@ public class CharactersManager : MonoBehaviour
 
     private IEnumerator AparecerConRetraso()
     {
-        LimpiarPersonajes();
+       // LimpiarPersonajes();
 
         // dialogueManager.botonIngreso.interactable = false;
         // dialogueManager.botonRechazo.interactable = false;
@@ -270,7 +278,7 @@ public class CharactersManager : MonoBehaviour
         {
             Character character = charactersForCurrentLevel[characterIndex];
             string[] dialogos = character.dialogos.ToArray();
-            dialogueManager.ComenzarDialogo(dialogos, character.respuestas, character.esAgresivo);
+            dialogueManager.ComenzarDialogo(dialogos, character.respuestas, character.esAgresivo, false);
         }
         else
         {

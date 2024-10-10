@@ -6884,6 +6884,7 @@ MonoBehaviour:
   areaClickable: {fileID: 0}
   nextDialogo: {fileID: 0}
   nextRespuesta: {fileID: 0}
+  puedeAvanzarDialogo: 1
 --- !u!1 &712981492
 GameObject:
   m_ObjectHideFlags: 0
@@ -9667,8 +9668,12 @@ MonoBehaviour:
     - "\xBFPresent\xF3 s\xEDntomas como picaz\xF3n o sarpullido? "
     - "No puedo realizar un diagn\xF3stico por el estado en que se encuentra"
     - "\xBFC\xF3mo puedo saber que no me est\xE1 mintiendo? "
+    dialogosIngreso:
+    - gracielaa
+    dialogosRechazo:
+    - la puta q te pario
     prefab: {fileID: 818472440953356866, guid: 3ca1d4bf8f02a6749a5cf75e353ccb3d, type: 3}
-    nivel: 1
+    nivel: 3
     esAgresivo: 0
   - nombre: pj2
     estado: 1
@@ -9686,6 +9691,10 @@ MonoBehaviour:
     - "\xBFPresent\xF3 s\xEDntomas como picaz\xF3n o sarpullido? "
     - "\xBFEntonces qu\xE9 son las manchas que tiene en la cara? "
     - "No ser\xE9 dermat\xF3logo pero esas ronchas no parecen ser acn\xE9\u2026 "
+    dialogosIngreso:
+    - fgjjf
+    dialogosRechazo:
+    - gfjfgj
     prefab: {fileID: 4471038150240660831, guid: 10b28ac8c6b89414fb3bb9b99b2da64f, type: 3}
     nivel: 1
     esAgresivo: 0
@@ -9704,6 +9713,10 @@ MonoBehaviour:
     - "\xBFPresent\xF3 s\xEDntomas como picaz\xF3n o sarpullido? "
     - "\xBFPuede bajarse el barbijo?"
     - Es necesario para verificar su estado de salud
+    dialogosIngreso:
+    - ggg
+    dialogosRechazo:
+    - gggg
     prefab: {fileID: 4534030318338212612, guid: 645f903f2aa46bd42bf0a0bb99722dbf, type: 3}
     nivel: 1
     esAgresivo: 0
@@ -9726,6 +9739,10 @@ MonoBehaviour:
       otros m\xFAsicos?"
     - "\xBFEstuvo en alg\xFAn lugar concurrido? Aparte de su recital, donde claramente
       no lo fue a ver nadie."
+    dialogosIngreso:
+    - gggg
+    dialogosRechazo:
+    - gggg
     prefab: {fileID: 4534030318338212612, guid: 65ba1a6c5e42cbc4cbc0efac8b3cee5a, type: 3}
     nivel: 1
     esAgresivo: 0
@@ -9744,6 +9761,10 @@ MonoBehaviour:
     - "\xBFPresent\xF3 s\xEDntomas como picaz\xF3n o sarpullido? "
     - "\xBFEntonces a qu\xE9 se deben las marcas en el cuello?"
     - "\xBFVino hasta ac\xE1 sola?\xBFQu\xE9 pas\xF3 con sus gatos?"
+    dialogosIngreso:
+    - gggg
+    dialogosRechazo:
+    - ggg
     prefab: {fileID: 4534030318338212612, guid: ff8449d53c377fd41a6c4d2f229fd278, type: 3}
     nivel: 1
     esAgresivo: 0
@@ -9765,6 +9786,10 @@ MonoBehaviour:
     - "\xBFPresent\xF3 s\xEDntomas como picaz\xF3n o sarpullido? "
     - "Se nota, entonces\u2026 \xBFQu\xE9 estuvo haciendo todo este tiempo?"
     - "\xBFC\xF3mo manejo las medidas de prevenci\xF3n hasta ahora?"
+    dialogosIngreso:
+    - gg
+    dialogosRechazo:
+    - ggg
     prefab: {fileID: 4534030318338212612, guid: cd3cc5b79305b0b49993641259778998, type: 3}
     nivel: 1
     esAgresivo: 0
@@ -9787,6 +9812,10 @@ MonoBehaviour:
     - "\xBFC\xF3mo mantuvo su estado f\xEDsico si no se pod\xEDa salir?"
     - "\xBFC\xF3mo puedo estar seguro de que no se encontr\xF3 con otra gente para
       jugar?"
+    dialogosIngreso:
+    - gggg
+    dialogosRechazo:
+    - ggg
     prefab: {fileID: 4534030318338212612, guid: 2158820591ed44b4e9d5edf3156379c0, type: 3}
     nivel: 1
     esAgresivo: 0
@@ -9807,6 +9836,10 @@ MonoBehaviour:
     - "\xBFPresent\xF3 s\xEDntomas como picaz\xF3n o sarpullido? "
     - "\xBFTuvo que ir a la oficina recientemente?"
     - "\xBFEst\xE1 segura que su malestar se debe al estr\xE9s?"
+    dialogosIngreso:
+    - ggg
+    dialogosRechazo:
+    - ggg
     prefab: {fileID: 4534030318338212612, guid: 77cf367750bdfd04780af06eff96079f, type: 3}
     nivel: 1
     esAgresivo: 0
@@ -9827,6 +9860,10 @@ MonoBehaviour:
     - "\xBFPresent\xF3 s\xEDntomas como picaz\xF3n o sarpullido? "
     - "\xBFPor qu\xE9 quiere entrar a este lugar en lugar de quedarse en su casa?"
     - "\xBFPuede retirarse la bufanda para comprobar que realmente no presenta s\xEDntomas?"
+    dialogosIngreso:
+    - ggg
+    dialogosRechazo:
+    - gggg
     prefab: {fileID: 7820086166756251426, guid: ca9393d56879ad1429513eeb5d16d8f8, type: 3}
     nivel: 1
     esAgresivo: 0
@@ -9847,6 +9884,10 @@ MonoBehaviour:
     - "\xBFPresent\xF3 s\xEDntomas como picaz\xF3n o sarpullido? "
     - "\xBFA qu\xE9 se debe el vendaje?"
     - "\xBFPor qu\xE9 se separ\xF3 del grupo?"
+    dialogosIngreso:
+    - gggg
+    dialogosRechazo:
+    - ggg
     prefab: {fileID: 4691758249037950082, guid: be4380dea7ebb8d48843de1a376b4b05, type: 3}
     nivel: 1
     esAgresivo: 0
@@ -9864,6 +9905,8 @@ MonoBehaviour:
     - "\xBFPuede explicarme por qu\xE9 los ajos y el colador?"
     - No puedo dejarlo ingresar con todos esos elementos... Ademas no puedo ver si
       presenta algun sintoma
+    dialogosIngreso: []
+    dialogosRechazo: []
     prefab: {fileID: 2573835153199593656, guid: 656587532b53f0f4595ef3a24ddb57ef, type: 3}
     nivel: 2
     esAgresivo: 0
@@ -9878,6 +9921,8 @@ MonoBehaviour:
     - "\xBFEstuvo en contacto con otra gente? "
     - "\xBFMantuvo precauciones? "
     - "\xBFSabe que no puede ingresar con mascotas?"
+    dialogosIngreso: []
+    dialogosRechazo: []
     prefab: {fileID: 2573835153199593656, guid: a7152580a841a8c43a40892441791e72, type: 3}
     nivel: 2
     esAgresivo: 0
@@ -9894,6 +9939,8 @@ MonoBehaviour:
     - "\xBFAlguno de los dos sali\xF3 de la casa o se reuni\xF3 con otras personas?"
     - "Usted presenta todos los s\xEDntomas visibles de un infectado, no voy a poder
       dejarlos pasar"
+    dialogosIngreso: []
+    dialogosRechazo: []
     prefab: {fileID: 2573835153199593656, guid: 6e00b6e0097661d46836bb67ad92d79c, type: 3}
     nivel: 2
     esAgresivo: 0
@@ -9908,6 +9955,8 @@ MonoBehaviour:
     - "\xBFHa estado en contacto con otras personas? "
     - "\xBFComo estuvo manejando la cuarentena?"
     - "\xBFPresent\xF3 s\xEDntomas del virus? "
+    dialogosIngreso: []
+    dialogosRechazo: []
     prefab: {fileID: 2573835153199593656, guid: 2c13e10de9ad66b4c8ef053671a158a3, type: 3}
     nivel: 2
     esAgresivo: 0
@@ -9918,6 +9967,8 @@ MonoBehaviour:
     - "\xA1TE DIJE QUE ME DEJES ENTRAR!"
     respuestas:
     - "Se\xF1or, calmese y tome distancia..."
+    dialogosIngreso: []
+    dialogosRechazo: []
     prefab: {fileID: 2573835153199593656, guid: 0e2d77ba5fb3fab47bbefc4da5d96d79, type: 3}
     nivel: 1
     esAgresivo: 1
@@ -9933,6 +9984,8 @@ MonoBehaviour:
     - "\xBFDe d\xF3nde viene? "
     - "\xBFEstuvo en contacto con otras personas? "
     - "\xBFTom\xF3 las precauciones necesarias?"
+    dialogosIngreso: []
+    dialogosRechazo: []
     prefab: {fileID: 2573835153199593656, guid: 20a160811651f9c40ad064946cdad38c, type: 3}
     nivel: 2
     esAgresivo: 0
@@ -9949,6 +10002,8 @@ MonoBehaviour:
     - "\xBFDe d\xF3nde viene con esa bandeja?"
     - "\xBFTom\xF3 las precauciones necesarias en su cocina?"
     - "\xBFPor qu\xE9 decidi\xF3 venir en lugar de quedarse en su casa?"
+    dialogosIngreso: []
+    dialogosRechazo: []
     prefab: {fileID: 2573835153199593656, guid: 18c28f3523fa5e84c90f569167b88aff, type: 3}
     nivel: 2
     esAgresivo: 0
@@ -9965,6 +10020,8 @@ MonoBehaviour:
     - "\xBFD\xF3nde estuvo estos \xFAltimos d\xEDas?"
     - "\xBFSe cruz\xF3 a otras personas en el camino?"
     - "\xBFDonde estan sus amigos en este momento?"
+    dialogosIngreso: []
+    dialogosRechazo: []
     prefab: {fileID: 2573835153199593656, guid: b694962cb524c9648a6388ee9310d537, type: 3}
     nivel: 2
     esAgresivo: 0
@@ -9982,6 +10039,8 @@ MonoBehaviour:
       el virus?"
     - "\xBFEso que tiene en la cabeza es sarpullido?"
     - "\xBFPor qu\xE9 quiere entrar al bunker?"
+    dialogosIngreso: []
+    dialogosRechazo: []
     prefab: {fileID: 2573835153199593656, guid: 8644957925043e84abc6ec8c7a1d6a4f, type: 3}
     nivel: 2
     esAgresivo: 0
@@ -9996,6 +10055,8 @@ MonoBehaviour:
     - "\xBFComo? "
     - "Se\xF1or, esto es un refugio, hay un virus letal dando vueltas, las fiestas
       est\xE1n prohibidas, no sea imprudente"
+    dialogosIngreso: []
+    dialogosRechazo: []
     prefab: {fileID: 2573835153199593656, guid: 3a0bb5d985a32a14280ec05499dbafed, type: 3}
     nivel: 2
     esAgresivo: 0
@@ -10006,6 +10067,8 @@ MonoBehaviour:
     - Las preguntas no van a ser necesarias...
     respuestas:
     - "S\xED, \xBFDe donde viene?"
+    dialogosIngreso: []
+    dialogosRechazo: []
     prefab: {fileID: 841363440324422405, guid: cfc627d5ff0e33e40a141873f5d8aed5, type: 3}
     nivel: 2
     esAgresivo: 1
@@ -10016,6 +10079,8 @@ MonoBehaviour:
     - "\xA1ABRIME LA PUERTA!"
     respuestas:
     - "No puedo dejarlo pasar as\xED nom\xE1s, primero debo evaluar su estado"
+    dialogosIngreso: []
+    dialogosRechazo: []
     prefab: {fileID: 1526593497047026833, guid: 018373af6d4e2f547816b99ce66d7b80, type: 3}
     nivel: 2
     esAgresivo: 1
@@ -10401,6 +10466,7 @@ MonoBehaviour:
   areaClickable: {fileID: 0}
   nextDialogo: {fileID: 0}
   nextRespuesta: {fileID: 0}
+  puedeAvanzarDialogo: 1
 --- !u!114 &992450832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14459,6 +14525,7 @@ MonoBehaviour:
   areaClickable: {fileID: 0}
   nextDialogo: {fileID: 0}
   nextRespuesta: {fileID: 0}
+  puedeAvanzarDialogo: 1
 --- !u!114 &1412460606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16429,6 +16496,7 @@ MonoBehaviour:
   colorNaranja: {r: 1, g: 0.5, b: 0, a: 1}
   colorRojo: {r: 1, g: 0, b: 0, a: 1}
   radioAnimator: {fileID: 1548452512}
+  gameManager: {fileID: 926031996}
 --- !u!1 &1682815669
 GameObject:
   m_ObjectHideFlags: 0
@@ -19038,7 +19106,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -860, y: 318.33}
+  m_AnchoredPosition: {x: -859.99994, y: 318.33}
   m_SizeDelta: {x: -1741.51, y: -636.65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2023095411
@@ -19394,6 +19462,7 @@ MonoBehaviour:
   areaClickable: {fileID: 0}
   nextDialogo: {fileID: 181519034}
   nextRespuesta: {fileID: 307729110}
+  puedeAvanzarDialogo: 1
 --- !u!4 &2085731923
 Transform:
   m_ObjectHideFlags: 0
