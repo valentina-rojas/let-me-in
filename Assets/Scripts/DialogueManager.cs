@@ -181,26 +181,25 @@ public class DialogueManager : MonoBehaviour
 
         tiempoUltimaActualizacion = Time.time;
 
-        while (textoRespuesta.text.Length < respuestasActuales[indexRespuestas].Length)
+     // Mientras el texto de la respuesta se está escribiendo
+    while (textoRespuesta.text.Length < respuestasActuales[indexRespuestas].Length)
+    {
+        if (textoCompleto)
         {
-            if (textoCompleto) break;
-
-            if (Time.time - tiempoUltimaActualizacion >= intervaloCursor)
-            {
-                cursorVisible = !cursorVisible;
-                tiempoUltimaActualizacion = Time.time;
-            }
-
-            // Construye el texto actual con el cursor
-            string textoParcial = respuestasActuales[indexRespuestas].Substring(0, textoRespuesta.text.Length);
-            if (cursorVisible)
-            {
-                textoParcial += "_";
-            }
-            textoRespuesta.text = textoParcial;
-
-            yield return new WaitForSeconds(velocidadTexto);
+            // Si el texto está completo, muestra el texto final con el cursor al final
+            textoRespuesta.text = respuestasActuales[indexRespuestas] + "_"; 
+            break;
         }
+
+        // Añade una letra y muestra el cursor fijo
+        textoRespuesta.text += respuestasActuales[indexRespuestas][textoRespuesta.text.Length] + "_"; 
+        yield return new WaitForSeconds(velocidadTexto);
+
+        // Para evitar que el cursor se duplique, eliminamos el "_" en la siguiente iteración
+        textoRespuesta.text = textoRespuesta.text.TrimEnd('_');
+    }
+
+
 
 
         textoRespuesta.text = respuestasActuales[indexRespuestas];
@@ -272,28 +271,21 @@ public class DialogueManager : MonoBehaviour
         tiempoUltimaActualizacion = Time.time; // Inicializar el tiempo del cursor
 
         while (textoDialogo.text.Length < lineas[indexDialogo].Length)
+    {
+        if (textoCompleto)
         {
-            if (textoCompleto)
-            {
-                textoDialogo.text = lineas[indexDialogo]; // Mostrar el texto completo
-                break;
-            }
-
-            if (Time.time - tiempoUltimaActualizacion >= intervaloCursor)
-            {
-                cursorVisible = !cursorVisible;
-                tiempoUltimaActualizacion = Time.time;
-            }
-
-            string textoParcial = lineas[indexDialogo].Substring(0, textoDialogo.text.Length);
-            if (cursorVisible)
-            {
-                textoParcial += "_";
-            }
-            textoDialogo.text = textoParcial;
-
-            yield return new WaitForSeconds(velocidadTexto);
+            textoDialogo.text = lineas[indexDialogo] + "_"; // Muestra el cursor fijo al final
+            break;
         }
+
+        textoDialogo.text += lineas[indexDialogo][textoDialogo.text.Length] + "_"; // Añade una letra y muestra el cursor fijo
+        yield return new WaitForSeconds(velocidadTexto);
+
+        // Para evitar que el cursor se duplique, eliminamos el "_" en la siguiente iteración
+        textoDialogo.text = textoDialogo.text.TrimEnd('_');
+    }
+
+
 
         // Finalizar diálogo
         textoDialogo.text = lineas[indexDialogo];

@@ -20190,7 +20190,7 @@ MonoBehaviour:
   botonIngreso: {fileID: 1228093870}
   botonRechazo: {fileID: 1941776353}
   panelSiguiente: {fileID: 1947946919}
-  velocidadTexto: 0.03
+  velocidadTexto: 0.04
   gameManager: {fileID: 0}
   audioManager: {fileID: 1168009879}
   aggressiveNPCs: {fileID: 1727551768}
