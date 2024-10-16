@@ -63,11 +63,15 @@ public class RadioManager : MonoBehaviour
 
         ActualizarContaminacion(1);
 
-        if (radioAnimator != null)
-        {
-            radioAnimator.SetTrigger("ActivarRadio");
-        }
-
+      if (radioAnimator != null)
+    {
+        radioAnimator.SetTrigger("ActivarRadio");
+        Debug.Log("Animación ActivarRadio desencadenada");
+    }
+    else
+    {
+        Debug.LogWarning("radioAnimator es nulo");
+    }
         ruidosDisturbios.Play();
         audioSeguridad.Play();
 
