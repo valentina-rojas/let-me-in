@@ -106,6 +106,8 @@ public class s_GameManager : MonoBehaviour
         {
             // Si es enfermo, activar disturbios
             StartCoroutine(ProximoPersonajeTrasDisturbios());
+
+             stressBar.ActualizarEstres(1);
         }
         else
         {

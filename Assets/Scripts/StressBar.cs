@@ -5,10 +5,11 @@ using UnityEngine.UI;
 
 public class StressBar : MonoBehaviour
 {
-    public Slider barraEstres;  // Referencia al Slider de la barra de estrés
-    public float maxEstres = 5f;  // Máximo nivel de estrés
-    private float nivelEstres = 0f;  // Nivel actual de estrés
-    public Image fillBarImage;  // Imagen de la barra para cambiar color
+    public Slider barraEstres;  
+    public float maxEstres = 5f; 
+    private float nivelEstres = 0f;  
+    public Image fillBarImage;  
+     public GameObject panelPerdiste; 
 
     public Color colorVerde = Color.green;
     public Color colorAmarillo = Color.yellow;
@@ -16,7 +17,7 @@ public class StressBar : MonoBehaviour
 
   void Start()
     {
-        // Inicializar la barra con 0 estrés
+        
         if (barraEstres != null)
         {
             barraEstres.maxValue = maxEstres;
@@ -24,29 +25,47 @@ public class StressBar : MonoBehaviour
         }
     }
 
-    // Llamar esta función cuando se va un personaje
+   
     public void ActualizarEstres(float cantidad)
     {
         nivelEstres += cantidad;
 
-        // Asegurarse de no exceder el nivel máximo de estrés
+     
         if (nivelEstres > maxEstres)
         {
             nivelEstres = maxEstres;
         }
 
-        // Actualizar la barra visualmente
         if (barraEstres != null)
         {
             barraEstres.value = nivelEstres;
             ActualizarColorBarra();
         }
 
-        // Puedes agregar lógica adicional si el nivel de estrés llega al máximo (pérdida, eventos especiales, etc.)
+    
         if (nivelEstres >= maxEstres)
         {
-            Debug.Log("¡El nivel de estrés ha alcanzado su límite!");
-            // Lógica para manejar qué sucede cuando el estrés está al máximo
+           PerderJuego();
+        }
+    }
+
+
+
+    public void DisminuirEstres(float cantidad)
+    {
+        nivelEstres -= cantidad;
+
+       
+        if (nivelEstres < 0)
+        {
+            nivelEstres = 0;
+        }
+
+   
+        if (barraEstres != null)
+        {
+            barraEstres.value = nivelEstres;
+            ActualizarColorBarra();
         }
     }
 
@@ -66,5 +85,17 @@ public class StressBar : MonoBehaviour
         {
             fillBarImage.color = colorRojo;  // Más del 80% rojo
         }
+    }
+
+
+     private void PerderJuego()
+    {
+     
+    
+        if (panelPerdiste != null)
+        {
+            panelPerdiste.SetActive(true);
+        }
+
     }
 }
