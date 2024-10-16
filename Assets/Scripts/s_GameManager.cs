@@ -327,4 +327,6 @@ public class s_GameManager : MonoBehaviour
             return "Mensaje de inicio no definido para este nivel.";
         }
     }
+
+
 }

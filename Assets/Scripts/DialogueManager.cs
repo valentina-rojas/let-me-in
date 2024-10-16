@@ -152,6 +152,7 @@ public class DialogueManager : MonoBehaviour
         // Si es el diálogo final de ingreso o rechazo, desactivar el botón y las teclas
         if (esDialogoFinal)
         {
+            leverController.DesactivarPalanca();
             puedeAvanzarDialogo = false; // Desactivar el avance con teclado
         }
         else
@@ -397,7 +398,10 @@ public class DialogueManager : MonoBehaviour
     void MostrarBotonSiguiente()
     {
         
+       if (!esDialogoFinal)
+    {
         leverController.ActivarPalanca();
+    }
 
         panelSiguiente.gameObject.SetActive(true);
 

@@ -53,6 +53,8 @@ public class CharactersManager : MonoBehaviour
 
     public TextMeshProUGUI contadorPersonas;
 
+      private bool juegoTerminado = false; 
+
    
 
     void Start()
@@ -61,10 +63,12 @@ public class CharactersManager : MonoBehaviour
         ConfigurarPersonajesParaNivel(gameManager.NivelActual);
     }
 
-    void OnDestroy()
-    {
-
-    }
+public void DetenerPersonajes()
+{
+    juegoTerminado = true;  // Marcar que el juego ha terminado
+    StopAllCoroutines();    // Detener todos los coroutines activos en este script
+    Debug.Log("Todos los coroutines han sido detenidos, no se aparecerán más personajes.");
+}
 
     public void ConfigurarPersonajesParaNivel(int nivel)
     {
@@ -108,6 +112,15 @@ public class CharactersManager : MonoBehaviour
 
     public void AparecerSiguientePersonaje()
     {
+
+
+          if (juegoTerminado)
+    {
+        Debug.Log("El juego ha terminado. No se aparecerán más personajes.");
+        return; // Detener si el juego ha terminado
+    }
+
+
         StartCoroutine(AparecerConRetraso());
 
         darkeningLayer.OnCharacterSpawned();
@@ -128,6 +141,18 @@ public class CharactersManager : MonoBehaviour
         Debug.Log("Esperando antes de aparecer el siguiente personaje...");
         yield return new WaitForSeconds(tiempoDeEspera);
 
+
+
+  // Verificar si el juego ha terminado antes de continuar
+    if (juegoTerminado)
+    {
+        Debug.Log("El juego ha terminado durante el retraso. No se aparecerán más personajes.");
+        yield break;  // Detener el Coroutine si el juego ha terminado
+    }
+
+
+
+    
         Debug.Log("Tiempo de espera completado. Apareciendo el siguiente personaje.");
 
         if (index < charactersForCurrentLevel.Count)

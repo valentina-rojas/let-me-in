@@ -19415,6 +19415,7 @@ MonoBehaviour:
   colorVerde: {r: 0, g: 1, b: 0, a: 1}
   colorAmarillo: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   colorRojo: {r: 1, g: 0, b: 0, a: 1}
+  charactersManager: {fileID: 943274571}
 --- !u!1 &1992671361
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,6 +15,7 @@ public class StressBar : MonoBehaviour
     public Color colorAmarillo = Color.yellow;
     public Color colorRojo = Color.red;
 
+ public CharactersManager charactersManager;
   void Start()
     {
         
@@ -88,14 +89,17 @@ public class StressBar : MonoBehaviour
     }
 
 
-     private void PerderJuego()
+  
+public void PerderJuego()
+{
+    CharactersManager charactersManager = FindObjectOfType<CharactersManager>();
+    if (charactersManager != null)
     {
-     
-    
-        if (panelPerdiste != null)
-        {
-            panelPerdiste.SetActive(true);
-        }
-
+        charactersManager.DetenerPersonajes();  // Detener la aparición de personajes
     }
+
+    // Mostrar el panel de perder o cualquier otra lógica
+    panelPerdiste.SetActive(true);
+}
+
 }
