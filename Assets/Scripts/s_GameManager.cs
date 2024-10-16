@@ -10,6 +10,7 @@ public class s_GameManager : MonoBehaviour
     public DialogueManager dialogueManager;
     public RadioManager radioManager;
     public CheckCondition checkCondition;
+    public StressBar stressBar;
 
     public string[] mensajesInicioDia;
 
@@ -59,6 +60,8 @@ public class s_GameManager : MonoBehaviour
     public void NextCharacter()
     {
         charactersManager.AparecerSiguientePersonaje();
+
+        stressBar.ActualizarEstres(1);
     }
 
     public void OnBotonIngresoClick()
@@ -110,6 +113,7 @@ public class s_GameManager : MonoBehaviour
             NextCharacter();
         }
 
+
         yield break;
     }
 
@@ -136,6 +140,8 @@ public class s_GameManager : MonoBehaviour
         charactersManager.MoverPersonajeAlPunto(charactersManager.spawnPoint.position);
 
         NextCharacter();
+
+
 
         yield break;
     }
