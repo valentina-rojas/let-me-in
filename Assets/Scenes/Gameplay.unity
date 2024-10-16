@@ -19409,7 +19409,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barraEstres: {fileID: 1776270241}
-  maxEstres: 2
+  maxEstres: 5
   fillBarImage: {fileID: 1960045491}
   panelPerdiste: {fileID: 607860682}
   colorVerde: {r: 0, g: 1, b: 0, a: 1}
