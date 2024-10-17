@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
 
 public class s_GameManager : MonoBehaviour
 {
@@ -18,6 +20,9 @@ public class s_GameManager : MonoBehaviour
     public int enfermosIngresados;
     public int sanosRechazados;
     public int enfermosRechazados;
+    public int strikes;
+
+      public TextMeshProUGUI textoStrikes;
 
     public GameObject Musica;
     public AudioSource backgroundMusic;
@@ -106,12 +111,11 @@ public class s_GameManager : MonoBehaviour
         {
             // Si es enfermo, activar disturbios
             StartCoroutine(ProximoPersonajeTrasDisturbios());
-
              stressBar.ActualizarEstres(1);
+            ActualizarTextoStrikes();
         }
         else
         {
-            // Si no, avanzar al siguiente personaje
             NextCharacter();
         }
 
@@ -141,8 +145,15 @@ public class s_GameManager : MonoBehaviour
 
         charactersManager.MoverPersonajeAlPunto(charactersManager.spawnPoint.position);
 
-        NextCharacter();
 
+ Character personajeActual = charactersManager.GetCharacter(charactersManager.CurrentCharacterIndex);
+     if (personajeActual.estado == CharacterState.Sano)
+        {
+            ActualizarTextoStrikes();
+        }
+      
+            NextCharacter();
+     
 
 
         yield break;
@@ -204,15 +215,13 @@ public class s_GameManager : MonoBehaviour
                 {
                     Debug.Log("¡Elección correcta! Personaje sano ingresado.");
                     sanosIngresados++;
-                    // NextCharacter();
+                
                 }
                 else if (personajeActual.estado == CharacterState.Enfermo)
                 {
                     Debug.Log("¡Elección incorrecta! Personaje enfermo ingresado.");
                     enfermosIngresados++;
-
-                    // checkCondition.botonMedico.interactable = false;
-                    // StartCoroutine(ProximoPersonajeTrasDisturbios());
+                    strikes++;
                 }
             }
             else
@@ -221,14 +230,13 @@ public class s_GameManager : MonoBehaviour
                 {
                     Debug.Log("¡Elección incorrecta! Personaje sano rechazado.");
                     sanosRechazados++;
-
-                    // NextCharacter();
+                    strikes++;
                 }
                 else if (personajeActual.estado == CharacterState.Enfermo)
                 {
                     Debug.Log("¡Elección correcta! Personaje enfermo rechazado.");
                     enfermosRechazados++;
-                    // NextCharacter();
+               
                 }
             }
         }
@@ -236,12 +244,6 @@ public class s_GameManager : MonoBehaviour
 
     private IEnumerator ProximoPersonajeTrasDisturbios()
     {
-        // Esperar a que termine el disturbio antes de avanzar al siguiente personaje
-        //   yield return StartCoroutine(radioManager.ActivarDisturbiosCoroutine());
-
-        // Llamar a NextCharacter después de que haya terminado el disturbio
-        // NextCharacter();
-
         radioManager.ActivarDisturbios();
         yield break;
     }
@@ -326,6 +328,14 @@ public class s_GameManager : MonoBehaviour
         {
             return "Mensaje de inicio no definido para este nivel.";
         }
+    }
+
+
+       public void ActualizarTextoStrikes()
+    {
+       
+            textoStrikes.text = "FALTAS: " + strikes;
+       
     }
 
 

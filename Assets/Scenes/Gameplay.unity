@@ -4509,7 +4509,7 @@ GameObject:
   - component: {fileID: 364513517}
   - component: {fileID: 364513516}
   m_Layer: 5
-  m_Name: texto camara
+  m_Name: texto FALTAS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4531,7 +4531,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 767, y: 402.5}
+  m_AnchoredPosition: {x: 712, y: 402.5}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &364513516
@@ -4554,7 +4554,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: CAM 1
+  m_text: 'FALTAS: 0'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a9f54d527a6fc144ca33ce1dbc79ae4c, type: 2}
   m_sharedMaterial: {fileID: 2445440937034267188, guid: a9f54d527a6fc144ca33ce1dbc79ae4c, type: 2}
@@ -10598,6 +10598,8 @@ MonoBehaviour:
   enfermosIngresados: 0
   sanosRechazados: 0
   enfermosRechazados: 0
+  strikes: 0
+  textoStrikes: {fileID: 364513516}
   Musica: {fileID: 1182969594}
   backgroundMusic: {fileID: 0}
   sonidoBoton: {fileID: 1897245216}
