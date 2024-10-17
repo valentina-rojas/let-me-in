@@ -5,6 +5,8 @@ using UnityEngine.UI;
 public class Zoom : MonoBehaviour, IDragHandler
 {
     public RectTransform lupa; // El RectTransform de la lupa
+      private bool isLupaVisible = false; 
+        public GameObject panelLupa;   
 
     // Método que se llama cuando se arrastra el objeto
     public void OnDrag(PointerEventData eventData)
@@ -19,5 +21,13 @@ public class Zoom : MonoBehaviour, IDragHandler
         );
 
         lupa.anchoredPosition = pos; // Actualiza la posición de la lupa
+    }
+
+
+
+      public void ToggleLupa()
+    {
+        isLupaVisible = !isLupaVisible; // Alterna el estado de visibilidad
+        panelLupa.SetActive(isLupaVisible); // Activa o desactiva el panel
     }
 }
