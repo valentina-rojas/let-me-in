@@ -69,7 +69,7 @@ public class UI_Manager : MonoBehaviour
         }
 
         panelReporte.gameObject.SetActive(false);
-        panelPerdiste.gameObject.SetActive(false);
+       // panelPerdiste.gameObject.SetActive(false);
         botonSiguienteNivel.gameObject.SetActive(false);
 
         panelInicioDia.gameObject.SetActive(true);
@@ -238,7 +238,7 @@ public class UI_Manager : MonoBehaviour
 
     public void PanelReporte()
     {
-        panelPerdiste.gameObject.SetActive(true);
+        //panelPerdiste.gameObject.SetActive(true);
     }
 
 
