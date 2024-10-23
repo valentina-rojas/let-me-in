@@ -269,7 +269,7 @@ public class s_GameManager : MonoBehaviour
         {
             uiManager.mensajeReporte.text = "¡Buen trabajo!";
 
-            //modificacion temporal para que no apse al nivel 3
+            //modificacion temporal para que no pase al nivel 3
             if (NivelActual == 1)
             {
                 uiManager.botonSiguienteNivel.gameObject.SetActive(true);
@@ -282,13 +282,13 @@ public class s_GameManager : MonoBehaviour
             }
 
         }
-        else if ((enfermosIngresados >= 1 && enfermosIngresados <= 3) || (sanosRechazados >= 1 && sanosRechazados <= 3))
+        else 
         {
             uiManager.mensajeReporte.text = "Más cuidado la próxima vez...";
             // GameData.Faltas++;
 
 
-            //modificacion temporal para que no apse al nivel 3
+            //modificacion temporal para que no pase al nivel 3
             if (NivelActual == 1)
             {
                 uiManager.botonSiguienteNivel.gameObject.SetActive(true);
@@ -299,15 +299,10 @@ public class s_GameManager : MonoBehaviour
 
                 uiManager.botonGanaste.gameObject.SetActive(true);
             }
-
         }
-        else if (enfermosIngresados > 3 || sanosRechazados > 3)
-        {
-            uiManager.mensajeReporte.text = "Fuiste retirado del puesto de trabajo.";
-
-            uiManager.botonPerdiste.gameObject.SetActive(true);
-        }
+    
     }
+
 
     public void OnBotonSiguienteNivel()
     {
