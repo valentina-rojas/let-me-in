@@ -157,11 +157,11 @@ public class RadioManager : MonoBehaviour
     {
         float porcentajeContaminacion = nivelContaminacion / maxContaminacion;
 
-        if (porcentajeContaminacion <= 0.33f)
+        if (porcentajeContaminacion <= 0.34f)
         {
             fillBarImage.color = colorAmarillo;  // Hasta 33% amarillo
         }
-        else if (porcentajeContaminacion <= 0.66f)
+        else if (porcentajeContaminacion <= 0.67f)
         {
             fillBarImage.color = colorNaranja;  // Entre 33% y 66% naranja
         }

@@ -13,6 +13,7 @@ public class s_GameManager : MonoBehaviour
     public RadioManager radioManager;
     public CheckCondition checkCondition;
     public StressBar stressBar;
+    public RechazoBarraManager rechazoBarraManager;
 
     public string[] mensajesInicioDia;
 
@@ -149,7 +150,7 @@ public class s_GameManager : MonoBehaviour
         Character personajeActual = charactersManager.GetCharacter(charactersManager.CurrentCharacterIndex);
         if (personajeActual.estado == CharacterState.Sano)
         {
-            ActualizarTextoStrikes();
+            rechazoBarraManager.RechazarSano();
         }
 
         NextCharacter();
