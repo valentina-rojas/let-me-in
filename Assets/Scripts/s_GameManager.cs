@@ -22,7 +22,7 @@ public class s_GameManager : MonoBehaviour
     public int enfermosRechazados;
     public int strikes;
 
-      public TextMeshProUGUI textoStrikes;
+    public TextMeshProUGUI textoStrikes;
 
     public GameObject Musica;
     public AudioSource backgroundMusic;
@@ -106,12 +106,12 @@ public class s_GameManager : MonoBehaviour
         // Verificar si el personaje ingresado es enfermo
         Character personajeActual = charactersManager.GetCharacter(charactersManager.CurrentCharacterIndex);
 
-        
+
         if (personajeActual.estado == CharacterState.Enfermo)
         {
             // Si es enfermo, activar disturbios
             StartCoroutine(ProximoPersonajeTrasDisturbios());
-             stressBar.ActualizarEstres(1);
+            stressBar.ActualizarEstres(1);
             ActualizarTextoStrikes();
         }
         else
@@ -146,14 +146,14 @@ public class s_GameManager : MonoBehaviour
         charactersManager.MoverPersonajeAlPunto(charactersManager.spawnPoint.position);
 
 
- Character personajeActual = charactersManager.GetCharacter(charactersManager.CurrentCharacterIndex);
-     if (personajeActual.estado == CharacterState.Sano)
+        Character personajeActual = charactersManager.GetCharacter(charactersManager.CurrentCharacterIndex);
+        if (personajeActual.estado == CharacterState.Sano)
         {
             ActualizarTextoStrikes();
         }
-      
-            NextCharacter();
-     
+
+        NextCharacter();
+
 
 
         yield break;
@@ -215,7 +215,7 @@ public class s_GameManager : MonoBehaviour
                 {
                     Debug.Log("¡Elección correcta! Personaje sano ingresado.");
                     sanosIngresados++;
-                
+
                 }
                 else if (personajeActual.estado == CharacterState.Enfermo)
                 {
@@ -236,7 +236,7 @@ public class s_GameManager : MonoBehaviour
                 {
                     Debug.Log("¡Elección correcta! Personaje enfermo rechazado.");
                     enfermosRechazados++;
-               
+
                 }
             }
         }
@@ -331,11 +331,11 @@ public class s_GameManager : MonoBehaviour
     }
 
 
-       public void ActualizarTextoStrikes()
+    public void ActualizarTextoStrikes()
     {
-       
-            textoStrikes.text = "FALTAS: " + strikes;
-       
+
+        textoStrikes.text = "FALTAS: " + strikes;
+
     }
 
 

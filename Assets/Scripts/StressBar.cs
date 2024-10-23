@@ -11,9 +11,13 @@ public class StressBar : MonoBehaviour
     public Image fillBarImage;  
      public GameObject panelPerdiste; 
 
-    public Color colorVerde = Color.green;
-    public Color colorAmarillo = Color.yellow;
-    public Color colorRojo = Color.red;
+    [Header("Colores de la barra de estrés")]
+    public Color colorVerdeClaro;  // Verde claro (0-20%)
+    public Color colorVerdeOscuro; // Verde oscuro (20-40%)
+    public Color colorAmarillo;    // Amarillo (40-60%)
+    public Color colorNaranja;     // Naranja (60-80%)
+    public Color colorRojo;        // Rojo (80-100%)
+
 
  public CharactersManager charactersManager;
   void Start()
@@ -70,21 +74,29 @@ public class StressBar : MonoBehaviour
         }
     }
 
-    private void ActualizarColorBarra()
+     private void ActualizarColorBarra()
     {
         float porcentajeEstres = nivelEstres / maxEstres;
 
-        if (porcentajeEstres <= 0.5f)
+        if (porcentajeEstres <= 0.2f)
         {
-            fillBarImage.color = colorVerde;  // Hasta 50% verde
+            fillBarImage.color = colorVerdeClaro;  // Hasta 20%
+        }
+        else if (porcentajeEstres <= 0.4f)
+        {
+            fillBarImage.color = colorVerdeOscuro; // 20% - 40%
+        }
+        else if (porcentajeEstres <= 0.6f)
+        {
+            fillBarImage.color = colorAmarillo;    // 40% - 60%
         }
         else if (porcentajeEstres <= 0.8f)
         {
-            fillBarImage.color = colorAmarillo;  // Entre 50% y 80% amarillo
+            fillBarImage.color = colorNaranja;     // 60% - 80%
         }
         else
         {
-            fillBarImage.color = colorRojo;  // Más del 80% rojo
+            fillBarImage.color = colorRojo;        // Más del 80%
         }
     }
 
