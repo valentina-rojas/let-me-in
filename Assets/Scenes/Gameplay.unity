@@ -4317,8 +4317,8 @@ RectTransform:
   - {fileID: 1494153716}
   - {fileID: 713921331}
   - {fileID: 1412460604}
-  - {fileID: 142091589}
   - {fileID: 1519422823}
+  - {fileID: 142091589}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -8203,7 +8203,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lupa: {fileID: 713921331}
   panelLupa: {fileID: 0}
-  areaLimite: {fileID: 0}
+  areaLimite: {fileID: 1519422823}
 --- !u!225 &713921333
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -17027,8 +17027,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -3.709961, y: 39.94995}
-  m_SizeDelta: {x: -249.82, y: -404.9}
+  m_AnchoredPosition: {x: 0.28997803, y: 39.049988}
+  m_SizeDelta: {x: -492.78, y: -577.56}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1519422824
 MonoBehaviour:
@@ -17503,7 +17503,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lupa: {fileID: 1562871742}
   panelLupa: {fileID: 0}
-  areaLimite: {fileID: 0}
+  areaLimite: {fileID: 1519422823}
 --- !u!1 &1565297162
 GameObject:
   m_ObjectHideFlags: 0
