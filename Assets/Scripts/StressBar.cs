@@ -5,24 +5,24 @@ using UnityEngine.UI;
 
 public class StressBar : MonoBehaviour
 {
-    public Slider barraEstres;  
-    public float maxEstres = 5f; 
-    private float nivelEstres = 0f;  
-    public Image fillBarImage;  
-     public GameObject panelPerdiste; 
+    public Slider barraEstres;
+    public float maxEstres = 5f;
+    private float nivelEstres = 0f;
+    public Image fillBarImage;
+    public GameObject panelPerdiste;
 
     [Header("Colores de la barra de estrés")]
-    public Color colorVerdeClaro;  // Verde claro (0-20%)
-    public Color colorVerdeOscuro; // Verde oscuro (20-40%)
-    public Color colorAmarillo;    // Amarillo (40-60%)
-    public Color colorNaranja;     // Naranja (60-80%)
-    public Color colorRojo;        // Rojo (80-100%)
+    public Color colorVerdeClaro;
+    public Color colorVerdeOscuro;
+    public Color colorAmarillo;
+    public Color colorNaranja;
+    public Color colorRojo;
 
 
- public CharactersManager charactersManager;
-  void Start()
+    public CharactersManager charactersManager;
+    void Start()
     {
-        
+
         if (barraEstres != null)
         {
             barraEstres.maxValue = maxEstres;
@@ -30,12 +30,12 @@ public class StressBar : MonoBehaviour
         }
     }
 
-   
+
     public void ActualizarEstres(float cantidad)
     {
         nivelEstres += cantidad;
 
-     
+
         if (nivelEstres > maxEstres)
         {
             nivelEstres = maxEstres;
@@ -47,10 +47,10 @@ public class StressBar : MonoBehaviour
             ActualizarColorBarra();
         }
 
-    
+
         if (nivelEstres >= maxEstres)
         {
-           PerderJuego();
+            PerderJuego();
         }
     }
 
@@ -60,13 +60,13 @@ public class StressBar : MonoBehaviour
     {
         nivelEstres -= cantidad;
 
-       
+
         if (nivelEstres < 0)
         {
             nivelEstres = 0;
         }
 
-   
+
         if (barraEstres != null)
         {
             barraEstres.value = nivelEstres;
@@ -74,7 +74,7 @@ public class StressBar : MonoBehaviour
         }
     }
 
-     private void ActualizarColorBarra()
+    private void ActualizarColorBarra()
     {
         float porcentajeEstres = nivelEstres / maxEstres;
 
@@ -101,17 +101,17 @@ public class StressBar : MonoBehaviour
     }
 
 
-  
-public void PerderJuego()
-{
-    CharactersManager charactersManager = FindObjectOfType<CharactersManager>();
-    if (charactersManager != null)
-    {
-        charactersManager.DetenerPersonajes();  // Detener la aparición de personajes
-    }
 
-    // Mostrar el panel de perder o cualquier otra lógica
-    panelPerdiste.SetActive(true);
-}
+    public void PerderJuego()
+    {
+        CharactersManager charactersManager = FindObjectOfType<CharactersManager>();
+        if (charactersManager != null)
+        {
+            charactersManager.DetenerPersonajes();  // Detener la aparición de personajes
+        }
+
+        // Mostrar el panel de perder o cualquier otra lógica
+        panelPerdiste.SetActive(true);
+    }
 
 }

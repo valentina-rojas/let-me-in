@@ -4627,7 +4627,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &364513515
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11018,8 +11018,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -1.5, y: 0}
+  m_SizeDelta: {x: -3.01, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &937239088
 MonoBehaviour:
@@ -12879,8 +12879,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -17.1, y: 0.0000099093}
-  m_SizeDelta: {x: 376.63, y: 49.38}
+  m_AnchoredPosition: {x: -21.6, y: 0.00000047683716}
+  m_SizeDelta: {x: 313.38, y: 64.78}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1086647206
 MonoBehaviour:
@@ -12902,7 +12902,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ef5fac53002bdb940a9672883a0308d5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ccbea1940fb382e4497e5739f1745ab8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -13165,8 +13165,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 620.7006, y: 326.2}
-  m_SizeDelta: {x: 341.08, y: 35.87}
+  m_AnchoredPosition: {x: 660.8, y: 317.21}
+  m_SizeDelta: {x: 260.88, y: 53.855}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1092231741
 MonoBehaviour:
@@ -15156,8 +15156,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: 2.5, y: 0}
-  m_SizeDelta: {x: -5, y: 0}
+  m_AnchoredPosition: {x: -5.25, y: 0}
+  m_SizeDelta: {x: -2.7, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1244009707
 GameObject:
@@ -18521,9 +18521,9 @@ MonoBehaviour:
     empeorando."
   - "Otro infectado ha causado problemas, la seguridad est\xE1 en alerta."
   velocidadEscritura: 0.05
-  duracionMensaje: 3
+  duracionMensaje: 5
   barraContaminacion: {fileID: 1092231741}
-  maxContaminacion: 5
+  maxContaminacion: 3
   fillBarImage: {fileID: 1565297164}
   colorAmarillo: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   colorNaranja: {r: 1, g: 0.5, b: 0, a: 1}

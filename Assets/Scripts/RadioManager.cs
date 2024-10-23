@@ -19,12 +19,12 @@ public class RadioManager : MonoBehaviour
     "Se detectó otro brote de violencia dentro del búnker, ¡Estamos en estado de emergencia!"
 };
     public float velocidadEscritura = 0.05f;
-    public float duracionMensaje = 3f;
+    public float duracionMensaje = 5f;
 
     private bool estaEscribiendo = false;
 
     public Slider barraContaminacion;
-    public float maxContaminacion = 5f;  // Máximo nivel de contaminación
+    public float maxContaminacion = 3f;  // Máximo nivel de contaminación
     private float nivelContaminacion = 0f;  // Nivel actual de contaminación
     public Image fillBarImage;
 
@@ -38,7 +38,7 @@ public class RadioManager : MonoBehaviour
 
     private int indiceMensajeActual = 0;
 
- public s_GameManager gameManager;
+    public s_GameManager gameManager;
     void Start()
     {
         // Inicializar la barra con 0 contaminación
@@ -63,15 +63,15 @@ public class RadioManager : MonoBehaviour
 
         ActualizarContaminacion(1);
 
-      if (radioAnimator != null)
-    {
-        radioAnimator.SetTrigger("ActivarRadio");
-        Debug.Log("Animación ActivarRadio desencadenada");
-    }
-    else
-    {
-        Debug.LogWarning("radioAnimator es nulo");
-    }
+        if (radioAnimator != null)
+        {
+            radioAnimator.SetTrigger("ActivarRadio");
+            Debug.Log("Animación ActivarRadio desencadenada");
+        }
+        else
+        {
+            Debug.LogWarning("radioAnimator es nulo");
+        }
         ruidosDisturbios.Play();
         audioSeguridad.Play();
 
@@ -104,7 +104,7 @@ public class RadioManager : MonoBehaviour
 
         indiceMensajeActual = (indiceMensajeActual + 1) % mensajesDisturbios.Count;
 
-        
+
         yield return new WaitForSeconds(2f);
 
         gameManager.NextCharacter();
@@ -157,17 +157,18 @@ public class RadioManager : MonoBehaviour
     {
         float porcentajeContaminacion = nivelContaminacion / maxContaminacion;
 
-        if (porcentajeContaminacion <= 0.5f)
+        if (porcentajeContaminacion <= 0.33f)
         {
-            fillBarImage.color = colorAmarillo;  // Hasta 50% amarillo
+            fillBarImage.color = colorAmarillo;  // Hasta 33% amarillo
         }
-        else if (porcentajeContaminacion <= 0.8f)
+        else if (porcentajeContaminacion <= 0.66f)
         {
-            fillBarImage.color = colorNaranja;  // Entre 50% y 80% naranja
+            fillBarImage.color = colorNaranja;  // Entre 33% y 66% naranja
         }
         else
         {
-            fillBarImage.color = colorRojo;  // Más del 80% rojo
+            fillBarImage.color = colorRojo;  // Más del 66% rojo
         }
     }
+
 }
