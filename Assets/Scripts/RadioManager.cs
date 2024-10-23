@@ -32,13 +32,16 @@ public class RadioManager : MonoBehaviour
     public Color colorNaranja = new Color(1f, 0.5f, 0f); // Color naranja
     public Color colorRojo = Color.red;
 
-
+    public RectTransform panelPerdiste;
 
     public Animator radioAnimator;
 
     private int indiceMensajeActual = 0;
 
     public s_GameManager gameManager;
+    public CharactersManager charactersManager;
+
+
     void Start()
     {
         // Inicializar la barra con 0 contaminación
@@ -147,6 +150,8 @@ public class RadioManager : MonoBehaviour
         // Puedes agregar lógica adicional si el nivel de contaminación llega al máximo (perder el juego, etc.)
         if (nivelContaminacion >= maxContaminacion)
         {
+
+
             Debug.Log("¡El búnker está completamente contaminado! Has perdido.");
             // Lógica para manejar la pérdida del juego
         }
@@ -171,4 +176,16 @@ public class RadioManager : MonoBehaviour
         }
     }
 
+
+    private void Perder()
+    {
+        CharactersManager charactersManager = FindObjectOfType<CharactersManager>();
+        if (charactersManager != null)
+        {
+            charactersManager.DetenerPersonajes();  // Detener la aparición de personajes
+        }
+
+
+        panelPerdiste.gameObject.SetActive(true);
+    }
 }

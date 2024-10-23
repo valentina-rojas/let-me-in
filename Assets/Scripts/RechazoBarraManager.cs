@@ -13,6 +13,10 @@ public class RechazoBarraManager : MonoBehaviour
     public Color colorAmarillo = Color.yellow;
     public Color colorRojo = Color.red;
 
+    public RectTransform panelPerdiste;
+
+    public CharactersManager charactersManager;
+
     void Start()
     {
         // Inicializar la barra con 0 rechazos
@@ -46,7 +50,7 @@ public class RechazoBarraManager : MonoBehaviour
         if (rechazosActuales >= maxRechazos)
         {
             Debug.Log("¡Has rechazado demasiados sanos! Has perdido.");
-            // Lógica para manejar la pérdida del juego o consecuencias
+            Perder();
         }
     }
 
@@ -67,5 +71,19 @@ public class RechazoBarraManager : MonoBehaviour
         {
             fillBarImageRechazo.color = colorRojo;  // Más del 66% rojo
         }
+    }
+
+
+    // Método para manejar la pérdida del juego
+    private void Perder()
+    {
+        CharactersManager charactersManager = FindObjectOfType<CharactersManager>();
+        if (charactersManager != null)
+        {
+            charactersManager.DetenerPersonajes();  // Detener la aparición de personajes
+        }
+
+
+        panelPerdiste.gameObject.SetActive(true);
     }
 }

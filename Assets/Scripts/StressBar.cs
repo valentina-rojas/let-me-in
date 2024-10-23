@@ -20,6 +20,7 @@ public class StressBar : MonoBehaviour
 
 
     public CharactersManager charactersManager;
+    
     void Start()
     {
 
