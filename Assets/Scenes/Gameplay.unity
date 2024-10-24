@@ -4304,9 +4304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bc4ce1cab1628a4eb85cdb5b9e7e7df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  medicoPrefab: {fileID: 4446553017529421117, guid: 220a37af652a12048a96c276ee2cc784, type: 3}
-  medicoSanoPrefab: {fileID: 7549767759818849222, guid: fc673f33555d8874c9896be2f92d1046, type: 3}
-  medicoEnfermoPrefab: {fileID: 3266940441214874305, guid: 8c3c45ef8c4f9144ea85b3fbff829f19, type: 3}
+  medicoPrefab: {fileID: 7027038344454737006, guid: f41e76fe8e489e3478058e9304b5fa16, type: 3}
   spawnPointMedico: {fileID: 639765274}
   centroPantalla: {fileID: 2029294334}
   puntoSalidaMedico: {fileID: 639765274}
@@ -7777,7 +7775,7 @@ Transform:
   m_GameObject: {fileID: 639765273}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12.46, y: 1.16, z: 82.21642}
+  m_LocalPosition: {x: 12.46, y: 2.85, z: 81.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -17767,7 +17765,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.28997803, y: 39.049988}
+  m_AnchoredPosition: {x: 0.29003906, y: 39.05005}
   m_SizeDelta: {x: -492.78, y: -577.56}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1519422824
@@ -22707,7 +22705,7 @@ Transform:
   m_GameObject: {fileID: 2029294333}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.81, y: 1.27, z: 82.21642}
+  m_LocalPosition: {x: 4.57, y: 2.96, z: 81.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

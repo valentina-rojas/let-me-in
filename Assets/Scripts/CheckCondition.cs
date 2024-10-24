@@ -6,8 +6,6 @@ using UnityEngine.UI;
 public class CheckCondition : MonoBehaviour
 {
     public GameObject medicoPrefab;
-    public GameObject medicoSanoPrefab;
-    public GameObject medicoEnfermoPrefab;
     public Transform spawnPointMedico;
     public Transform centroPantalla;
     public Transform puntoSalidaMedico;
@@ -42,8 +40,7 @@ public class CheckCondition : MonoBehaviour
 
     private IEnumerator MedicoEvaluacionRoutine()
     {
-        //dialogueManager.botonIngreso.interactable = false;
-        //dialogueManager.botonRechazo.interactable = false;
+        
 
         leverController.DesactivarPalanca();
 
@@ -84,17 +81,17 @@ public class CheckCondition : MonoBehaviour
 
         if (personajeActual != null)
         {
-            Destroy(medicoInstance);
+         
 
             if (personajeActual.estado == CharacterState.Sano)
             {
                 Debug.Log("El personaje está sano.");
-                medicoInstance = Instantiate(medicoSanoPrefab, centroPantalla.position, Quaternion.identity);
+              
             }
             else if (personajeActual.estado == CharacterState.Enfermo)
             {
                 Debug.Log("El personaje está enfermo.");
-                medicoInstance = Instantiate(medicoEnfermoPrefab, centroPantalla.position, Quaternion.identity);
+           
             }
         }
     }
