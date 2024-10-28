@@ -39,7 +39,7 @@ public class OptionsManager : MonoBehaviour
 
     public void AbrirOpciones()
     {
-          CerrarTodosLosPaneles();
+        CerrarTodosLosPaneles();
         panelOpciones.gameObject.SetActive(true);
         //  Time.timeScale = 0f;
     }
@@ -85,13 +85,15 @@ public class OptionsManager : MonoBehaviour
         CerrarTodosLosPaneles();
         panelSintomas.gameObject.SetActive(true);
 
-        if (GameData.NivelActual == 1) {
-             panelSintomasNivel2.gameObject.SetActive(false);
+        if (GameData.NivelActual == 1)
+        {
+            panelSintomasNivel2.gameObject.SetActive(false);
             panelSintomasNivel1.gameObject.SetActive(true);
         }
 
-        if (GameData.NivelActual == 2) {
-             panelSintomasNivel1.gameObject.SetActive(false);
+        if (GameData.NivelActual == 2)
+        {
+            panelSintomasNivel1.gameObject.SetActive(false);
             panelSintomasNivel2.gameObject.SetActive(true);
         }
 
@@ -102,12 +104,28 @@ public class OptionsManager : MonoBehaviour
         panelSintomas.gameObject.SetActive(false);
     }
 
-       // Método para cerrar todos los paneles
-    private void CerrarTodosLosPaneles()
+    // Método para cerrar todos los paneles
+    public void CerrarTodosLosPaneles()
     {
         panelOpciones.gameObject.SetActive(false);
         panelAyuda.gameObject.SetActive(false);
         panelSintomas.gameObject.SetActive(false);
+    }
+
+    public void DesactivarBotonesVentanas()
+    {
+
+        botonAyuda.interactable = false;
+        botonOpciones.interactable = false;
+        botonSintomas.interactable = false;
+    }
+
+    public void ActivarBotonesVentanas()
+    {
+
+        botonAyuda.interactable = true;
+        botonOpciones.interactable = true;
+        botonSintomas.interactable = true;
     }
 
 }

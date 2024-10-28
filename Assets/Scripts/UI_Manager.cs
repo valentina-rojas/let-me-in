@@ -69,7 +69,7 @@ public class UI_Manager : MonoBehaviour
         }
 
         panelReporte.gameObject.SetActive(false);
-       // panelPerdiste.gameObject.SetActive(false);
+        // panelPerdiste.gameObject.SetActive(false);
         botonSiguienteNivel.gameObject.SetActive(false);
 
         panelInicioDia.gameObject.SetActive(true);
@@ -169,9 +169,8 @@ public class UI_Manager : MonoBehaviour
 
         audioTecleo.Stop();
         panelInicioDia.gameObject.SetActive(false);
-        optionsManager.botonOpciones.interactable = true;
-        optionsManager.botonAyuda.interactable = true;
-        optionsManager.botonSintomas.interactable = true;
+
+        optionsManager.ActivarBotonesVentanas();
 
         //llamar iniico juego
         PanelInicioDesactivado?.Invoke();
@@ -222,9 +221,7 @@ public class UI_Manager : MonoBehaviour
         panelReporte.gameObject.SetActive(true);
         // botonSiguienteNivel.gameObject.SetActive(true);
 
-  optionsManager.botonOpciones.interactable = false;
-        optionsManager.botonAyuda.interactable = false;
-        optionsManager.botonSintomas.interactable = false;
+        optionsManager.DesactivarBotonesVentanas();
 
         int diaActual = gameManager.NivelActual;
         string tituloReporte = $"Reporte Día {diaActual}\n";
