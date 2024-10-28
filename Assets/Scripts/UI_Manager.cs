@@ -38,6 +38,7 @@ public class UI_Manager : MonoBehaviour
     public s_GameManager gameManager;
     public CharactersManager charactersManager;
     public OptionsManager optionsManager;
+    public InteractableObjects interactableObjects;
 
     public AudioSource audioTecleo;
 
@@ -55,7 +56,7 @@ public class UI_Manager : MonoBehaviour
         dialogueManager.panelDialogo.gameObject.SetActive(false);
         dialogueManager.panelRespuestas.gameObject.SetActive(false);
 
-
+        interactableObjects.DesactivarEventTriggers();
 
         int nivelActual = gameManager.NivelActual - 1; // Si el nivel empieza en 1, resta 1 para usarlo como índice
 
@@ -92,6 +93,7 @@ public class UI_Manager : MonoBehaviour
         else
         {
             IniciarJuego();
+            interactableObjects.ActivarEventTriggers();
         }
     }
 
@@ -177,7 +179,7 @@ public class UI_Manager : MonoBehaviour
     }
 
 
-    private IEnumerator MostrarPanelIndicacionesCoroutine()
+   private IEnumerator MostrarPanelIndicacionesCoroutine()
     {
         yield return StartCoroutine(MostrarIndicacionesSecuencia());
         PanelInicioDesactivado -= MostrarPanelIndicaciones;
@@ -185,7 +187,7 @@ public class UI_Manager : MonoBehaviour
     }
 
 
-    private IEnumerator MostrarIndicacionesSecuencia()
+   private IEnumerator MostrarIndicacionesSecuencia()
     {
         RectTransform[] indicaciones = { indicaciones1, indicaciones2, indicaciones3, indicaciones4, indicaciones5 };
 
@@ -212,6 +214,7 @@ public class UI_Manager : MonoBehaviour
 
         // Iniciar el juego después de mostrar todas las indicaciones
         IniciarJuego();
+      interactableObjects.ActivarEventTriggers();
     }
 
 
@@ -222,6 +225,7 @@ public class UI_Manager : MonoBehaviour
         // botonSiguienteNivel.gameObject.SetActive(true);
 
         optionsManager.DesactivarBotonesVentanas();
+        interactableObjects.DesactivarEventTriggers();
 
         int diaActual = gameManager.NivelActual;
         string tituloReporte = $"Reporte Día {diaActual}\n";

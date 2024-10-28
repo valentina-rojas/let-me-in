@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class Zoom : MonoBehaviour, IDragHandler
 {
     public RectTransform lupa; // El RectTransform de la lupa
-    private bool isLupaVisible = false;
+    public bool isLupaVisible = false;
     public GameObject panelLupa;
     public RectTransform areaLimite;
 

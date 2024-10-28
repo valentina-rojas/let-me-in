@@ -403,6 +403,7 @@ MonoBehaviour:
   gameManager: {fileID: 926031996}
   charactersManager: {fileID: 0}
   optionsManager: {fileID: 0}
+  interactableObjects: {fileID: 0}
   audioTecleo: {fileID: 0}
   imagenInicioDia: {fileID: 0}
   imagenesNiveles: []
@@ -7422,6 +7423,7 @@ MonoBehaviour:
   gameManager: {fileID: 926031996}
   charactersManager: {fileID: 0}
   optionsManager: {fileID: 0}
+  interactableObjects: {fileID: 0}
   audioTecleo: {fileID: 0}
   imagenInicioDia: {fileID: 0}
   imagenesNiveles: []
@@ -7818,6 +7820,7 @@ Transform:
   - {fileID: 1989282622}
   - {fileID: 944450475}
   - {fileID: 340776257}
+  - {fileID: 1825495187}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &686974106 stripped
@@ -8389,6 +8392,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lupa: {fileID: 713921331}
+  isLupaVisible: 0
   panelLupa: {fileID: 0}
   areaLimite: {fileID: 1519422823}
 --- !u!225 &713921333
@@ -11637,6 +11641,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lupa: {fileID: 1562871742}
+  isLupaVisible: 0
   panelLupa: {fileID: 1562871741}
   areaLimite: {fileID: 1519422823}
 --- !u!1 &958300637
@@ -16889,6 +16894,7 @@ MonoBehaviour:
   gameManager: {fileID: 926031996}
   charactersManager: {fileID: 0}
   optionsManager: {fileID: 0}
+  interactableObjects: {fileID: 0}
   audioTecleo: {fileID: 0}
   imagenInicioDia: {fileID: 0}
   imagenesNiveles: []
@@ -17218,6 +17224,7 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   charactersManager: {fileID: 0}
   optionsManager: {fileID: 0}
+  interactableObjects: {fileID: 0}
   audioTecleo: {fileID: 0}
   imagenInicioDia: {fileID: 0}
   imagenesNiveles: []
@@ -17413,6 +17420,8 @@ MonoBehaviour:
   botonOpciones: {fileID: 1066798053}
   botonAyuda: {fileID: 795394667}
   botonSintomas: {fileID: 212331604}
+  interactableObjects: {fileID: 1825495188}
+  zoomManager: {fileID: 944450476}
 --- !u!1001 &1540513120
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17835,6 +17844,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lupa: {fileID: 1562871742}
+  isLupaVisible: 0
   panelLupa: {fileID: 0}
   areaLimite: {fileID: 1519422823}
 --- !u!1 &1565297162
@@ -19321,6 +19331,7 @@ MonoBehaviour:
   gameManager: {fileID: 926031996}
   charactersManager: {fileID: 943274571}
   optionsManager: {fileID: 1528108909}
+  interactableObjects: {fileID: 1825495188}
   audioTecleo: {fileID: 152417382}
   imagenInicioDia: {fileID: 472027197}
   imagenesNiveles:
@@ -19456,6 +19467,7 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   charactersManager: {fileID: 0}
   optionsManager: {fileID: 0}
+  interactableObjects: {fileID: 0}
   audioTecleo: {fileID: 0}
   imagenInicioDia: {fileID: 0}
   imagenesNiveles: []
@@ -19863,6 +19875,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1805619942}
   m_CullTransparentMesh: 1
+--- !u!1 &1825495186
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1825495187}
+  - component: {fileID: 1825495188}
+  m_Layer: 0
+  m_Name: InteractableObjects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1825495187
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1825495186}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.3699423, y: 1.0872034, z: -9.00584}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 678873980}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1825495188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1825495186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48b38d9ce06cbaf48ac65df4692a1039, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventTriggers:
+  - {fileID: 555149305}
+  - {fileID: 1494153717}
 --- !u!1 &1826664187
 GameObject:
   m_ObjectHideFlags: 0
@@ -22377,6 +22436,7 @@ MonoBehaviour:
   gameManager: {fileID: 926031996}
   charactersManager: {fileID: 0}
   optionsManager: {fileID: 0}
+  interactableObjects: {fileID: 0}
   audioTecleo: {fileID: 0}
   imagenInicioDia: {fileID: 0}
   imagenesNiveles: []

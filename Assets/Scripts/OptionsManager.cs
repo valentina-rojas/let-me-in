@@ -22,6 +22,9 @@ public class OptionsManager : MonoBehaviour
     public Button botonSintomas;
 
 
+    public InteractableObjects interactableObjects;
+    public Zoom zoomManager;
+
     void Start()
     {
         musicSlider.value = 0.5f;
@@ -47,7 +50,9 @@ public class OptionsManager : MonoBehaviour
     public void CerrarOpciones()
     {
         panelOpciones.gameObject.SetActive(false);
-        //Time.timeScale = 1f;
+
+        interactableObjects.ActivarEventTriggers();
+
     }
 
     public void SetMusicVolume(float volume)
@@ -78,6 +83,8 @@ public class OptionsManager : MonoBehaviour
     {
         panelAyuda.gameObject.SetActive(false);
 
+        interactableObjects.ActivarEventTriggers();
+
     }
 
     public void AbrirSintomas()
@@ -102,11 +109,21 @@ public class OptionsManager : MonoBehaviour
     public void CerrarSintomas()
     {
         panelSintomas.gameObject.SetActive(false);
+
+        interactableObjects.ActivarEventTriggers();
     }
 
     // Método para cerrar todos los paneles
     public void CerrarTodosLosPaneles()
     {
+        interactableObjects.DesactivarEventTriggers();
+
+        // Desactivar la lupa si está visible
+        if (zoomManager != null && zoomManager.isLupaVisible)
+        {
+            zoomManager.ToggleLupa();
+        }
+
         panelOpciones.gameObject.SetActive(false);
         panelAyuda.gameObject.SetActive(false);
         panelSintomas.gameObject.SetActive(false);
@@ -114,6 +131,13 @@ public class OptionsManager : MonoBehaviour
 
     public void DesactivarBotonesVentanas()
     {
+        interactableObjects.DesactivarEventTriggers();
+
+        // Desactivar la lupa si está visible
+        if (zoomManager != null && zoomManager.isLupaVisible)
+        {
+            zoomManager.ToggleLupa();
+        }
 
         botonAyuda.interactable = false;
         botonOpciones.interactable = false;
@@ -122,6 +146,8 @@ public class OptionsManager : MonoBehaviour
 
     public void ActivarBotonesVentanas()
     {
+
+        interactableObjects.ActivarEventTriggers();
 
         botonAyuda.interactable = true;
         botonOpciones.interactable = true;
