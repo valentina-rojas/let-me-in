@@ -12,7 +12,7 @@ public class CheckCondition : MonoBehaviour
     public CharactersManager charactersManager;
     public DialogueManager dialogueManager;
     public s_GameManager gameManager;
-      public LeverController leverController;
+    public LeverController leverController;
 
     private GameObject medicoInstance;
 
