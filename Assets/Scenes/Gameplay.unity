@@ -11124,8 +11124,8 @@ MonoBehaviour:
   - nombre: pj1
     estado: 0
     dialogos:
-    - "Hola. \xA1Necesito ayuda!"
-    - "Soy de un pueblo cercano, vengo caminando hace tres d\xEDas por favor necesito
+    - "Hola \xA1Necesito ayuda!"
+    - "Soy de un pueblo cercano, vengo caminando hace tres d\xEDas, por favor necesito
       ayuda"
     - "No me cruc\xE9 con nadie en el camino"
     - "Ninguno adem\xE1s del agotamiento y el hambre"
@@ -11152,7 +11152,7 @@ MonoBehaviour:
     - Solamente con la gente del refugio, estaban todos sanos
     - No, no, me siento perfectamente
     - "Acn\xE9, lo tengo desde los 15 a\xF1os, ya intente de todo"
-    - "Justamente \xBFQu\xE9 pod\xE9s saber vos entonces? ya te dije que estoy sana
+    - "Justamente \xBFQu\xE9 pod\xE9s saber vos entonces? Ya te dije que estoy sana,
       vengo de una zona segura"
     respuestas:
     - "\xBFDe d\xF3nde viene? "
@@ -11171,7 +11171,7 @@ MonoBehaviour:
     estado: 1
     dialogos:
     - Hola
-    - De la ciudad, haciendo un recorrido en busca de provisiones.
+    - De la ciudad, haciendo un recorrido en busca de provisiones
     - "Me cruc\xE9 con un grupo de gente, pero mantuve distancia"
     - No, solo me duele la cabeza por estar tantas horas bajo el sol
     - "\xBFEs realmente necesario?"
@@ -11183,7 +11183,7 @@ MonoBehaviour:
     - "\xBFPuede bajarse el barbijo?"
     - Es necesario para verificar su estado de salud
     dialogosIngreso:
-    - Por fin
+    - Por fin...
     dialogosRechazo:
     - "\xBFEncima que uso el barbijo? Ahora voy a ir a toserle en la cara a los de
       la fila"
@@ -11196,7 +11196,7 @@ MonoBehaviour:
     - Hola, necesito ayuda
     - "Vengo deambulando entre ciudades, me qued\xE9 varado en un pueblo donde fui
       a tocar cuando arranc\xF3 la pandemia"
-    - No, si no fue a verme nadie, tengo una bronca
+    - No, si no fue a verme nadie, tengo una bronca...
     - No, nada raro en la piel
     - "S\xED, ped\xED prestada la guitarra, no me alcanza para comprarme una"
     - "No, solo interactu\xE9 con mi banda, que me abandon\xF3 apenas se anunci\xF3
@@ -11230,7 +11230,7 @@ MonoBehaviour:
     - "\xBFEstuvo en contacto con otra gente? "
     - "\xBFPresent\xF3 s\xEDntomas como picaz\xF3n o sarpullido? "
     - "\xBFEntonces a qu\xE9 se deben las marcas en el cuello?"
-    - "\xBFVino hasta ac\xE1 sola?\xBFQu\xE9 pas\xF3 con sus gatos?"
+    - "\xBFVino hasta ac\xE1 sola? \xBFQu\xE9 pas\xF3 con sus gatos?"
     dialogosIngreso:
     - "\xA1Muchas gracias!"
     dialogosRechazo:
@@ -11266,15 +11266,15 @@ MonoBehaviour:
   - nombre: pj7
     estado: 0
     dialogos:
-    - "Hola, escuch\xE9 que en este lugar hay mucha gente"
-    - De la plaza, no hay nadie para jugar un partido, como siempre
+    - "Hola, escuch\xE9 que en este lugar hay mucha gente..."
+    - De la plaza, no hay nadie para jugar un partido, como siempre...
     - "No, si todos est\xE1n encerrados, parece que soy el \xFAnico que quiere moverse"
     - "Ninguno, mi estado f\xEDsico es excelente, no como todos los que se escondieron
       en el sill\xF3n de su casa"
     - Ejercitando en casa, no es lo mismo que un buen partido, pero al menos me mantengo
       en forma
     - "\xBFNo ve que no tengo ning\xFAn s\xEDntoma? Me saco la remera de ser necesario,
-      pero d\xE9jeme entrar por favor, \xA1necesito jugar un partido!"
+      pero d\xE9jeme entrar por favor, \xA1Necesito jugar un partido!"
     respuestas:
     - "\xBFDe d\xF3nde viene? "
     - "\xBFEstuvo en contacto con otra gente? "
@@ -11283,7 +11283,7 @@ MonoBehaviour:
     - "\xBFC\xF3mo puedo estar seguro de que no se encontr\xF3 con otra gente para
       jugar?"
     dialogosIngreso:
-    - 'Gracias loco, los voy a sacar atletas a todos '
+    - Gracias loco, los voy a sacar atletas a todos...
     dialogosRechazo:
     - Bueno, voy a ver si alguien de la fila quiere jugar un rato...
     prefab: {fileID: 4534030318338212612, guid: 2158820591ed44b4e9d5edf3156379c0, type: 3}
@@ -11294,7 +11294,7 @@ MonoBehaviour:
     dialogos:
     - Hola
     - "Desde mi casa, desde que empez\xF3 la pandemia estoy trabajando desde ah\xED"
-    - "No en persona, solo a trav\xE9s de mis compa\xF1eros por videollamada"
+    - "No en persona, solo a trav\xE9s de videollamada con mis compa\xF1eros"
     - "Nada de eso, solo tos y cansancio, debe ser por el estr\xE9s"
     - "Una vez, para retirar unos documentos, pero entr\xE9 y sal\xED r\xE1pidamente
       para no cruzarme con nadie"
@@ -11307,7 +11307,7 @@ MonoBehaviour:
     - "\xBFTuvo que ir a la oficina recientemente?"
     - "\xBFEst\xE1 segura que su malestar se debe al estr\xE9s?"
     dialogosIngreso:
-    - Por fin voy a tener una excusa para dejar de trabajar un rato
+    - Por fin voy a tener una excusa para dejar de trabajar un rato...
     dialogosRechazo:
     - No me hagas volver a trabajar...
     prefab: {fileID: 4534030318338212612, guid: 77cf367750bdfd04780af06eff96079f, type: 3}
@@ -11319,8 +11319,8 @@ MonoBehaviour:
     - Hola
     - Estaba encerrado en mi casa hasta que escuche en la radio que habilitaron la
       entrada de civiles en los refugios
-    - No, mi familia se fue apenas declararon la pandemia, pero yo no quise dejar
-      la casa sola
+    - "No, mi familia se fue apenas declararon la pandemia, pero yo no quer\xEDa
+      dejar la casa sola"
     - "Hasta ahora no, tom\xE9 todas las precauciones necesarias"
     - "Me quede sin comida y agua, adem\xE1s vivo en una zona peligrosa"
     - Si, si, no hay problema
@@ -11373,8 +11373,8 @@ MonoBehaviour:
     respuestas:
     - "\xBFDe d\xF3nde viene disfrazado as\xED?"
     - "\xBFPuede explicarme por qu\xE9 los ajos y el colador?"
-    - No puedo dejarlo ingresar con todos esos elementos... Ademas no puedo ver si
-      presenta algun sintoma
+    - "No puedo dejarlo ingresar con todos esos elementos... Ademas no puedo ver
+      si presenta algun s\xEDntoma"
     dialogosIngreso:
     - Gracias pero no me pienso sacar nada...
     dialogosRechazo:
@@ -11388,7 +11388,7 @@ MonoBehaviour:
     - "\xA1Buenos d\xEDas!"
     - No, estoy sola con mi gato
     - "Estuve aislada en mi casa, mi barrio es un caos y no quiero volver ah\xED"
-    - "Pero es mi FAMILIA, no puedo dejarlo \xA1por favor!"
+    - "Pero es mi FAMILIA, no puedo dejarlo \xA1Por favor!"
     respuestas:
     - "\xBFEstuvo en contacto con otra gente? "
     - "\xBFMantuvo precauciones? "
@@ -11444,7 +11444,7 @@ MonoBehaviour:
     - "DEJAME ENTRAR \xA1YA!"
     - "\xA1TE DIJE QUE ME DEJES ENTRAR!"
     respuestas:
-    - "Se\xF1or, calmese y tome distancia..."
+    - "Se\xF1or, c\xE1lmese y tome distancia..."
     dialogosIngreso: []
     dialogosRechazo: []
     prefab: {fileID: 2573835153199593656, guid: 0e2d77ba5fb3fab47bbefc4da5d96d79, type: 3}
@@ -11473,9 +11473,9 @@ MonoBehaviour:
     estado: 0
     dialogos:
     - "Hola, \xBFc\xF3mo est\xE1s?"
-    - Ah, esto, traigo algo de comida casera para ofrecerle a todos, no se si tienen
-      alimentos en el bunker
-    - "\xA1Por supuesto! utilice guantes, barbijo y desinfecte todo"
+    - "Ah, esto, traigo algo de comida casera para ofrecerle a todos, no se si tienen
+      alimentos en el b\xFAnker"
+    - "\xA1Por supuesto! Utilic\xE9 guantes, barbijo y desinfecte todo"
     - "Porque vivo sola y no se como va a avanzar esto, prefiero estar en un lugar
       donde haya atenci\xF3n m\xE9dica"
     respuestas:
@@ -11512,17 +11512,17 @@ MonoBehaviour:
   - nombre: pj19
     estado: 1
     dialogos:
-    - "Por fin \xBFNo tienen un sistema m\xE1s lento? Hace media hora estoy esperando."
+    - "Por fin \xBFNo tienen un sistema m\xE1s lento? Hace media hora estoy esperando"
     - "No, las medidas son una p\xE9rdida de tiempo porque nadie las cumple"
     - No, tengo la calva sensible y estar esperando hace media hora abajo del sol
       no ayuda
     - Porque estoy cansado de tener que buscar provisiones e interactuar con gente
       inepta
     respuestas:
-    - "Bueno se\xF1or, c\xE1lmese, hacemos lo que podemos \xBFTomo precauciones para
-      el virus?"
+    - "Bueno se\xF1or, c\xE1lmese, hacemos lo que podemos \xBFTom\xF3 precauciones
+      para el virus?"
     - "\xBFEso que tiene en la cabeza es sarpullido?"
-    - "\xBFPor qu\xE9 quiere entrar al bunker?"
+    - "\xBFPor qu\xE9 quiere entrar al b\xFAnker?"
     dialogosIngreso:
     - "Faltaria que me rechaces nom\xE1s..."
     dialogosRechazo:
@@ -11538,7 +11538,7 @@ MonoBehaviour:
       la fiesta"
     - "No me la bajes asi... Si seguro ah\xED adentro hay una re joda"
     respuestas:
-    - "\xBFComo? "
+    - "\xBFC\xF3mo? "
     - "Se\xF1or, esto es un refugio, hay un virus letal dando vueltas, las fiestas
       est\xE1n prohibidas, no sea imprudente"
     dialogosIngreso:
