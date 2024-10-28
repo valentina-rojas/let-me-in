@@ -190,6 +190,13 @@ public class RadioManager : MonoBehaviour
     }
 
 
+    public void PantallaRadio()
+    {
+
+        StartCoroutine(ActivarPantallaRadio());
+
+    }
+
     public IEnumerator ActivarPantallaRadio()
     {
         radioAnimator.SetTrigger("ActivarRadio");
@@ -199,9 +206,5 @@ public class RadioManager : MonoBehaviour
         radioAnimator.SetTrigger("IdleRadio");
     }
 
-    public void PantallaRadio()
-    {
 
-        ActivarPantallaRadio();
-    }
 }
