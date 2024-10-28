@@ -188,4 +188,20 @@ public class RadioManager : MonoBehaviour
 
         panelPerdiste.gameObject.SetActive(true);
     }
+
+
+    public IEnumerator ActivarPantallaRadio()
+    {
+        radioAnimator.SetTrigger("ActivarRadio");
+
+        yield return new WaitForSeconds(2f);
+
+        radioAnimator.SetTrigger("IdleRadio");
+    }
+
+    public void PantallaRadio()
+    {
+
+        ActivarPantallaRadio();
+    }
 }
