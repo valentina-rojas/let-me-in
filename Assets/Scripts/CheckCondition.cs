@@ -6,9 +6,13 @@ using UnityEngine.UI;
 public class CheckCondition : MonoBehaviour
 {
     public GameObject medicoPrefab;
+    public GameObject cartelSanoPrefab;   // Prefab del cartel para personaje sano
+    public GameObject cartelEnfermoPrefab; // Prefab del cartel para personaje enfermo
     public Transform spawnPointMedico;
     public Transform centroPantalla;
     public Transform puntoSalidaMedico;
+    public Transform spawnPointIngreso;      // Punto de aparición para ingreso
+    public Transform spawnPointRechazo;   
     public CharactersManager charactersManager;
     public DialogueManager dialogueManager;
     public s_GameManager gameManager;
@@ -86,16 +90,24 @@ public class CheckCondition : MonoBehaviour
             if (personajeActual.estado == CharacterState.Sano)
             {
                 Debug.Log("El personaje está sano.");
+                  StartCoroutine(MostrarCartel(cartelSanoPrefab, spawnPointIngreso));
               
             }
             else if (personajeActual.estado == CharacterState.Enfermo)
             {
                 Debug.Log("El personaje está enfermo.");
+                   StartCoroutine(MostrarCartel(cartelEnfermoPrefab, spawnPointRechazo));
            
             }
         }
     }
 
+  private IEnumerator MostrarCartel(GameObject cartelPrefab, Transform spawnPoint)
+    {
+        GameObject cartelInstance = Instantiate(cartelPrefab, spawnPoint.position, Quaternion.identity);
+        yield return new WaitForSeconds(2f);
+        Destroy(cartelInstance);
+    }
 
     public void ReiniciarNivel()
     {
