@@ -33,6 +33,7 @@ public class DialogueManager : MonoBehaviour
     public AggressiveNPCs aggressiveNPCs;
     public CheckCondition checkCondition;
     public LeverController leverController;
+    public CharactersManager charactersManager;
 
     public bool medicoUsado = false;
 
@@ -53,10 +54,22 @@ public class DialogueManager : MonoBehaviour
     public bool puedeAvanzarDialogo = true;
     private bool esDialogoFinal = false;
 
+    //private Character character; // Variable para almacenar el personaje
+
+
     void Start()
     {
-
+ //character = charactersManager.GetCharacter(charactersManager.CurrentCharacterIndex);
     }
+
+
+
+    /*public void IniciarDialogo()
+    {
+        character = charactersManager.GetCharacter(charactersManager.CurrentCharacterIndex);
+        // Aquí puedes llamar a ComenzarDialogo o lo que necesites hacer con el personaje
+    }*/
+
 
     void Update()
     {
@@ -146,7 +159,7 @@ public class DialogueManager : MonoBehaviour
         indexDialogo = 0;
         indexRespuestas = 0;
 
-       
+
         MostrarPanelDialogo();
 
         // Si es el diálogo final de ingreso o rechazo, desactivar el botón y las teclas
@@ -181,23 +194,23 @@ public class DialogueManager : MonoBehaviour
 
         tiempoUltimaActualizacion = Time.time;
 
-     // Mientras el texto de la respuesta se está escribiendo
-    while (textoRespuesta.text.Length < respuestasActuales[indexRespuestas].Length)
-    {
-        if (textoCompleto)
+        // Mientras el texto de la respuesta se está escribiendo
+        while (textoRespuesta.text.Length < respuestasActuales[indexRespuestas].Length)
         {
-            // Si el texto está completo, muestra el texto final con el cursor al final
-            textoRespuesta.text = respuestasActuales[indexRespuestas] + "_"; 
-            break;
+            if (textoCompleto)
+            {
+                // Si el texto está completo, muestra el texto final con el cursor al final
+                textoRespuesta.text = respuestasActuales[indexRespuestas] + "_";
+                break;
+            }
+
+            // Añade una letra y muestra el cursor fijo
+            textoRespuesta.text += respuestasActuales[indexRespuestas][textoRespuesta.text.Length] + "_";
+            yield return new WaitForSeconds(velocidadTexto);
+
+            // Para evitar que el cursor se duplique, eliminamos el "_" en la siguiente iteración
+            textoRespuesta.text = textoRespuesta.text.TrimEnd('_');
         }
-
-        // Añade una letra y muestra el cursor fijo
-        textoRespuesta.text += respuestasActuales[indexRespuestas][textoRespuesta.text.Length] + "_"; 
-        yield return new WaitForSeconds(velocidadTexto);
-
-        // Para evitar que el cursor se duplique, eliminamos el "_" en la siguiente iteración
-        textoRespuesta.text = textoRespuesta.text.TrimEnd('_');
-    }
 
 
 
@@ -268,33 +281,44 @@ public class DialogueManager : MonoBehaviour
         vozPersonaje.Play();
         StartCoroutine(DetenerAudioPersonaje(2));
 
+       charactersManager.Hablando();
+
+
         tiempoUltimaActualizacion = Time.time; // Inicializar el tiempo del cursor
 
         while (textoDialogo.text.Length < lineas[indexDialogo].Length)
-    {
-        if (textoCompleto)
         {
-            textoDialogo.text = lineas[indexDialogo] + "_"; // Muestra el cursor fijo al final
-            break;
+            if (textoCompleto)
+            {
+                textoDialogo.text = lineas[indexDialogo] + "_"; // Muestra el cursor fijo al final
+
+               // charactersManager.ActivarAnimacion(character, "triggerBlink");
+            
+                break;
+            }
+
+            textoDialogo.text += lineas[indexDialogo][textoDialogo.text.Length] + "_"; // Añade una letra y muestra el cursor fijo
+            yield return new WaitForSeconds(velocidadTexto);
+
+            // Para evitar que el cursor se duplique, eliminamos el "_" en la siguiente iteración
+            textoDialogo.text = textoDialogo.text.TrimEnd('_');
         }
-
-        textoDialogo.text += lineas[indexDialogo][textoDialogo.text.Length] + "_"; // Añade una letra y muestra el cursor fijo
-        yield return new WaitForSeconds(velocidadTexto);
-
-        // Para evitar que el cursor se duplique, eliminamos el "_" en la siguiente iteración
-        textoDialogo.text = textoDialogo.text.TrimEnd('_');
-    }
 
 
 
         // Finalizar diálogo
         textoDialogo.text = lineas[indexDialogo];
 
+          charactersManager.TerminoHablar();
+
+
+
         if (AudioManager.instance != null)
         {
             AudioManager.instance.DetenerHablar();
         }
 
+   
 
         // Mostrar el texto completo con el cursor titilante
         while (true)
@@ -323,10 +347,12 @@ public class DialogueManager : MonoBehaviour
             textoCompleto = false;
             mostrandoRespuestas = true;
 
-            if (!esDialogoFinal )
+            if (!esDialogoFinal)
             {
                 nextDialogo.gameObject.SetActive(true);
-            } else {
+            }
+            else
+            {
                 nextDialogo.gameObject.SetActive(false);
             }
 
@@ -389,11 +415,11 @@ public class DialogueManager : MonoBehaviour
 
     void MostrarBotonSiguiente()
     {
-        
-       if (!esDialogoFinal)
-    {
-        leverController.ActivarPalanca();
-    }
+
+        if (!esDialogoFinal)
+        {
+            leverController.ActivarPalanca();
+        }
 
         panelSiguiente.gameObject.SetActive(true);
 
@@ -404,6 +430,6 @@ public class DialogueManager : MonoBehaviour
 
     }
 
-   
+
 }
 
