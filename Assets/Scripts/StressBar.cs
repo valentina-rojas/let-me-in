@@ -20,7 +20,9 @@ public class StressBar : MonoBehaviour
 
 
     public CharactersManager charactersManager;
-    
+
+    public Animator mate;
+
     void Start()
     {
 
@@ -61,6 +63,7 @@ public class StressBar : MonoBehaviour
     {
         nivelEstres -= cantidad;
 
+        StartCoroutine(AnimacionMate());
 
         if (nivelEstres < 0)
         {
@@ -74,6 +77,17 @@ public class StressBar : MonoBehaviour
             ActualizarColorBarra();
         }
     }
+
+
+    public IEnumerator AnimacionMate()
+    {
+        mate.SetTrigger("mateSpin");
+
+        yield return new WaitForSeconds(2f);
+
+        mate.SetTrigger("mateIdle");
+    }
+
 
     private void ActualizarColorBarra()
     {
