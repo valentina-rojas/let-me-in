@@ -30,6 +30,11 @@ public class ReproducirCinematicas : MonoBehaviour
     }
 
 
+  public void CinematicaRenunciar()
+    {
+        ReproducirCinematica("CinematicaRenunciar");
+    }
+
     public void ReproducirCinematica(string nombreCinematica)
     {
         StartCoroutine(CerrarCinematicaCoroutine(nombreCinematica));
