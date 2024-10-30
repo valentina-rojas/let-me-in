@@ -11943,6 +11943,32 @@ MonoBehaviour:
     nivel: 2
     esAgresivo: 1
     animator: {fileID: 0}
+  - nombre: pj23
+    estado: 1
+    dialogos:
+    - Abrime la puerta...
+    - "\xA1ABRIME LA PUERTA!"
+    respuestas:
+    - "No puedo dejarlo pasar as\xED nom\xE1s, primero debo evaluar su estado"
+    dialogosIngreso: []
+    dialogosRechazo: []
+    prefab: {fileID: 952824410394418340, guid: bbcc3f5ef642ee6468f5a6b00b22032e, type: 3}
+    nivel: 3
+    esAgresivo: 1
+    animator: {fileID: 0}
+  - nombre: pj23
+    estado: 1
+    dialogos:
+    - Abrime la puerta...
+    - "\xA1ABRIME LA PUERTA!"
+    respuestas:
+    - "No puedo dejarlo pasar as\xED nom\xE1s, primero debo evaluar su estado"
+    dialogosIngreso: []
+    dialogosRechazo: []
+    prefab: {fileID: 5274696793240584207, guid: bc0bfd5922905344fae35c57f7ede332, type: 3}
+    nivel: 3
+    esAgresivo: 1
+    animator: {fileID: 0}
   dialogueManager: {fileID: 2085731922}
   gameManager: {fileID: 926031996}
   uiManager: {fileID: 1709672043}
