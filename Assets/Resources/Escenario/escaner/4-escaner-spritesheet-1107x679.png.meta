@@ -6,7 +6,7 @@ TextureImporter:
   serializedVersion: 12
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -37,13 +37,13 @@ TextureImporter:
     filterMode: 1
     aniso: 1
     mipBias: 0
-    wrapU: 0
-    wrapV: 0
+    wrapU: 1
+    wrapV: 1
     wrapW: 0
-  nPOTScale: 1
+  nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 0
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -52,9 +52,9 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   spriteTessellationDetail: -1
-  textureType: 0
+  textureType: 8
   textureShape: 1
   singleChannelComponent: 0
   flipbookRows: 1
@@ -108,18 +108,172 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: 4-escaner-spritesheet-1107x679_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1107
+        height: 679
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8fdcfcfe2e89fae42a86e4c6e4f14096
+      internalID: -2137139682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4-escaner-spritesheet-1107x679_1
+      rect:
+        serializedVersion: 2
+        x: 1107
+        y: 0
+        width: 1107
+        height: 679
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d7522c6d4831024bb34ff2e707a8342
+      internalID: 341057755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4-escaner-spritesheet-1107x679_2
+      rect:
+        serializedVersion: 2
+        x: 2214
+        y: 0
+        width: 1107
+        height: 679
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0538f430c0b94cd4ba91270ac0c8a971
+      internalID: 1346505367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4-escaner-spritesheet-1107x679_3
+      rect:
+        serializedVersion: 2
+        x: 3321
+        y: 0
+        width: 1107
+        height: 679
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 201c8200e87c4974fb0068acb52da649
+      internalID: 630454564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4-escaner-spritesheet-1107x679_4
+      rect:
+        serializedVersion: 2
+        x: 4428
+        y: 0
+        width: 1107
+        height: 679
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71c66e33cb9e4714f87ab8e111e0307b
+      internalID: -504362043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4-escaner-spritesheet-1107x679_5
+      rect:
+        serializedVersion: 2
+        x: 5535
+        y: 0
+        width: 1107
+        height: 679
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c12a4ae5c634e04e85f630dd4061a38
+      internalID: -834647526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 4-escaner-spritesheet-1107x679_6
+      rect:
+        serializedVersion: 2
+        x: 6642
+        y: 0
+        width: 1107
+        height: 679
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13fd3885dd0564e4f8c5813699a8147d
+      internalID: 1740154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      4-escaner-spritesheet-1107x679_0: -2137139682
+      4-escaner-spritesheet-1107x679_1: 341057755
+      4-escaner-spritesheet-1107x679_2: 1346505367
+      4-escaner-spritesheet-1107x679_3: 630454564
+      4-escaner-spritesheet-1107x679_4: -504362043
+      4-escaner-spritesheet-1107x679_5: -834647526
+      4-escaner-spritesheet-1107x679_6: 1740154
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

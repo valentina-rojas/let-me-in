@@ -6,13 +6,15 @@ using UnityEngine.UI;
 public class CheckCondition : MonoBehaviour
 {
     public GameObject medicoPrefab;
-    public GameObject cartelSanoPrefab;   // Prefab del cartel para personaje sano
-    public GameObject cartelEnfermoPrefab; // Prefab del cartel para personaje enfermo
+    public GameObject cartelSanoPrefab;  
+    public GameObject cartelEnfermoPrefab; 
+    public GameObject luzEscanerPrefab; 
     public Transform spawnPointMedico;
     public Transform centroPantalla;
     public Transform puntoSalidaMedico;
-    public Transform spawnPointIngreso;      // Punto de aparición para ingreso
+    public Transform spawnPointIngreso;     
     public Transform spawnPointRechazo;   
+    public Transform spawnPointLuzEscaner;  
     public CharactersManager charactersManager;
     public DialogueManager dialogueManager;
     public s_GameManager gameManager;
@@ -48,7 +50,7 @@ public class CheckCondition : MonoBehaviour
 
         leverController.DesactivarPalanca();
 
-        StartCoroutine(gameManager.AbrirPuerta(8f));
+        StartCoroutine(gameManager.AbrirPuerta(12f));
 
         yield return StartCoroutine(MoverPersonaje(medicoInstance.transform, centroPantalla.position));
 
@@ -56,7 +58,7 @@ public class CheckCondition : MonoBehaviour
 
         EvaluarEstadoPersonaje();
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(7f);
 
         yield return StartCoroutine(MoverPersonaje(medicoInstance.transform, puntoSalidaMedico.position));
 
@@ -83,24 +85,37 @@ public class CheckCondition : MonoBehaviour
     {
         Character personajeActual = charactersManager.GetCharacter(charactersManager.CurrentCharacterIndex);
 
-        if (personajeActual != null)
-        {
-         
-
-            if (personajeActual.estado == CharacterState.Sano)
-            {
-                Debug.Log("El personaje está sano.");
-                  StartCoroutine(MostrarCartel(cartelSanoPrefab, spawnPointIngreso));
-              
-            }
-            else if (personajeActual.estado == CharacterState.Enfermo)
-            {
-                Debug.Log("El personaje está enfermo.");
-                   StartCoroutine(MostrarCartel(cartelEnfermoPrefab, spawnPointRechazo));
-           
-            }
-        }
+       if (personajeActual != null)
+    {
+        // Instancia la luz del escáner
+        StartCoroutine(MostrarLuzEscanerYCartel(personajeActual));
     }
+    }
+
+
+    private IEnumerator MostrarLuzEscanerYCartel(Character personajeActual)
+{
+    // Crear la instancia de la luz del escáner
+    GameObject luzEscanerInstance = Instantiate(luzEscanerPrefab, spawnPointLuzEscaner.position, Quaternion.identity);
+
+    // Esperar 2 segundos para que la luz del escáner permanezca visible
+    yield return new WaitForSeconds(3f);
+
+    // Destruir la luz del escáner
+    Destroy(luzEscanerInstance);
+ yield return new WaitForSeconds(2f);
+    // Mostrar el cartel según el estado del personaje
+    if (personajeActual.estado == CharacterState.Sano)
+    {
+        Debug.Log("El personaje está sano.");
+        StartCoroutine(MostrarCartel(cartelSanoPrefab, spawnPointIngreso));
+    }
+    else if (personajeActual.estado == CharacterState.Enfermo)
+    {
+        Debug.Log("El personaje está enfermo.");
+        StartCoroutine(MostrarCartel(cartelEnfermoPrefab, spawnPointRechazo));
+    }
+}
 
   private IEnumerator MostrarCartel(GameObject cartelPrefab, Transform spawnPoint)
     {

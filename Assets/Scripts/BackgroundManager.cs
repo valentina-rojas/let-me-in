@@ -50,7 +50,7 @@ public class BackgroundManager : MonoBehaviour
         }
         else
         {
-            capaNivel1.SetActive(false);
+             capaNivel1.SetActive(true);
             capaNivel2.SetActive(false);
             capaCorteDeLuz.SetActive(false);
         }
