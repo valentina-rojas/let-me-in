@@ -5,8 +5,12 @@ using UnityEngine.EventSystems;
 
 public class InteractableObjects : MonoBehaviour
 {
-      [SerializeField]
+    [SerializeField]
     public List<EventTrigger> eventTriggers; // Asigna los EventTriggers en el Inspector
+
+
+    public Animator papelesAnimator;
+    public Animator pantallaAnimator;
 
     public void DesactivarEventTriggers()
     {
@@ -29,4 +33,35 @@ public class InteractableObjects : MonoBehaviour
             }
         }
     }
+
+
+    public void AnimarPapeles(){
+
+        StartCoroutine(ActivarPapeles());
+    }
+
+
+    public IEnumerator ActivarPapeles()
+    {
+        papelesAnimator.SetTrigger("papelesFlip");
+        yield return new WaitForSeconds(2f);
+        papelesAnimator.SetTrigger("papelesIdle");
+
+    }
+
+
+    public void AnimarPantalla(){
+
+
+StartCoroutine(ActivarPantalla());
+    }
+
+ public IEnumerator ActivarPantalla()
+    {
+        pantallaAnimator.SetTrigger("pantallaMove");
+        yield return new WaitForSeconds(2f);
+        pantallaAnimator.SetTrigger("pantallaIdle");
+
+    }
+
 }
