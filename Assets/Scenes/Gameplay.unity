@@ -11491,7 +11491,7 @@ MonoBehaviour:
     dialogosRechazo:
     - Entiendo... Voy a seguir caminando...
     prefab: {fileID: 818472440953356866, guid: 3ca1d4bf8f02a6749a5cf75e353ccb3d, type: 3}
-    nivel: 3
+    nivel: 1
     esAgresivo: 0
     animator: {fileID: 0}
   - nombre: pj2
@@ -11515,7 +11515,7 @@ MonoBehaviour:
     dialogosRechazo:
     - "Ojal\xE1 te echen del laburo..."
     prefab: {fileID: 4471038150240660831, guid: 10b28ac8c6b89414fb3bb9b99b2da64f, type: 3}
-    nivel: 3
+    nivel: 1
     esAgresivo: 0
     animator: {fileID: 0}
   - nombre: pj3
@@ -12338,7 +12338,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -306.99994, y: -167.00003}
+  m_AnchoredPosition: {x: -306.99997, y: -167.00003}
   m_SizeDelta: {x: -209.71, y: 558.46}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &992450831
@@ -18176,7 +18176,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -29.01001, y: 120.14}
+  m_AnchoredPosition: {x: -29.01001, y: 120.140015}
   m_SizeDelta: {x: -912.36, y: -739.72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1519422824
