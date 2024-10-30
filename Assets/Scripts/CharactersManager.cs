@@ -432,4 +432,24 @@ public class CharactersManager : MonoBehaviour
             Debug.LogWarning("No hay personaje actual para hablar.");
         }
     }
+
+
+
+ public void Reaccion()
+    {
+        Character character = GetCurrentCharacter();
+
+
+
+        if (character != null)
+        {
+            ActivarAnimacion(character, "triggerReaction");
+        }
+        else
+        {
+            Debug.LogWarning("No hay personaje actual para hablar.");
+        }
+    }
+
+
 }

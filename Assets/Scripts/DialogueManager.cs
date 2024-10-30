@@ -283,6 +283,16 @@ public class DialogueManager : MonoBehaviour
 
        charactersManager.Hablando();
 
+             if (!esDialogoFinal)
+            {
+             charactersManager.Hablando();
+            }
+            else
+            {
+                   
+               charactersManager.Reaccion();
+            }
+
 
         tiempoUltimaActualizacion = Time.time; // Inicializar el tiempo del cursor
 
@@ -349,10 +359,12 @@ public class DialogueManager : MonoBehaviour
 
             if (!esDialogoFinal)
             {
+           
                 nextDialogo.gameObject.SetActive(true);
             }
             else
             {
+                   
                 nextDialogo.gameObject.SetActive(false);
             }
 
