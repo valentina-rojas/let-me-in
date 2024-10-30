@@ -94,7 +94,6 @@ public class s_GameManager : MonoBehaviour
 
         dialogueManager.ComenzarDialogo(dialogoIngreso, null, false, true);
 
-     //   charactersManager.Reaccion(); 
 
         yield return new WaitForSeconds(3f); // Esperar 2 segundos
 

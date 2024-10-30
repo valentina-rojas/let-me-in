@@ -59,7 +59,7 @@ public class DialogueManager : MonoBehaviour
 
     void Start()
     {
- //character = charactersManager.GetCharacter(charactersManager.CurrentCharacterIndex);
+        //character = charactersManager.GetCharacter(charactersManager.CurrentCharacterIndex);
     }
 
 
@@ -281,17 +281,17 @@ public class DialogueManager : MonoBehaviour
         vozPersonaje.Play();
         StartCoroutine(DetenerAudioPersonaje(2));
 
-       charactersManager.Hablando();
+        charactersManager.Hablando();
 
-             if (!esDialogoFinal)
-            {
-             charactersManager.Hablando();
-            }
-            else
-            {
-                   
-               charactersManager.Reaccion();
-            }
+        if (!esDialogoFinal)
+        {
+            charactersManager.Hablando();
+        }
+        else
+        {
+
+            charactersManager.Reaccion();
+        }
 
 
         tiempoUltimaActualizacion = Time.time; // Inicializar el tiempo del cursor
@@ -302,8 +302,8 @@ public class DialogueManager : MonoBehaviour
             {
                 textoDialogo.text = lineas[indexDialogo] + "_"; // Muestra el cursor fijo al final
 
-               // charactersManager.ActivarAnimacion(character, "triggerBlink");
-            
+                // charactersManager.ActivarAnimacion(character, "triggerBlink");
+
                 break;
             }
 
@@ -319,8 +319,12 @@ public class DialogueManager : MonoBehaviour
         // Finalizar diálogo
         textoDialogo.text = lineas[indexDialogo];
 
-          charactersManager.TerminoHablar();
 
+
+        if (!esDialogoFinal)
+        {
+            charactersManager.TerminoHablar();
+        }
 
 
         if (AudioManager.instance != null)
@@ -328,7 +332,7 @@ public class DialogueManager : MonoBehaviour
             AudioManager.instance.DetenerHablar();
         }
 
-   
+
 
         // Mostrar el texto completo con el cursor titilante
         while (true)
@@ -359,12 +363,12 @@ public class DialogueManager : MonoBehaviour
 
             if (!esDialogoFinal)
             {
-           
+
                 nextDialogo.gameObject.SetActive(true);
             }
             else
             {
-                   
+
                 nextDialogo.gameObject.SetActive(false);
             }
 

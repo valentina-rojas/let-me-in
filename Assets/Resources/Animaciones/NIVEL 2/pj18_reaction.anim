@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pj9_reaction
+  m_Name: pj18_reaction
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,9 +21,9 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 1485933501, guid: 8800dad37f56e14489b8d01775d011a5, type: 3}
+      value: {fileID: -1478508368, guid: fc52ad37330fac040a953d5568c032e4, type: 3}
     - time: 0.083333336
-      value: {fileID: 2113583724, guid: 8800dad37f56e14489b8d01775d011a5, type: 3}
+      value: {fileID: 1175991852, guid: fc52ad37330fac040a953d5568c032e4, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -46,8 +46,8 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 1485933501, guid: 8800dad37f56e14489b8d01775d011a5, type: 3}
-    - {fileID: 2113583724, guid: 8800dad37f56e14489b8d01775d011a5, type: 3}
+    - {fileID: -1478508368, guid: fc52ad37330fac040a953d5568c032e4, type: 3}
+    - {fileID: 1175991852, guid: fc52ad37330fac040a953d5568c032e4, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
