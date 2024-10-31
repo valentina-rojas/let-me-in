@@ -452,4 +452,31 @@ public class CharactersManager : MonoBehaviour
     }
 
 
+
+public void ActivarReaccionIngreso()
+{
+
+     Character character = GetCurrentCharacter();
+
+  if (character != null)
+        {
+            ActivarAnimacion(character, "reaccionIngreso");
+        }
+   
+    
+}
+
+public void ActivarReaccionRechazo()
+{
+
+       Character character = GetCurrentCharacter();
+
+  if (character != null)
+        {
+           ActivarAnimacion(character, "reaccionRechazo");
+        }
+   
+}
+
+
 }

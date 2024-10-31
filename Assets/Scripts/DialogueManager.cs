@@ -290,7 +290,7 @@ public class DialogueManager : MonoBehaviour
         else
         {
 
-            charactersManager.Reaccion();
+           // charactersManager.Reaccion();
         }
 
 

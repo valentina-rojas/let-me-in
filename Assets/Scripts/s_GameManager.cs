@@ -92,6 +92,8 @@ public class s_GameManager : MonoBehaviour
         // Obtener el diálogo de ingreso del personaje actual y mostrarlo
         string[] dialogoIngreso = charactersManager.GetCharacter(charactersManager.CurrentCharacterIndex).dialogosIngreso;
 
+        charactersManager.ActivarReaccionIngreso();
+
         dialogueManager.ComenzarDialogo(dialogoIngreso, null, false, true);
 
 
@@ -104,7 +106,6 @@ public class s_GameManager : MonoBehaviour
        // charactersManager.TerminoHablar();
 
         charactersManager.MoverPersonajeAlPunto(charactersManager.exitPoint.position);
-
         StartCoroutine(AbrirPuerta());
 
         // Verificar si el personaje ingresado es enfermo
@@ -139,6 +140,8 @@ public class s_GameManager : MonoBehaviour
         // Obtener el diálogo de rechazo del personaje actual y mostrarlo
         string[] dialogoRechazo = charactersManager.GetCharacter(charactersManager.CurrentCharacterIndex).dialogosRechazo;
 
+        charactersManager.ActivarReaccionRechazo();
+
         dialogueManager.ComenzarDialogo(dialogoRechazo, null, false, true);
 
         yield return new WaitForSeconds(3f); // Esperar 2 segundos
@@ -158,7 +161,7 @@ public class s_GameManager : MonoBehaviour
 
         NextCharacter();
 
-
+  
 
         yield break;
     }
