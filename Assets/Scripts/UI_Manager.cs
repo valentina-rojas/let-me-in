@@ -97,67 +97,58 @@ public class UI_Manager : MonoBehaviour
         }
     }
 
-    public IEnumerator MostrarPanelInicioDiaCoroutine(string mensaje)
+  public IEnumerator MostrarPanelInicioDiaCoroutine(string mensaje)
+{
+    textoInicioDia.text = "";
+    audioTecleo.Play();
+    tiempoUltimaActualizacion = Time.time;
+
+    // Mostrar el texto letra por letra
+    for (int i = 0; i < mensaje.Length; i++)
     {
-        textoInicioDia.text = "";
-        string mensajeConCursor = mensaje + "_";
+        textoInicioDia.text += mensaje[i]; // Añadir letra
+        textoInicioDia.text += "_"; // Añadir el cursor
 
-        audioTecleo.Play();
-        tiempoUltimaActualizacion = Time.time;
-
-
-        while (textoInicioDia.text.Length < mensaje.Length)
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                textoInicioDia.text = mensaje;
-                break;
-            }
-
-            if (Time.time - tiempoUltimaActualizacion >= intervaloCursor)
-            {
-                cursorVisible = !cursorVisible;
-                tiempoUltimaActualizacion = Time.time;
-            }
-
-
-            string textoParcial = mensaje.Substring(0, textoInicioDia.text.Length);
-            if (cursorVisible)
-            {
-                textoParcial += "_";
-            }
-            textoInicioDia.text = textoParcial;
-
-            yield return new WaitForSeconds(velocidadTexto);
-        }
-
-        textoInicioDia.text = mensaje;
-        audioTecleo.Stop();
-
-        while (true)
-        {
-            if (Time.time - tiempoUltimaActualizacion >= intervaloCursor)
-            {
-                cursorVisible = !cursorVisible;
-                tiempoUltimaActualizacion = Time.time;
-            }
-
-
-            string textoConCursorTitilante = mensaje;
-            if (cursorVisible)
-            {
-                textoConCursorTitilante += "_";
-            }
-            textoInicioDia.text = textoConCursorTitilante;
-
-            yield return null;
-        }
-
-        yield return new WaitForSeconds(duracionPanel);
-        panelInicioDia.gameObject.SetActive(false);
-
-        PanelInicioDesactivado?.Invoke();
+        yield return new WaitForSeconds(velocidadTexto);
+        textoInicioDia.text = textoInicioDia.text.TrimEnd('_'); // Quitar el cursor en la siguiente iteración
     }
+
+    // Finalizar texto
+    textoInicioDia.text = mensaje;
+
+    audioTecleo.Stop();
+
+    // Mostrar el texto completo con el cursor titilante
+    while (true)
+    {
+        if (Time.time - tiempoUltimaActualizacion >= intervaloCursor)
+        {
+            cursorVisible = !cursorVisible;
+            tiempoUltimaActualizacion = Time.time;
+        }
+
+        string textoConCursorTitilante = mensaje;
+        if (cursorVisible)
+        {
+            textoConCursorTitilante += "_";
+        }
+        textoInicioDia.text = textoConCursorTitilante;
+
+        yield return null; // Esperar al siguiente frame
+
+        // Salir del bucle cuando se haga clic
+        if (Input.GetMouseButtonDown(0))
+        {
+            break;
+        }
+    }
+
+    // Esperar antes de desactivar el panel
+    yield return new WaitForSeconds(duracionPanel);
+    panelInicioDia.gameObject.SetActive(false);
+
+    PanelInicioDesactivado?.Invoke();
+}
 
 
 
@@ -179,7 +170,7 @@ public class UI_Manager : MonoBehaviour
     }
 
 
-   private IEnumerator MostrarPanelIndicacionesCoroutine()
+    private IEnumerator MostrarPanelIndicacionesCoroutine()
     {
         yield return StartCoroutine(MostrarIndicacionesSecuencia());
         PanelInicioDesactivado -= MostrarPanelIndicaciones;
@@ -187,34 +178,42 @@ public class UI_Manager : MonoBehaviour
     }
 
 
-   private IEnumerator MostrarIndicacionesSecuencia()
+    private IEnumerator MostrarIndicacionesSecuencia()
     {
-        RectTransform[] indicaciones = { indicaciones1, indicaciones2, indicaciones3, indicaciones4, indicaciones5 };
 
-        foreach (var indicacion in indicaciones)
-        {
-            indicacion.gameObject.SetActive(true);
-            float tiempoRestante = duracionIndicaciones;
+        optionsManager.panelAyuda.gameObject.SetActive(true);
 
-            omitirIndicaciones.gameObject.SetActive(true);
+        /*  RectTransform[] indicaciones = { indicaciones1, indicaciones2, indicaciones3, indicaciones4, indicaciones5 };
 
-            while (tiempoRestante > 0)
-            {
-                if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    break; // Saltar a la siguiente indicación
-                }
-                tiempoRestante -= Time.deltaTime;
-                yield return null;
-            }
+          foreach (var indicacion in indicaciones)
+          {
+              indicacion.gameObject.SetActive(true);
+              float tiempoRestante = duracionIndicaciones;
 
-            indicacion.gameObject.SetActive(false);
-            omitirIndicaciones.gameObject.SetActive(false);
-        }
+              omitirIndicaciones.gameObject.SetActive(true);
+
+              while (tiempoRestante > 0)
+              {
+                  if (Input.GetKeyDown(KeyCode.Space))
+                  {
+                      break; // Saltar a la siguiente indicación
+                  }
+                  tiempoRestante -= Time.deltaTime;
+                  yield return null;
+              }
+
+              indicacion.gameObject.SetActive(false);
+              omitirIndicaciones.gameObject.SetActive(false);
+          }*/
+
+         yield return new WaitUntil(() => !optionsManager.panelAyuda.gameObject.activeSelf);
+
 
         // Iniciar el juego después de mostrar todas las indicaciones
         IniciarJuego();
-      interactableObjects.ActivarEventTriggers();
+        interactableObjects.ActivarEventTriggers();
+
+        yield break;
     }
 
 
