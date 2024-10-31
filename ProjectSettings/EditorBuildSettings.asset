@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CinematicaPerdiste.unity
     guid: 5dd54c1858fd70a40ba4dd73c40664de
+  - enabled: 1
+    path: Assets/Scenes/CinematicaRenunciar.unity
+    guid: 576f3926f07d4b0469ed2cae0170d555
   m_configObjects: {}

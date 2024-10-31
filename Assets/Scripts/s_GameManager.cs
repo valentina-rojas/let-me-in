@@ -97,7 +97,7 @@ public class s_GameManager : MonoBehaviour
         dialogueManager.ComenzarDialogo(dialogoIngreso, null, false, true);
 
 
-        yield return new WaitForSeconds(3f); // Esperar 2 segundos
+        yield return new WaitForSeconds(5f); // Esperar 2 segundos
 
         dialogueManager.OcultarDialogo();
 
@@ -144,7 +144,7 @@ public class s_GameManager : MonoBehaviour
 
         dialogueManager.ComenzarDialogo(dialogoRechazo, null, false, true);
 
-        yield return new WaitForSeconds(3f); // Esperar 2 segundos
+        yield return new WaitForSeconds(5f); // Esperar 2 segundos
 
         dialogueManager.OcultarDialogo();
 

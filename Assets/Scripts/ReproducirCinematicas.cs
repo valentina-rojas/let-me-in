@@ -44,6 +44,7 @@ public class ReproducirCinematicas : MonoBehaviour
     {
         yield return StartCoroutine(FadeOutPantalla());
         ChangeScene(nombreCinematica);
+        GameData.NivelActual = 1; 
     }
 
     private IEnumerator FadeOutPantalla()

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731725, g: 0.13414745, b: 0.12107873, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -14439,7 +14439,7 @@ GameObject:
   - component: {fileID: 1094696259}
   - component: {fileID: 1094696258}
   m_Layer: 5
-  m_Name: botonPerdisteDisturbios
+  m_Name: botonPerdisteRenunciar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23958,7 +23958,7 @@ MonoBehaviour:
   barraEstres: {fileID: 1776270241}
   maxEstres: 5
   fillBarImage: {fileID: 1960045491}
-  panelPerdiste: {fileID: 2067811275}
+  panelPerdiste: {fileID: 607860682}
   colorVerdeClaro: {r: 0.7607844, g: 0.65882355, b: 0.38823533, a: 1}
   colorVerdeOscuro: {r: 0.7490196, g: 0.5686275, b: 0.1137255, a: 1}
   colorAmarillo: {r: 0.79215693, g: 0.4784314, b: 0, a: 1}
@@ -24399,7 +24399,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -860, y: 318.33}
+  m_AnchoredPosition: {x: -859.99994, y: 318.33}
   m_SizeDelta: {x: -1741.51, y: -636.65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2023095411
