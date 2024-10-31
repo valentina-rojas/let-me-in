@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731725, g: 0.13414745, b: 0.12107873, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -11976,7 +11976,7 @@ MonoBehaviour:
     dialogosRechazo:
     - Entiendo... Voy a seguir caminando...
     prefab: {fileID: 818472440953356866, guid: 3ca1d4bf8f02a6749a5cf75e353ccb3d, type: 3}
-    nivel: 3
+    nivel: 1
     esAgresivo: 0
     animator: {fileID: 0}
   - nombre: pj2
@@ -12451,7 +12451,7 @@ MonoBehaviour:
     dialogosIngreso: []
     dialogosRechazo: []
     prefab: {fileID: 5274696793240584207, guid: bc0bfd5922905344fae35c57f7ede332, type: 3}
-    nivel: 3
+    nivel: 2
     esAgresivo: 1
     animator: {fileID: 0}
   dialogueManager: {fileID: 2085731922}
@@ -13089,7 +13089,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -17, y: -398}
+  m_AnchoredPosition: {x: 21.82, y: -399.4}
   m_SizeDelta: {x: 1.7699999, y: 2.0742188}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &1006143574
@@ -23386,7 +23386,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -860, y: 318.33}
+  m_AnchoredPosition: {x: -859.99994, y: 318.33}
   m_SizeDelta: {x: -1741.51, y: -636.65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2023095411

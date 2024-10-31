@@ -290,7 +290,7 @@ public class DialogueManager : MonoBehaviour
         else
         {
 
-           // charactersManager.Reaccion();
+            // charactersManager.Reaccion();
         }
 
 
@@ -359,18 +359,17 @@ public class DialogueManager : MonoBehaviour
             }
 
             textoCompleto = false;
-            mostrandoRespuestas = true;
-
+            // Dentro del while(true) al final de la coroutine
             if (!esDialogoFinal)
             {
-
                 nextDialogo.gameObject.SetActive(true);
             }
             else
             {
-
                 nextDialogo.gameObject.SetActive(false);
             }
+
+            mostrandoRespuestas = true; // Mover después de la condición para activar el botón
 
         }
 
