@@ -17,6 +17,8 @@ public class RechazoBarraManager : MonoBehaviour
 
     public CharactersManager charactersManager;
 
+    public AudioSource loadingBar;
+
     void Start()
     {
         // Inicializar la barra con 0 rechazos
@@ -44,6 +46,7 @@ public class RechazoBarraManager : MonoBehaviour
         {
             barraRechazoSanos.value = rechazosActuales;
             ActualizarColorBarraRechazo();
+            loadingBar.Play();
         }
 
         // Puedes agregar lógica adicional si el nivel de rechazos llega al máximo

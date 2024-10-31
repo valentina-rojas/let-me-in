@@ -8,6 +8,7 @@ public class Zoom : MonoBehaviour, IDragHandler
     public bool isLupaVisible = false;
     public GameObject panelLupa;
     public RectTransform areaLimite;
+    public AudioSource sonidoBoton;
 
 
     // Método que se llama cuando se arrastra el objeto
@@ -46,6 +47,7 @@ public class Zoom : MonoBehaviour, IDragHandler
 
     public void ToggleLupa()
     {
+        sonidoBoton.Play();
         isLupaVisible = !isLupaVisible; // Alterna el estado de visibilidad
         panelLupa.SetActive(isLupaVisible); // Activa o desactiva el panel
     }

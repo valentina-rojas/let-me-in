@@ -24,6 +24,10 @@ public class CheckCondition : MonoBehaviour
 
     public Button botonMedico;
     public AudioSource sonidoBoton;
+    public AudioSource brazoMecanico;
+    public AudioSource luzEscaner;
+    public AudioSource beepEscaner;
+
 
     public void Start()
     {
@@ -50,9 +54,11 @@ public class CheckCondition : MonoBehaviour
 
         leverController.DesactivarPalanca();
 
-        StartCoroutine(gameManager.AbrirPuerta(12f));
+       // StartCoroutine(gameManager.AbrirPuerta(12f));
 
+        brazoMecanico.Play();
         yield return StartCoroutine(MoverPersonaje(medicoInstance.transform, centroPantalla.position));
+        brazoMecanico.Stop();
 
         yield return new WaitForSeconds(2f);
 
@@ -60,8 +66,9 @@ public class CheckCondition : MonoBehaviour
 
         yield return new WaitForSeconds(7f);
 
+        brazoMecanico.Play();
         yield return StartCoroutine(MoverPersonaje(medicoInstance.transform, puntoSalidaMedico.position));
-
+        brazoMecanico.Stop();
         Destroy(medicoInstance);
 
        // dialogueManager.botonIngreso.interactable = true;
@@ -97,9 +104,10 @@ public class CheckCondition : MonoBehaviour
 {
     // Crear la instancia de la luz del escáner
     GameObject luzEscanerInstance = Instantiate(luzEscanerPrefab, spawnPointLuzEscaner.position, Quaternion.identity);
-
-    // Esperar 2 segundos para que la luz del escáner permanezca visible
+    luzEscaner.Play();
+   
     yield return new WaitForSeconds(3f);
+    luzEscaner.Stop();
 
     // Destruir la luz del escáner
     Destroy(luzEscanerInstance);
@@ -120,6 +128,7 @@ public class CheckCondition : MonoBehaviour
   private IEnumerator MostrarCartel(GameObject cartelPrefab, Transform spawnPoint)
     {
         GameObject cartelInstance = Instantiate(cartelPrefab, spawnPoint.position, Quaternion.identity);
+        beepEscaner.Play();
         yield return new WaitForSeconds(2f);
         Destroy(cartelInstance);
     }

@@ -41,6 +41,9 @@ public class RadioManager : MonoBehaviour
     public s_GameManager gameManager;
     public CharactersManager charactersManager;
 
+     public AudioSource loadingBar;
+      public AudioSource sonidoEstatica;
+
 
     void Start()
     {
@@ -145,6 +148,7 @@ public class RadioManager : MonoBehaviour
         {
             barraContaminacion.value = nivelContaminacion;
             ActualizarColorBarra();
+            loadingBar.Play();
         }
 
         // Puedes agregar lógica adicional si el nivel de contaminación llega al máximo (perder el juego, etc.)
@@ -200,9 +204,9 @@ public class RadioManager : MonoBehaviour
     public IEnumerator ActivarPantallaRadio()
     {
         radioAnimator.SetTrigger("ActivarRadio");
-
+        sonidoEstatica.Play();
         yield return new WaitForSeconds(2f);
-
+        sonidoEstatica.Stop();
         radioAnimator.SetTrigger("IdleRadio");
     }
 

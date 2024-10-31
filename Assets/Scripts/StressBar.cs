@@ -22,6 +22,8 @@ public class StressBar : MonoBehaviour
     public CharactersManager charactersManager;
 
     public Animator mate;
+    public AudioSource audioMate;
+    public AudioSource loadingBar;
 
     void Start()
     {
@@ -48,6 +50,7 @@ public class StressBar : MonoBehaviour
         {
             barraEstres.value = nivelEstres;
             ActualizarColorBarra();
+            loadingBar.Play();
         }
 
 
@@ -82,9 +85,9 @@ public class StressBar : MonoBehaviour
     public IEnumerator AnimacionMate()
     {
         mate.SetTrigger("mateSpin");
-
+        audioMate.Play();
         yield return new WaitForSeconds(2f);
-
+        audioMate.Stop();
         mate.SetTrigger("mateIdle");
     }
 

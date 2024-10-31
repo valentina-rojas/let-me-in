@@ -12,6 +12,9 @@ public class InteractableObjects : MonoBehaviour
     public Animator papelesAnimator;
     public Animator pantallaAnimator;
 
+    public AudioSource sonidoPapel;
+    public AudioSource sonidoEstatica;
+
     public void DesactivarEventTriggers()
     {
         foreach (var trigger in eventTriggers)
@@ -43,8 +46,11 @@ public class InteractableObjects : MonoBehaviour
 
     public IEnumerator ActivarPapeles()
     {
+        
         papelesAnimator.SetTrigger("papelesFlip");
+        sonidoPapel.Play();
         yield return new WaitForSeconds(2f);
+        sonidoPapel.Stop();
         papelesAnimator.SetTrigger("papelesIdle");
 
     }
@@ -58,8 +64,11 @@ StartCoroutine(ActivarPantalla());
 
  public IEnumerator ActivarPantalla()
     {
+        
         pantallaAnimator.SetTrigger("pantallaMove");
+        sonidoEstatica.Play();
         yield return new WaitForSeconds(2f);
+        sonidoEstatica.Stop();
         pantallaAnimator.SetTrigger("pantallaIdle");
 
     }
