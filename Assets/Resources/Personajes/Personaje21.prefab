@@ -102,3 +102,4 @@ MonoBehaviour:
   - {fileID: -1512913557, guid: afb3ed28a86eda842b920f433630fef1, type: 3}
   - {fileID: -822654618, guid: afb3ed28a86eda842b920f433630fef1, type: 3}
   - {fileID: -1458891080, guid: afb3ed28a86eda842b920f433630fef1, type: 3}
+  sonidoAtaque: {fileID: 8300000, guid: 2b8239a3bae3a244faf2197fbb4652b4, type: 3}

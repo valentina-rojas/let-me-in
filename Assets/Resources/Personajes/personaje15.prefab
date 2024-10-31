@@ -124,3 +124,4 @@ MonoBehaviour:
   - {fileID: 987144293, guid: 5483a7549c8fda54093ea962373ba9c7, type: 3}
   - {fileID: -591173372, guid: 5483a7549c8fda54093ea962373ba9c7, type: 3}
   - {fileID: 2053021008, guid: 5483a7549c8fda54093ea962373ba9c7, type: 3}
+  sonidoAtaque: {fileID: 8300000, guid: ea8f462317e337b4a9e7b452f1ac37ac, type: 3}
