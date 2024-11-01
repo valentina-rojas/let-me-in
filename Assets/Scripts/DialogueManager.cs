@@ -33,6 +33,7 @@ public class DialogueManager : MonoBehaviour
     public AggressiveNPCs aggressiveNPCs;
     public CheckCondition checkCondition;
     public LeverController leverController;
+    public CharactersManager charactersManager;
 
     public bool medicoUsado = false;
 
@@ -50,28 +51,50 @@ public class DialogueManager : MonoBehaviour
     public Button nextDialogo;
     public Button nextRespuesta;
 
+    public bool puedeAvanzarDialogo = true;
+    private bool esDialogoFinal = false;
+
+    //private Character character; // Variable para almacenar el personaje
+
 
     void Start()
     {
-
+        //character = charactersManager.GetCharacter(charactersManager.CurrentCharacterIndex);
     }
+
+
+
+    /*public void IniciarDialogo()
+    {
+        character = charactersManager.GetCharacter(charactersManager.CurrentCharacterIndex);
+        // Aquí puedes llamar a ComenzarDialogo o lo que necesites hacer con el personaje
+    }*/
+
 
     void Update()
     {
         if (dialogoVisible)
         {
+
+
             // Detecta si el usuario presiona Espacio para adelantar un diálogo
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 AdelantarDialogo();
             }
-            // Detecta si el usuario presiona Enter para omitir todos los diálogos
-            else if (Input.GetKeyDown(KeyCode.Return))
+
+            if (puedeAvanzarDialogo)
             {
-                SaltarTodosLosDialogos();
+                if (Input.GetKeyDown(KeyCode.Return))
+                {
+                    SaltarTodosLosDialogos();
+                }
             }
+
         }
     }
+
+
 
     public void AdelantarDialogo()
     {
@@ -100,6 +123,18 @@ public class DialogueManager : MonoBehaviour
 
     }
 
+
+    public void OcultarDialogo()
+    {
+        panelDialogo.gameObject.SetActive(false);
+    }
+
+    public bool DialogoEstaOculto()
+    {
+        // Aquí puedes agregar la lógica para verificar si el diálogo está oculto
+        return !panelDialogo.gameObject.activeSelf; // Por ejemplo, si el diálogo está representado por un panel que se oculta
+    }
+
     public void PausarVoces()
     {
         if (vozGuardia != null)
@@ -114,16 +149,30 @@ public class DialogueManager : MonoBehaviour
     }
 
 
-    public void ComenzarDialogo(string[] dialogos, List<string> respuestas, bool esAgresivo)
+    public void ComenzarDialogo(string[] dialogos, List<string> respuestas, bool esAgresivo, bool esDialogoFinal)
     {
         lineas = dialogos;
         respuestasActuales = respuestas;
         this.esAgresivo = esAgresivo;
+        this.esDialogoFinal = esDialogoFinal;
 
         indexDialogo = 0;
         indexRespuestas = 0;
 
+
         MostrarPanelDialogo();
+
+        // Si es el diálogo final de ingreso o rechazo, desactivar el botón y las teclas
+        if (esDialogoFinal)
+        {
+            leverController.DesactivarPalanca();
+            puedeAvanzarDialogo = false; // Desactivar el avance con teclado
+        }
+        else
+        {
+            puedeAvanzarDialogo = true; // Permitir avance con teclado
+        }
+
     }
 
     void MostrarPanelRespuestas()
@@ -145,26 +194,25 @@ public class DialogueManager : MonoBehaviour
 
         tiempoUltimaActualizacion = Time.time;
 
+        // Mientras el texto de la respuesta se está escribiendo
         while (textoRespuesta.text.Length < respuestasActuales[indexRespuestas].Length)
         {
-            if (textoCompleto) break;
-
-            if (Time.time - tiempoUltimaActualizacion >= intervaloCursor)
+            if (textoCompleto)
             {
-                cursorVisible = !cursorVisible;
-                tiempoUltimaActualizacion = Time.time;
+                // Si el texto está completo, muestra el texto final con el cursor al final
+                textoRespuesta.text = respuestasActuales[indexRespuestas] + "_";
+                break;
             }
 
-            // Construye el texto actual con el cursor
-            string textoParcial = respuestasActuales[indexRespuestas].Substring(0, textoRespuesta.text.Length);
-            if (cursorVisible)
-            {
-                textoParcial += "_";
-            }
-            textoRespuesta.text = textoParcial;
-
+            // Añade una letra y muestra el cursor fijo
+            textoRespuesta.text += respuestasActuales[indexRespuestas][textoRespuesta.text.Length] + "_";
             yield return new WaitForSeconds(velocidadTexto);
+
+            // Para evitar que el cursor se duplique, eliminamos el "_" en la siguiente iteración
+            textoRespuesta.text = textoRespuesta.text.TrimEnd('_');
         }
+
+
 
 
         textoRespuesta.text = respuestasActuales[indexRespuestas];
@@ -233,39 +281,57 @@ public class DialogueManager : MonoBehaviour
         vozPersonaje.Play();
         StartCoroutine(DetenerAudioPersonaje(2));
 
+        charactersManager.Hablando();
+
+        if (!esDialogoFinal)
+        {
+            charactersManager.Hablando();
+        }
+        else
+        {
+
+            // charactersManager.Reaccion();
+        }
+
+
         tiempoUltimaActualizacion = Time.time; // Inicializar el tiempo del cursor
 
         while (textoDialogo.text.Length < lineas[indexDialogo].Length)
         {
             if (textoCompleto)
             {
-                textoDialogo.text = lineas[indexDialogo]; // Mostrar el texto completo
+                textoDialogo.text = lineas[indexDialogo] + "_"; // Muestra el cursor fijo al final
+
+                // charactersManager.ActivarAnimacion(character, "triggerBlink");
+
                 break;
             }
 
-            if (Time.time - tiempoUltimaActualizacion >= intervaloCursor)
-            {
-                cursorVisible = !cursorVisible;
-                tiempoUltimaActualizacion = Time.time;
-            }
-
-            string textoParcial = lineas[indexDialogo].Substring(0, textoDialogo.text.Length);
-            if (cursorVisible)
-            {
-                textoParcial += "_";
-            }
-            textoDialogo.text = textoParcial;
-
+            textoDialogo.text += lineas[indexDialogo][textoDialogo.text.Length] + "_"; // Añade una letra y muestra el cursor fijo
             yield return new WaitForSeconds(velocidadTexto);
+
+            // Para evitar que el cursor se duplique, eliminamos el "_" en la siguiente iteración
+            textoDialogo.text = textoDialogo.text.TrimEnd('_');
         }
+
+
 
         // Finalizar diálogo
         textoDialogo.text = lineas[indexDialogo];
+
+
+
+        if (!esDialogoFinal)
+        {
+            charactersManager.TerminoHablar();
+        }
+
 
         if (AudioManager.instance != null)
         {
             AudioManager.instance.DetenerHablar();
         }
+
 
 
         // Mostrar el texto completo con el cursor titilante
@@ -293,8 +359,18 @@ public class DialogueManager : MonoBehaviour
             }
 
             textoCompleto = false;
-            mostrandoRespuestas = true;
-            nextDialogo.gameObject.SetActive(true);
+            // Dentro del while(true) al final de la coroutine
+            if (!esDialogoFinal)
+            {
+                nextDialogo.gameObject.SetActive(true);
+            }
+            else
+            {
+                nextDialogo.gameObject.SetActive(false);
+            }
+
+            mostrandoRespuestas = true; // Mover después de la condición para activar el botón
+
         }
 
     }
@@ -354,12 +430,12 @@ public class DialogueManager : MonoBehaviour
 
     void MostrarBotonSiguiente()
     {
-      //  botonIngreso.interactable = true;
-      //  botonRechazo.interactable = true;
-       // ColisionBotones();
 
-       leverController.ActivarPalanca();
-       
+        if (!esDialogoFinal)
+        {
+            leverController.ActivarPalanca();
+        }
+
         panelSiguiente.gameObject.SetActive(true);
 
         if (!medicoUsado)
@@ -369,21 +445,6 @@ public class DialogueManager : MonoBehaviour
 
     }
 
-  /*  public void ColisionBotones()
-    {
-        var imageIngreso = botonIngreso.GetComponent<Image>();
-        var imageRechazo = botonRechazo.GetComponent<Image>();
 
-
-        if (imageIngreso != null)
-        {
-            imageIngreso.alphaHitTestMinimumThreshold = 0.1f;
-        }
-
-        if (imageRechazo != null)
-        {
-            imageRechazo.alphaHitTestMinimumThreshold = 0.1f;
-        }
-    }*/
 }
 

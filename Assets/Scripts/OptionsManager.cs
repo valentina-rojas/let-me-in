@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.Audio; 
+using UnityEngine.Audio;
 using UnityEngine.UI;
 
 public class OptionsManager : MonoBehaviour
@@ -11,9 +11,19 @@ public class OptionsManager : MonoBehaviour
     public AudioMixer audioMixer;
 
     public RectTransform panelOpciones;
+    public RectTransform panelAyuda;
+    public RectTransform panelSintomas;
 
-public Button botonOpciones;
- 
+    public RectTransform panelSintomasNivel1;
+    public RectTransform panelSintomasNivel2;
+
+    public Button botonOpciones;
+    public Button botonAyuda;
+    public Button botonSintomas;
+
+
+    public InteractableObjects interactableObjects;
+    public Zoom zoomManager;
 
     void Start()
     {
@@ -32,14 +42,17 @@ public Button botonOpciones;
 
     public void AbrirOpciones()
     {
+        CerrarTodosLosPaneles();
         panelOpciones.gameObject.SetActive(true);
-        Time.timeScale = 0f;      
+        //  Time.timeScale = 0f;
     }
 
     public void CerrarOpciones()
     {
         panelOpciones.gameObject.SetActive(false);
-        Time.timeScale = 1f;  
+
+        interactableObjects.ActivarEventTriggers();
+
     }
 
     public void SetMusicVolume(float volume)
@@ -60,5 +73,85 @@ public Button botonOpciones;
         audioMixer.SetFloat("VoicesVolume", Mathf.Log10(Mathf.Max(volume, minVolume)) * 20);
     }
 
+    public void AbrirAyuda()
+    {
+        CerrarTodosLosPaneles();
+        panelAyuda.gameObject.SetActive(true);
+    }
+
+    public void CerrarAyuda()
+    {
+        panelAyuda.gameObject.SetActive(false);
+
+        interactableObjects.ActivarEventTriggers();
+
+    }
+
+    public void AbrirSintomas()
+    {
+        CerrarTodosLosPaneles();
+        panelSintomas.gameObject.SetActive(true);
+
+        if (GameData.NivelActual == 1)
+        {
+            panelSintomasNivel2.gameObject.SetActive(false);
+            panelSintomasNivel1.gameObject.SetActive(true);
+        }
+
+        if (GameData.NivelActual == 2)
+        {
+            panelSintomasNivel1.gameObject.SetActive(false);
+            panelSintomasNivel2.gameObject.SetActive(true);
+        }
+
+    }
+
+    public void CerrarSintomas()
+    {
+        panelSintomas.gameObject.SetActive(false);
+
+        interactableObjects.ActivarEventTriggers();
+    }
+
+    // Método para cerrar todos los paneles
+    public void CerrarTodosLosPaneles()
+    {
+        interactableObjects.DesactivarEventTriggers();
+
+        // Desactivar la lupa si está visible
+        if (zoomManager != null && zoomManager.isLupaVisible)
+        {
+            zoomManager.ToggleLupa();
+        }
+
+        panelOpciones.gameObject.SetActive(false);
+        panelAyuda.gameObject.SetActive(false);
+        panelSintomas.gameObject.SetActive(false);
+    }
+
+    public void DesactivarBotonesVentanas()
+    {
+        interactableObjects.DesactivarEventTriggers();
+
+        // Desactivar la lupa si está visible
+        if (zoomManager != null && zoomManager.isLupaVisible)
+        {
+            zoomManager.ToggleLupa();
+        }
+
+        botonAyuda.interactable = false;
+        botonOpciones.interactable = false;
+        botonSintomas.interactable = false;
+    }
+
+    public void ActivarBotonesVentanas()
+    {
+
+        interactableObjects.ActivarEventTriggers();
+
+        botonAyuda.interactable = true;
+        botonOpciones.interactable = true;
+        botonSintomas.interactable = true;
+    }
 
 }

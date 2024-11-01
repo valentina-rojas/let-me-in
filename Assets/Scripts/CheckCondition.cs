@@ -6,20 +6,28 @@ using UnityEngine.UI;
 public class CheckCondition : MonoBehaviour
 {
     public GameObject medicoPrefab;
-    public GameObject medicoSanoPrefab;
-    public GameObject medicoEnfermoPrefab;
+    public GameObject cartelSanoPrefab;  
+    public GameObject cartelEnfermoPrefab; 
+    public GameObject luzEscanerPrefab; 
     public Transform spawnPointMedico;
     public Transform centroPantalla;
     public Transform puntoSalidaMedico;
+    public Transform spawnPointIngreso;     
+    public Transform spawnPointRechazo;   
+    public Transform spawnPointLuzEscaner;  
     public CharactersManager charactersManager;
     public DialogueManager dialogueManager;
     public s_GameManager gameManager;
-      public LeverController leverController;
+    public LeverController leverController;
 
     private GameObject medicoInstance;
 
     public Button botonMedico;
     public AudioSource sonidoBoton;
+    public AudioSource brazoMecanico;
+    public AudioSource luzEscaner;
+    public AudioSource beepEscaner;
+
 
     public void Start()
     {
@@ -42,23 +50,25 @@ public class CheckCondition : MonoBehaviour
 
     private IEnumerator MedicoEvaluacionRoutine()
     {
-        //dialogueManager.botonIngreso.interactable = false;
-        //dialogueManager.botonRechazo.interactable = false;
+        
 
         leverController.DesactivarPalanca();
 
-        StartCoroutine(gameManager.AbrirPuerta(8f));
+       // StartCoroutine(gameManager.AbrirPuerta(12f));
 
+        brazoMecanico.Play();
         yield return StartCoroutine(MoverPersonaje(medicoInstance.transform, centroPantalla.position));
+        brazoMecanico.Stop();
 
         yield return new WaitForSeconds(2f);
 
         EvaluarEstadoPersonaje();
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(7f);
 
+        brazoMecanico.Play();
         yield return StartCoroutine(MoverPersonaje(medicoInstance.transform, puntoSalidaMedico.position));
-
+        brazoMecanico.Stop();
         Destroy(medicoInstance);
 
        // dialogueManager.botonIngreso.interactable = true;
@@ -82,23 +92,46 @@ public class CheckCondition : MonoBehaviour
     {
         Character personajeActual = charactersManager.GetCharacter(charactersManager.CurrentCharacterIndex);
 
-        if (personajeActual != null)
-        {
-            Destroy(medicoInstance);
-
-            if (personajeActual.estado == CharacterState.Sano)
-            {
-                Debug.Log("El personaje está sano.");
-                medicoInstance = Instantiate(medicoSanoPrefab, centroPantalla.position, Quaternion.identity);
-            }
-            else if (personajeActual.estado == CharacterState.Enfermo)
-            {
-                Debug.Log("El personaje está enfermo.");
-                medicoInstance = Instantiate(medicoEnfermoPrefab, centroPantalla.position, Quaternion.identity);
-            }
-        }
+       if (personajeActual != null)
+    {
+        // Instancia la luz del escáner
+        StartCoroutine(MostrarLuzEscanerYCartel(personajeActual));
+    }
     }
 
+
+    private IEnumerator MostrarLuzEscanerYCartel(Character personajeActual)
+{
+    // Crear la instancia de la luz del escáner
+    GameObject luzEscanerInstance = Instantiate(luzEscanerPrefab, spawnPointLuzEscaner.position, Quaternion.identity);
+    luzEscaner.Play();
+   
+    yield return new WaitForSeconds(3f);
+    luzEscaner.Stop();
+
+    // Destruir la luz del escáner
+    Destroy(luzEscanerInstance);
+ yield return new WaitForSeconds(2f);
+    // Mostrar el cartel según el estado del personaje
+    if (personajeActual.estado == CharacterState.Sano)
+    {
+        Debug.Log("El personaje está sano.");
+        StartCoroutine(MostrarCartel(cartelSanoPrefab, spawnPointIngreso));
+    }
+    else if (personajeActual.estado == CharacterState.Enfermo)
+    {
+        Debug.Log("El personaje está enfermo.");
+        StartCoroutine(MostrarCartel(cartelEnfermoPrefab, spawnPointRechazo));
+    }
+}
+
+  private IEnumerator MostrarCartel(GameObject cartelPrefab, Transform spawnPoint)
+    {
+        GameObject cartelInstance = Instantiate(cartelPrefab, spawnPoint.position, Quaternion.identity);
+        beepEscaner.Play();
+        yield return new WaitForSeconds(2f);
+        Destroy(cartelInstance);
+    }
 
     public void ReiniciarNivel()
     {

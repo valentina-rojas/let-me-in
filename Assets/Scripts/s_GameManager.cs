@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
 
 public class s_GameManager : MonoBehaviour
 {
@@ -10,6 +12,8 @@ public class s_GameManager : MonoBehaviour
     public DialogueManager dialogueManager;
     public RadioManager radioManager;
     public CheckCondition checkCondition;
+    public StressBar stressBar;
+    public RechazoBarraManager rechazoBarraManager;
 
     public string[] mensajesInicioDia;
 
@@ -17,6 +21,9 @@ public class s_GameManager : MonoBehaviour
     public int enfermosIngresados;
     public int sanosRechazados;
     public int enfermosRechazados;
+    public int strikes;
+
+    public TextMeshProUGUI textoStrikes;
 
     public GameObject Musica;
     public AudioSource backgroundMusic;
@@ -59,18 +66,104 @@ public class s_GameManager : MonoBehaviour
     public void NextCharacter()
     {
         charactersManager.AparecerSiguientePersonaje();
+
+        stressBar.ActualizarEstres(1);
     }
 
     public void OnBotonIngresoClick()
     {
-        //sonidoBoton.Play();
+        StartCoroutine(ProcesoIngreso());
+    }
+
+    public void OnBotonRechazoClick()
+    {
+        StartCoroutine(ProcesoRechazo());
+    }
+
+    private IEnumerator ProcesoIngreso()
+    {
+        // sonidoBoton.Play();
         ruidoPalanca.Play();
+        checkCondition.botonMedico.interactable = false;
 
-        StartCoroutine(DetenerSonidoPuerta(4f)); // Detener sonido después de 2 segundos
+        StartCoroutine(DetenerSonidoPuerta(4f)); // Detener sonido después de 4 segundos
         VerificarEstadoPersonaje(true);
-        charactersManager.MoverPersonajeAlPunto(charactersManager.exitPoint.position);
 
+        // Obtener el diálogo de ingreso del personaje actual y mostrarlo
+        string[] dialogoIngreso = charactersManager.GetCharacter(charactersManager.CurrentCharacterIndex).dialogosIngreso;
+
+        charactersManager.ActivarReaccionIngreso();
+
+        dialogueManager.ComenzarDialogo(dialogoIngreso, null, false, true);
+
+
+        yield return new WaitForSeconds(5f); // Esperar 2 segundos
+
+        dialogueManager.OcultarDialogo();
+
+        yield return new WaitUntil(() => dialogueManager.DialogoEstaOculto());
+
+       // charactersManager.TerminoHablar();
+
+        charactersManager.MoverPersonajeAlPunto(charactersManager.exitPoint.position);
         StartCoroutine(AbrirPuerta());
+
+        // Verificar si el personaje ingresado es enfermo
+        Character personajeActual = charactersManager.GetCharacter(charactersManager.CurrentCharacterIndex);
+
+
+        if (personajeActual.estado == CharacterState.Enfermo)
+        {
+            // Si es enfermo, activar disturbios
+            StartCoroutine(ProximoPersonajeTrasDisturbios());
+            stressBar.ActualizarEstres(1);
+            ActualizarTextoStrikes();
+        }
+        else
+        {
+            NextCharacter();
+        }
+
+
+        yield break;
+    }
+
+    private IEnumerator ProcesoRechazo()
+    {
+        // sonidoBoton.Play();
+        ruidoPalanca.Play();
+        checkCondition.botonMedico.interactable = false;
+
+        VerificarEstadoPersonaje(false);
+
+
+        // Obtener el diálogo de rechazo del personaje actual y mostrarlo
+        string[] dialogoRechazo = charactersManager.GetCharacter(charactersManager.CurrentCharacterIndex).dialogosRechazo;
+
+        charactersManager.ActivarReaccionRechazo();
+
+        dialogueManager.ComenzarDialogo(dialogoRechazo, null, false, true);
+
+        yield return new WaitForSeconds(5f); // Esperar 2 segundos
+
+        dialogueManager.OcultarDialogo();
+
+        yield return new WaitUntil(() => dialogueManager.DialogoEstaOculto());
+
+        charactersManager.MoverPersonajeAlPunto(charactersManager.spawnPoint.position);
+
+
+        Character personajeActual = charactersManager.GetCharacter(charactersManager.CurrentCharacterIndex);
+        if (personajeActual.estado == CharacterState.Sano)
+        {
+            rechazoBarraManager.RechazarSano();
+        }
+
+        NextCharacter();
+
+  
+
+        yield break;
     }
 
     public IEnumerator AbrirPuerta(float? tiempoEsperaExtendido = null)
@@ -115,15 +208,8 @@ public class s_GameManager : MonoBehaviour
         }
     }
 
-    public void OnBotonRechazoClick()
-    {
-        // sonidoBoton.Play();
 
-        ruidoPalanca.Play();
 
-        VerificarEstadoPersonaje(false);
-        charactersManager.MoverPersonajeAlPunto(charactersManager.spawnPoint.position);
-    }
 
     public void VerificarEstadoPersonaje(bool esIngreso)
     {
@@ -136,15 +222,13 @@ public class s_GameManager : MonoBehaviour
                 {
                     Debug.Log("¡Elección correcta! Personaje sano ingresado.");
                     sanosIngresados++;
-                    NextCharacter();
+
                 }
                 else if (personajeActual.estado == CharacterState.Enfermo)
                 {
                     Debug.Log("¡Elección incorrecta! Personaje enfermo ingresado.");
                     enfermosIngresados++;
-
-                    checkCondition.botonMedico.interactable = false;
-                    StartCoroutine(ProximoPersonajeTrasDisturbios());
+                    strikes++;
                 }
             }
             else
@@ -153,14 +237,13 @@ public class s_GameManager : MonoBehaviour
                 {
                     Debug.Log("¡Elección incorrecta! Personaje sano rechazado.");
                     sanosRechazados++;
-
-                    NextCharacter();
+                    strikes++;
                 }
                 else if (personajeActual.estado == CharacterState.Enfermo)
                 {
                     Debug.Log("¡Elección correcta! Personaje enfermo rechazado.");
                     enfermosRechazados++;
-                    NextCharacter();
+
                 }
             }
         }
@@ -168,11 +251,8 @@ public class s_GameManager : MonoBehaviour
 
     private IEnumerator ProximoPersonajeTrasDisturbios()
     {
-        // Esperar a que termine el disturbio antes de avanzar al siguiente personaje
-        yield return StartCoroutine(radioManager.ActivarDisturbiosCoroutine());
-
-        // Llamar a NextCharacter después de que haya terminado el disturbio
-        NextCharacter();
+        radioManager.ActivarDisturbios();
+        yield break;
     }
 
     public void MostrarPanelReporte()
@@ -196,7 +276,7 @@ public class s_GameManager : MonoBehaviour
         {
             uiManager.mensajeReporte.text = "¡Buen trabajo!";
 
-            //modificacion temporal para que no apse al nivel 3
+            //modificacion temporal para que no pase al nivel 3
             if (NivelActual == 1)
             {
                 uiManager.botonSiguienteNivel.gameObject.SetActive(true);
@@ -209,13 +289,13 @@ public class s_GameManager : MonoBehaviour
             }
 
         }
-        else if ((enfermosIngresados >= 1 && enfermosIngresados <= 3) || (sanosRechazados >= 1 && sanosRechazados <= 3))
+        else 
         {
             uiManager.mensajeReporte.text = "Más cuidado la próxima vez...";
             // GameData.Faltas++;
 
 
-            //modificacion temporal para que no apse al nivel 3
+            //modificacion temporal para que no pase al nivel 3
             if (NivelActual == 1)
             {
                 uiManager.botonSiguienteNivel.gameObject.SetActive(true);
@@ -226,15 +306,10 @@ public class s_GameManager : MonoBehaviour
 
                 uiManager.botonGanaste.gameObject.SetActive(true);
             }
-
         }
-        else if (enfermosIngresados > 3 || sanosRechazados > 3)
-        {
-            uiManager.mensajeReporte.text = "Fuiste retirado del puesto de trabajo.";
-
-            uiManager.botonPerdiste.gameObject.SetActive(true);
-        }
+    
     }
+
 
     public void OnBotonSiguienteNivel()
     {
@@ -256,4 +331,14 @@ public class s_GameManager : MonoBehaviour
             return "Mensaje de inicio no definido para este nivel.";
         }
     }
+
+
+    public void ActualizarTextoStrikes()
+    {
+
+        textoStrikes.text = "FALTAS: " + strikes;
+
+    }
+
+
 }

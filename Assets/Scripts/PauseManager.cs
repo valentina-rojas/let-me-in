@@ -7,6 +7,8 @@ public class PauseManager : MonoBehaviour
 {
     public GameObject pauseMenuUI;
 
+    public OptionsManager optionsManager;
+
     private bool isPaused = false;
 
     private AudioSource[] allAudioSources;
@@ -30,10 +32,11 @@ public class PauseManager : MonoBehaviour
             }
         }
     }
-
+  
     public void ResumeGame()
     {
         pauseMenuUI.SetActive(false);
+        optionsManager.ActivarBotonesVentanas();
         Time.timeScale = 1f;
 
         // Reanuda todos los sonidos
@@ -47,6 +50,8 @@ public class PauseManager : MonoBehaviour
 
     public void PauseGame()
     {
+        optionsManager.CerrarTodosLosPaneles();
+        optionsManager.DesactivarBotonesVentanas();
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
 

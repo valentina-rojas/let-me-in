@@ -9,6 +9,7 @@ public class AggressiveNPCs : MonoBehaviour
     public TextMeshProUGUI timerText;
     public s_GameManager gameManager;
     public CharactersManager charactersManager;
+    public StressBar stressBar;
     public GameObject panelPerdiste;
     public GameObject seguridadPrefab;
     public Transform spawnPointSeguridad;
@@ -26,7 +27,7 @@ public class AggressiveNPCs : MonoBehaviour
     public AudioSource escobaSeguridad;
     public AudioSource golpe;
 
-   
+
     public GameObject[] vidriosRotos;  // Array para múltiples filtros de vidrio roto
     private int vidrioActual = 0;      // Índice para saber qué filtro activar
 
@@ -37,9 +38,9 @@ public class AggressiveNPCs : MonoBehaviour
 
     public float tiempoBaseTemporizador;
 
-    public Transform cameraTransform; 
-    public float shakeIntensity = 0.1f; 
-    public float shakeDuration = 3f;  
+    public Transform cameraTransform;
+    public float shakeIntensity = 0.1f;
+    public float shakeDuration = 3f;
     private Vector3 originalCameraPosition;
     private bool isShaking = false;
     private Coroutine shakeCoroutine;
@@ -59,11 +60,11 @@ public class AggressiveNPCs : MonoBehaviour
 
         if (gameManager.NivelActual == 2)
         {
-            tiempoBaseTemporizador = 3f; 
+            tiempoBaseTemporizador = 3f;
         }
         else
         {
-            tiempoBaseTemporizador = 5f; 
+            tiempoBaseTemporizador = 5f;
         }
     }
 
@@ -128,13 +129,13 @@ public class AggressiveNPCs : MonoBehaviour
         StartTimer(tiempoBaseTemporizador);
         Peligro();
 
-       
+
         if (cameraTransform != null)
         {
             ShakeCamera();
         }
 
-       // Activar un nuevo filtro de vidrio roto
+        // Activar un nuevo filtro de vidrio roto
         if (vidriosRotos.Length > 0)
         {
 
@@ -156,14 +157,14 @@ public class AggressiveNPCs : MonoBehaviour
         ActualizarTextoTemporizador();
     }
 
- void ActualizarTextoTemporizador()
-{
-    if (timerText != null)
+    void ActualizarTextoTemporizador()
     {
-        int tiempoEntero = Mathf.FloorToInt(tiempoRestante); 
-        timerText.text = tiempoEntero.ToString();  
+        if (timerText != null)
+        {
+            int tiempoEntero = Mathf.FloorToInt(tiempoRestante);
+            timerText.text = tiempoEntero.ToString();
+        }
     }
-}
 
 
     void FinTemporizador()
@@ -221,7 +222,7 @@ public class AggressiveNPCs : MonoBehaviour
         {
             StopCoroutine(shakeCoroutine);
             shakeCoroutine = null;
-            cameraTransform.position = originalCameraPosition; 
+            cameraTransform.position = originalCameraPosition;
             isShaking = false;
         }
 
@@ -252,7 +253,7 @@ public class AggressiveNPCs : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
 
-        StartCoroutine(gameManager.AbrirPuerta(10f));
+        StartCoroutine(gameManager.AbrirPuerta(20f));
 
 
         seguridadInstance = Instantiate(seguridadPrefab, spawnPointSeguridad.position, Quaternion.identity);
@@ -304,6 +305,27 @@ public class AggressiveNPCs : MonoBehaviour
         }
 
 
+        golpe.Play();
+
+        stressBar.ActualizarEstres(1);
+
+        // Asegúrate de obtener la escala actual del personaje
+        Vector3 escalaOriginal = seguridadInstance.transform.localScale;
+
+        // Si el personaje está mirando hacia la izquierda (eje X positivo), invierte el valor
+        if (escalaOriginal.x > 0)
+        {
+            seguridadInstance.transform.localScale = new Vector3(-escalaOriginal.x, escalaOriginal.y, escalaOriginal.z);
+        }
+
+        // Mover al personaje de seguridad de vuelta a su punto de spawn
+        while (Vector3.Distance(seguridadInstance.transform.position, spawnPointSeguridad.position) > 0.1f)
+        {
+            seguridadInstance.transform.position = Vector3.MoveTowards(seguridadInstance.transform.position, spawnPointSeguridad.position, Time.deltaTime * velocidadSeguridad);
+            yield return null;
+        }
+
+        // Destruir al personaje de seguridad después de llegar al spawn point
         if (seguridadInstance != null)
         {
             Destroy(seguridadInstance);
@@ -311,7 +333,6 @@ public class AggressiveNPCs : MonoBehaviour
 
         pasosSeguridad.Stop();
         escobaSeguridad.Stop();
-        golpe.Play();
 
         yield return new WaitForSeconds(1f);
         charactersManager.AparecerSiguientePersonaje();

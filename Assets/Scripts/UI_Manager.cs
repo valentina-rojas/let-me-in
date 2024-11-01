@@ -38,6 +38,7 @@ public class UI_Manager : MonoBehaviour
     public s_GameManager gameManager;
     public CharactersManager charactersManager;
     public OptionsManager optionsManager;
+    public InteractableObjects interactableObjects;
 
     public AudioSource audioTecleo;
 
@@ -55,7 +56,7 @@ public class UI_Manager : MonoBehaviour
         dialogueManager.panelDialogo.gameObject.SetActive(false);
         dialogueManager.panelRespuestas.gameObject.SetActive(false);
 
-
+        interactableObjects.DesactivarEventTriggers();
 
         int nivelActual = gameManager.NivelActual - 1; // Si el nivel empieza en 1, resta 1 para usarlo como índice
 
@@ -69,7 +70,7 @@ public class UI_Manager : MonoBehaviour
         }
 
         panelReporte.gameObject.SetActive(false);
-        panelPerdiste.gameObject.SetActive(false);
+        // panelPerdiste.gameObject.SetActive(false);
         botonSiguienteNivel.gameObject.SetActive(false);
 
         panelInicioDia.gameObject.SetActive(true);
@@ -92,70 +93,62 @@ public class UI_Manager : MonoBehaviour
         else
         {
             IniciarJuego();
+            interactableObjects.ActivarEventTriggers();
         }
     }
 
-    public IEnumerator MostrarPanelInicioDiaCoroutine(string mensaje)
+  public IEnumerator MostrarPanelInicioDiaCoroutine(string mensaje)
+{
+    textoInicioDia.text = "";
+    audioTecleo.Play();
+    tiempoUltimaActualizacion = Time.time;
+
+    // Mostrar el texto letra por letra
+    for (int i = 0; i < mensaje.Length; i++)
     {
-        textoInicioDia.text = "";
-        string mensajeConCursor = mensaje + "_";
+        textoInicioDia.text += mensaje[i]; // Añadir letra
+        textoInicioDia.text += "_"; // Añadir el cursor
 
-        audioTecleo.Play();
-        tiempoUltimaActualizacion = Time.time;
-
-
-        while (textoInicioDia.text.Length < mensaje.Length)
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                textoInicioDia.text = mensaje;
-                break;
-            }
-
-            if (Time.time - tiempoUltimaActualizacion >= intervaloCursor)
-            {
-                cursorVisible = !cursorVisible;
-                tiempoUltimaActualizacion = Time.time;
-            }
-
-
-            string textoParcial = mensaje.Substring(0, textoInicioDia.text.Length);
-            if (cursorVisible)
-            {
-                textoParcial += "_";
-            }
-            textoInicioDia.text = textoParcial;
-
-            yield return new WaitForSeconds(velocidadTexto);
-        }
-
-        textoInicioDia.text = mensaje;
-        audioTecleo.Stop();
-
-        while (true)
-        {
-            if (Time.time - tiempoUltimaActualizacion >= intervaloCursor)
-            {
-                cursorVisible = !cursorVisible;
-                tiempoUltimaActualizacion = Time.time;
-            }
-
-
-            string textoConCursorTitilante = mensaje;
-            if (cursorVisible)
-            {
-                textoConCursorTitilante += "_";
-            }
-            textoInicioDia.text = textoConCursorTitilante;
-
-            yield return null;
-        }
-
-        yield return new WaitForSeconds(duracionPanel);
-        panelInicioDia.gameObject.SetActive(false);
-
-        PanelInicioDesactivado?.Invoke();
+        yield return new WaitForSeconds(velocidadTexto);
+        textoInicioDia.text = textoInicioDia.text.TrimEnd('_'); // Quitar el cursor en la siguiente iteración
     }
+
+    // Finalizar texto
+    textoInicioDia.text = mensaje;
+
+    audioTecleo.Stop();
+
+    // Mostrar el texto completo con el cursor titilante
+    while (true)
+    {
+        if (Time.time - tiempoUltimaActualizacion >= intervaloCursor)
+        {
+            cursorVisible = !cursorVisible;
+            tiempoUltimaActualizacion = Time.time;
+        }
+
+        string textoConCursorTitilante = mensaje;
+        if (cursorVisible)
+        {
+            textoConCursorTitilante += "_";
+        }
+        textoInicioDia.text = textoConCursorTitilante;
+
+        yield return null; // Esperar al siguiente frame
+
+        // Salir del bucle cuando se haga clic
+        if (Input.GetMouseButtonDown(0))
+        {
+            break;
+        }
+    }
+
+    // Esperar antes de desactivar el panel
+    yield return new WaitForSeconds(duracionPanel);
+    panelInicioDia.gameObject.SetActive(false);
+
+    PanelInicioDesactivado?.Invoke();
+}
 
 
 
@@ -169,7 +162,8 @@ public class UI_Manager : MonoBehaviour
 
         audioTecleo.Stop();
         panelInicioDia.gameObject.SetActive(false);
-        optionsManager.botonOpciones.interactable = true;
+
+        optionsManager.ActivarBotonesVentanas();
 
         //llamar iniico juego
         PanelInicioDesactivado?.Invoke();
@@ -186,31 +180,40 @@ public class UI_Manager : MonoBehaviour
 
     private IEnumerator MostrarIndicacionesSecuencia()
     {
-        RectTransform[] indicaciones = { indicaciones1, indicaciones2, indicaciones3, indicaciones4, indicaciones5 };
 
-        foreach (var indicacion in indicaciones)
-        {
-            indicacion.gameObject.SetActive(true);
-            float tiempoRestante = duracionIndicaciones;
+        optionsManager.panelAyuda.gameObject.SetActive(true);
 
-            omitirIndicaciones.gameObject.SetActive(true);
+        /*  RectTransform[] indicaciones = { indicaciones1, indicaciones2, indicaciones3, indicaciones4, indicaciones5 };
 
-            while (tiempoRestante > 0)
-            {
-                if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    break; // Saltar a la siguiente indicación
-                }
-                tiempoRestante -= Time.deltaTime;
-                yield return null;
-            }
+          foreach (var indicacion in indicaciones)
+          {
+              indicacion.gameObject.SetActive(true);
+              float tiempoRestante = duracionIndicaciones;
 
-            indicacion.gameObject.SetActive(false);
-            omitirIndicaciones.gameObject.SetActive(false);
-        }
+              omitirIndicaciones.gameObject.SetActive(true);
+
+              while (tiempoRestante > 0)
+              {
+                  if (Input.GetKeyDown(KeyCode.Space))
+                  {
+                      break; // Saltar a la siguiente indicación
+                  }
+                  tiempoRestante -= Time.deltaTime;
+                  yield return null;
+              }
+
+              indicacion.gameObject.SetActive(false);
+              omitirIndicaciones.gameObject.SetActive(false);
+          }*/
+
+         yield return new WaitUntil(() => !optionsManager.panelAyuda.gameObject.activeSelf);
+
 
         // Iniciar el juego después de mostrar todas las indicaciones
         IniciarJuego();
+        interactableObjects.ActivarEventTriggers();
+
+        yield break;
     }
 
 
@@ -219,6 +222,9 @@ public class UI_Manager : MonoBehaviour
     {
         panelReporte.gameObject.SetActive(true);
         // botonSiguienteNivel.gameObject.SetActive(true);
+
+        optionsManager.DesactivarBotonesVentanas();
+        interactableObjects.DesactivarEventTriggers();
 
         int diaActual = gameManager.NivelActual;
         string tituloReporte = $"Reporte Día {diaActual}\n";
@@ -232,7 +238,7 @@ public class UI_Manager : MonoBehaviour
 
     public void PanelReporte()
     {
-        panelPerdiste.gameObject.SetActive(true);
+        //panelPerdiste.gameObject.SetActive(true);
     }
 
 

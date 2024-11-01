@@ -19,23 +19,30 @@ public class RadioManager : MonoBehaviour
     "Se detectó otro brote de violencia dentro del búnker, ¡Estamos en estado de emergencia!"
 };
     public float velocidadEscritura = 0.05f;
-    public float duracionMensaje = 3f;
+    public float duracionMensaje = 5f;
 
     private bool estaEscribiendo = false;
 
     public Slider barraContaminacion;
-    public float maxContaminacion = 5f;  // Máximo nivel de contaminación
+    public float maxContaminacion = 3f;  // Máximo nivel de contaminación
     private float nivelContaminacion = 0f;  // Nivel actual de contaminación
-    public Image fillBarImage; 
+    public Image fillBarImage;
 
-     public Color colorAmarillo = Color.yellow;
+    public Color colorAmarillo = Color.yellow;
     public Color colorNaranja = new Color(1f, 0.5f, 0f); // Color naranja
     public Color colorRojo = Color.red;
 
+    public RectTransform panelPerdiste;
 
     public Animator radioAnimator;
 
     private int indiceMensajeActual = 0;
+
+    public s_GameManager gameManager;
+    public CharactersManager charactersManager;
+
+     public AudioSource loadingBar;
+      public AudioSource sonidoEstatica;
 
 
     void Start()
@@ -47,7 +54,7 @@ public class RadioManager : MonoBehaviour
             barraContaminacion.value = nivelContaminacion;
         }
 
-    
+
     }
 
     public void ActivarDisturbios()
@@ -64,9 +71,13 @@ public class RadioManager : MonoBehaviour
 
         if (radioAnimator != null)
         {
-            radioAnimator.SetTrigger("ActivarRadio");  
+            radioAnimator.SetTrigger("ActivarRadio");
+            Debug.Log("Animación ActivarRadio desencadenada");
         }
-
+        else
+        {
+            Debug.LogWarning("radioAnimator es nulo");
+        }
         ruidosDisturbios.Play();
         audioSeguridad.Play();
 
@@ -92,12 +103,18 @@ public class RadioManager : MonoBehaviour
         ruidosDisturbios.Stop();
 
 
-  if (radioAnimator != null)
-    {
-        radioAnimator.SetTrigger("IdleRadio"); // Asumiendo que tienes un estado 'idle' en tu animación
-    }
+        if (radioAnimator != null)
+        {
+            radioAnimator.SetTrigger("IdleRadio"); // Asumiendo que tienes un estado 'idle' en tu animación
+        }
 
         indiceMensajeActual = (indiceMensajeActual + 1) % mensajesDisturbios.Count;
+
+
+        yield return new WaitForSeconds(2f);
+
+        gameManager.NextCharacter();
+
     }
 
 
@@ -130,33 +147,68 @@ public class RadioManager : MonoBehaviour
         if (barraContaminacion != null)
         {
             barraContaminacion.value = nivelContaminacion;
-              ActualizarColorBarra(); 
+            ActualizarColorBarra();
+            loadingBar.Play();
         }
 
         // Puedes agregar lógica adicional si el nivel de contaminación llega al máximo (perder el juego, etc.)
         if (nivelContaminacion >= maxContaminacion)
         {
+
+
             Debug.Log("¡El búnker está completamente contaminado! Has perdido.");
             // Lógica para manejar la pérdida del juego
         }
     }
 
 
-     private void ActualizarColorBarra()
+    private void ActualizarColorBarra()
     {
         float porcentajeContaminacion = nivelContaminacion / maxContaminacion;
 
-        if (porcentajeContaminacion <= 0.5f)
+        if (porcentajeContaminacion <= 0.34f)
         {
-            fillBarImage.color = colorAmarillo;  // Hasta 50% amarillo
+            fillBarImage.color = colorAmarillo;  // Hasta 33% amarillo
         }
-        else if (porcentajeContaminacion <= 0.8f)
+        else if (porcentajeContaminacion <= 0.67f)
         {
-            fillBarImage.color = colorNaranja;  // Entre 50% y 80% naranja
+            fillBarImage.color = colorNaranja;  // Entre 33% y 66% naranja
         }
         else
         {
-            fillBarImage.color = colorRojo;  // Más del 80% rojo
+            fillBarImage.color = colorRojo;  // Más del 66% rojo
         }
     }
+
+
+    private void Perder()
+    {
+        CharactersManager charactersManager = FindObjectOfType<CharactersManager>();
+        if (charactersManager != null)
+        {
+            charactersManager.DetenerPersonajes();  // Detener la aparición de personajes
+        }
+
+
+        panelPerdiste.gameObject.SetActive(true);
+    }
+
+
+    public void PantallaRadio()
+    {
+
+        StartCoroutine(ActivarPantallaRadio());
+
+    }
+
+    public IEnumerator ActivarPantallaRadio()
+    {
+        radioAnimator.SetTrigger("ActivarRadio");
+        sonidoEstatica.Play();
+        yield return new WaitForSeconds(2f);
+        sonidoEstatica.Stop();
+        radioAnimator.SetTrigger("IdleRadio");
+    }
+
+
 }

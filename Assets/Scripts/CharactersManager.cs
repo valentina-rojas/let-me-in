@@ -16,9 +16,15 @@ public class Character
     public CharacterState estado;
     public List<string> dialogos;
     public List<string> respuestas;
+
+    public string[] dialogosIngreso;  // Diálogo cuando el personaje es aceptado
+    public string[] dialogosRechazo;
+
     public GameObject prefab;
     public int nivel;
     public bool esAgresivo;
+
+    [HideInInspector] public Animator animator;
 }
 
 public class CharactersManager : MonoBehaviour
@@ -49,14 +55,21 @@ public class CharactersManager : MonoBehaviour
 
     public TextMeshProUGUI contadorPersonas;
 
+    private bool juegoTerminado = false;
+
+
+
     void Start()
     {
+
         ConfigurarPersonajesParaNivel(gameManager.NivelActual);
     }
 
-    void OnDestroy()
+    public void DetenerPersonajes()
     {
-
+        juegoTerminado = true;  // Marcar que el juego ha terminado
+        StopAllCoroutines();    // Detener todos los coroutines activos en este script
+        Debug.Log("Todos los coroutines han sido detenidos, no se aparecerán más personajes.");
     }
 
     public void ConfigurarPersonajesParaNivel(int nivel)
@@ -97,9 +110,28 @@ public class CharactersManager : MonoBehaviour
         }
     }
 
+    public Character GetCurrentCharacter()
+    {
+        if (charactersForCurrentLevel.Count > 0)
+        {
+            return charactersForCurrentLevel[index - 1]; // Retorna el personaje actual basado en el índice
+        }
+        Debug.LogError("No hay personajes disponibles.");
+        return null;
+    }
+
 
     public void AparecerSiguientePersonaje()
     {
+
+
+        if (juegoTerminado)
+        {
+            Debug.Log("El juego ha terminado. No se aparecerán más personajes.");
+            return; // Detener si el juego ha terminado
+        }
+
+
         StartCoroutine(AparecerConRetraso());
 
         darkeningLayer.OnCharacterSpawned();
@@ -107,7 +139,7 @@ public class CharactersManager : MonoBehaviour
 
     private IEnumerator AparecerConRetraso()
     {
-        LimpiarPersonajes();
+        // LimpiarPersonajes();
 
         // dialogueManager.botonIngreso.interactable = false;
         // dialogueManager.botonRechazo.interactable = false;
@@ -120,6 +152,18 @@ public class CharactersManager : MonoBehaviour
         Debug.Log("Esperando antes de aparecer el siguiente personaje...");
         yield return new WaitForSeconds(tiempoDeEspera);
 
+
+
+        // Verificar si el juego ha terminado antes de continuar
+        if (juegoTerminado)
+        {
+            Debug.Log("El juego ha terminado durante el retraso. No se aparecerán más personajes.");
+            yield break;  // Detener el Coroutine si el juego ha terminado
+        }
+
+
+
+
         Debug.Log("Tiempo de espera completado. Apareciendo el siguiente personaje.");
 
         if (index < charactersForCurrentLevel.Count)
@@ -130,7 +174,14 @@ public class CharactersManager : MonoBehaviour
             //GameObject personajePrefab = personajesPrefabs[Random.Range(0, personajesPrefabs.Length)];
             GameObject nuevoPersonaje = Instantiate(character.prefab, spawnPoint.position, Quaternion.identity);
 
+
+            character.animator = nuevoPersonaje.GetComponent<Animator>();  // Obtener el Animator del prefab
+
+
             personajesEnPantalla.Add(nuevoPersonaje);
+
+
+
             StartCoroutine(MoverPersonajeAlCentro(nuevoPersonaje, centerPoint.position, index));
             index++;
 
@@ -140,7 +191,7 @@ public class CharactersManager : MonoBehaviour
                   StartCoroutine(OscurecerLuzGradualmente());
               }*/
 
-              contadorPersonas.text = (charactersForCurrentLevel.Count - index).ToString();
+            contadorPersonas.text = (charactersForCurrentLevel.Count - index).ToString();
 
         }
         else
@@ -270,7 +321,9 @@ public class CharactersManager : MonoBehaviour
         {
             Character character = charactersForCurrentLevel[characterIndex];
             string[] dialogos = character.dialogos.ToArray();
-            dialogueManager.ComenzarDialogo(dialogos, character.respuestas, character.esAgresivo);
+            dialogueManager.ComenzarDialogo(dialogos, character.respuestas, character.esAgresivo, false);
+
+            //   dialogueManager.IniciarDialogo();
         }
         else
         {
@@ -335,6 +388,95 @@ public class CharactersManager : MonoBehaviour
         }
         return null;
     }
+
+    public void ActivarAnimacion(Character character, string trigger)
+    {
+        if (character.animator != null)
+        {
+            character.animator.SetTrigger(trigger);
+        }
+        else
+        {
+            Debug.LogWarning($"Animator no encontrado para el personaje {character.nombre}");
+        }
+    }
+
+
+    public void Hablando()
+    {
+        Character character = GetCurrentCharacter();
+        if (character != null)
+        {
+            ActivarAnimacion(character, "triggerTalk");
+        }
+        else
+        {
+            Debug.LogWarning("No hay personaje actual para hablar.");
+        }
+    }
+
+
+
+    public void TerminoHablar()
+    {
+        Character character = GetCurrentCharacter();
+
+
+
+        if (character != null)
+        {
+            ActivarAnimacion(character, "triggerBlink");
+        }
+        else
+        {
+            Debug.LogWarning("No hay personaje actual para hablar.");
+        }
+    }
+
+
+
+ public void Reaccion()
+    {
+        Character character = GetCurrentCharacter();
+
+
+
+        if (character != null)
+        {
+            ActivarAnimacion(character, "triggerReaction");
+        }
+        else
+        {
+            Debug.LogWarning("No hay personaje actual para hablar.");
+        }
+    }
+
+
+
+public void ActivarReaccionIngreso()
+{
+
+     Character character = GetCurrentCharacter();
+
+  if (character != null)
+        {
+            ActivarAnimacion(character, "reaccionIngreso");
+        }
+   
+    
+}
+
+public void ActivarReaccionRechazo()
+{
+
+       Character character = GetCurrentCharacter();
+
+  if (character != null)
+        {
+           ActivarAnimacion(character, "reaccionRechazo");
+        }
+   
+}
 
 
 }
