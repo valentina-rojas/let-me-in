@@ -13,6 +13,7 @@ public class s_GameManager : MonoBehaviour
     public RadioManager radioManager;
     public CheckCondition checkCondition;
     public StressBar stressBar;
+    public RechazoBarraManager rechazoBarraManager;
 
     public string[] mensajesInicioDia;
 
@@ -22,7 +23,7 @@ public class s_GameManager : MonoBehaviour
     public int enfermosRechazados;
     public int strikes;
 
-      public TextMeshProUGUI textoStrikes;
+    public TextMeshProUGUI textoStrikes;
 
     public GameObject Musica;
     public AudioSource backgroundMusic;
@@ -91,27 +92,31 @@ public class s_GameManager : MonoBehaviour
         // Obtener el diálogo de ingreso del personaje actual y mostrarlo
         string[] dialogoIngreso = charactersManager.GetCharacter(charactersManager.CurrentCharacterIndex).dialogosIngreso;
 
+        charactersManager.ActivarReaccionIngreso();
+
         dialogueManager.ComenzarDialogo(dialogoIngreso, null, false, true);
 
-        yield return new WaitForSeconds(3f); // Esperar 2 segundos
+
+        yield return new WaitForSeconds(5f); // Esperar 2 segundos
 
         dialogueManager.OcultarDialogo();
 
         yield return new WaitUntil(() => dialogueManager.DialogoEstaOculto());
 
-        charactersManager.MoverPersonajeAlPunto(charactersManager.exitPoint.position);
+       // charactersManager.TerminoHablar();
 
+        charactersManager.MoverPersonajeAlPunto(charactersManager.exitPoint.position);
         StartCoroutine(AbrirPuerta());
 
         // Verificar si el personaje ingresado es enfermo
         Character personajeActual = charactersManager.GetCharacter(charactersManager.CurrentCharacterIndex);
 
-        
+
         if (personajeActual.estado == CharacterState.Enfermo)
         {
             // Si es enfermo, activar disturbios
             StartCoroutine(ProximoPersonajeTrasDisturbios());
-             stressBar.ActualizarEstres(1);
+            stressBar.ActualizarEstres(1);
             ActualizarTextoStrikes();
         }
         else
@@ -135,9 +140,11 @@ public class s_GameManager : MonoBehaviour
         // Obtener el diálogo de rechazo del personaje actual y mostrarlo
         string[] dialogoRechazo = charactersManager.GetCharacter(charactersManager.CurrentCharacterIndex).dialogosRechazo;
 
+        charactersManager.ActivarReaccionRechazo();
+
         dialogueManager.ComenzarDialogo(dialogoRechazo, null, false, true);
 
-        yield return new WaitForSeconds(3f); // Esperar 2 segundos
+        yield return new WaitForSeconds(5f); // Esperar 2 segundos
 
         dialogueManager.OcultarDialogo();
 
@@ -146,15 +153,15 @@ public class s_GameManager : MonoBehaviour
         charactersManager.MoverPersonajeAlPunto(charactersManager.spawnPoint.position);
 
 
- Character personajeActual = charactersManager.GetCharacter(charactersManager.CurrentCharacterIndex);
-     if (personajeActual.estado == CharacterState.Sano)
+        Character personajeActual = charactersManager.GetCharacter(charactersManager.CurrentCharacterIndex);
+        if (personajeActual.estado == CharacterState.Sano)
         {
-            ActualizarTextoStrikes();
+            rechazoBarraManager.RechazarSano();
         }
-      
-            NextCharacter();
-     
 
+        NextCharacter();
+
+  
 
         yield break;
     }
@@ -215,7 +222,7 @@ public class s_GameManager : MonoBehaviour
                 {
                     Debug.Log("¡Elección correcta! Personaje sano ingresado.");
                     sanosIngresados++;
-                
+
                 }
                 else if (personajeActual.estado == CharacterState.Enfermo)
                 {
@@ -236,7 +243,7 @@ public class s_GameManager : MonoBehaviour
                 {
                     Debug.Log("¡Elección correcta! Personaje enfermo rechazado.");
                     enfermosRechazados++;
-               
+
                 }
             }
         }
@@ -269,7 +276,7 @@ public class s_GameManager : MonoBehaviour
         {
             uiManager.mensajeReporte.text = "¡Buen trabajo!";
 
-            //modificacion temporal para que no apse al nivel 3
+            //modificacion temporal para que no pase al nivel 3
             if (NivelActual == 1)
             {
                 uiManager.botonSiguienteNivel.gameObject.SetActive(true);
@@ -282,13 +289,13 @@ public class s_GameManager : MonoBehaviour
             }
 
         }
-        else if ((enfermosIngresados >= 1 && enfermosIngresados <= 3) || (sanosRechazados >= 1 && sanosRechazados <= 3))
+        else 
         {
             uiManager.mensajeReporte.text = "Más cuidado la próxima vez...";
             // GameData.Faltas++;
 
 
-            //modificacion temporal para que no apse al nivel 3
+            //modificacion temporal para que no pase al nivel 3
             if (NivelActual == 1)
             {
                 uiManager.botonSiguienteNivel.gameObject.SetActive(true);
@@ -299,15 +306,10 @@ public class s_GameManager : MonoBehaviour
 
                 uiManager.botonGanaste.gameObject.SetActive(true);
             }
-
         }
-        else if (enfermosIngresados > 3 || sanosRechazados > 3)
-        {
-            uiManager.mensajeReporte.text = "Fuiste retirado del puesto de trabajo.";
-
-            uiManager.botonPerdiste.gameObject.SetActive(true);
-        }
+    
     }
+
 
     public void OnBotonSiguienteNivel()
     {
@@ -331,11 +333,11 @@ public class s_GameManager : MonoBehaviour
     }
 
 
-       public void ActualizarTextoStrikes()
+    public void ActualizarTextoStrikes()
     {
-       
-            textoStrikes.text = "FALTAS: " + strikes;
-       
+
+        textoStrikes.text = "FALTAS: " + strikes;
+
     }
 
 
