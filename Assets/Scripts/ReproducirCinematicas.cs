@@ -10,33 +10,39 @@ public class ReproducirCinematicas : MonoBehaviour
     public float duracionFadeOut = 2f;
     public Image pantallaNegra;
     public float duracionFadePantalla = 2f;
+    public AudioSource desplegarpestañas;
 
 
 
     public void CinematicaGanar()
     {
+      
         ReproducirCinematica("CinematicaGanar");
     }
 
 
   public void CinematicaPerdiste()
     {
+       
         ReproducirCinematica("CinematicaPerdiste");
     }
 
   public void CinematicaPerderDisturbios()
     {
+      
         ReproducirCinematica("CinematicaPerderDisturbios");
     }
 
 
   public void CinematicaRenunciar()
     {
+        
         ReproducirCinematica("CinematicaRenunciar");
     }
 
     public void ReproducirCinematica(string nombreCinematica)
     {
+        desplegarpestañas.Play();
         StartCoroutine(CerrarCinematicaCoroutine(nombreCinematica));
     }
 

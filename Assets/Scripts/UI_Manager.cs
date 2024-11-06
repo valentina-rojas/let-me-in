@@ -41,6 +41,7 @@ public class UI_Manager : MonoBehaviour
     public InteractableObjects interactableObjects;
 
     public AudioSource audioTecleo;
+    public AudioSource desplegarpestañas;
 
     private Coroutine panelInicioDiaCoroutine;
     private bool cursorVisible = true;
@@ -154,6 +155,7 @@ public class UI_Manager : MonoBehaviour
 
     public void CerrarPanelInicioDia()
     {
+        desplegarpestañas.Play();
         if (panelInicioDiaCoroutine != null)
         {
             StopCoroutine(panelInicioDiaCoroutine);

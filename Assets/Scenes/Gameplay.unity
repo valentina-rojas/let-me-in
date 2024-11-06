@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731725, g: 0.13414745, b: 0.12107873, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -405,6 +405,7 @@ MonoBehaviour:
   optionsManager: {fileID: 0}
   interactableObjects: {fileID: 0}
   audioTecleo: {fileID: 0}
+  "desplegarpesta\xF1as": {fileID: 0}
   imagenInicioDia: {fileID: 0}
   imagenesNiveles: []
 --- !u!114 &17082862
@@ -487,7 +488,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 3589235375562402397, guid: d877e5208d19e2e448be4224230f5ecf, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 8e1fa3fac54a0d54b93a8e4ca53224a9, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 57bc3c74ef50bf640b3bc787f6405ea7, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -495,7 +496,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 191
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -4427,6 +4428,7 @@ MonoBehaviour:
   duracionFadeOut: 2
   pantallaNegra: {fileID: 1146401320}
   duracionFadePantalla: 2
+  "desplegarpesta\xF1as": {fileID: 1128534294}
 --- !u!1 &324602590
 GameObject:
   m_ObjectHideFlags: 0
@@ -8115,6 +8117,7 @@ MonoBehaviour:
   optionsManager: {fileID: 0}
   interactableObjects: {fileID: 0}
   audioTecleo: {fileID: 0}
+  "desplegarpesta\xF1as": {fileID: 0}
   imagenInicioDia: {fileID: 0}
   imagenesNiveles: []
 --- !u!114 &607860684
@@ -9091,6 +9094,7 @@ MonoBehaviour:
   nextDialogo: {fileID: 0}
   nextRespuesta: {fileID: 0}
   puedeAvanzarDialogo: 1
+  "desplegarpesta\xF1as": {fileID: 0}
 --- !u!1 &712981492
 GameObject:
   m_ObjectHideFlags: 0
@@ -13148,6 +13152,7 @@ MonoBehaviour:
   nextDialogo: {fileID: 0}
   nextRespuesta: {fileID: 0}
   puedeAvanzarDialogo: 1
+  "desplegarpesta\xF1as": {fileID: 0}
 --- !u!114 &992450832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13235,6 +13240,7 @@ Transform:
   - {fileID: 20543993}
   - {fileID: 970531497}
   - {fileID: 1385868423}
+  - {fileID: 1128534293}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1005778473
@@ -14850,6 +14856,134 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ffc1384ecc2fa14e9d1c51e18ed4c2e, type: 3}
+--- !u!1 &1128534292
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1128534293}
+  - component: {fileID: 1128534294}
+  m_Layer: 0
+  m_Name: "desplegar pesta\xF1as (mp3cut.net)"
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1128534293
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1128534292}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -10.087121, y: -1.915194, z: -3.6926444}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1004175586}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1128534294
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1128534292}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 3589235375562402397, guid: d877e5208d19e2e448be4224230f5ecf, type: 2}
+  m_audioClip: {fileID: 8300000, guid: b968e08a58ae2b9478be045483dc921a, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1135084271
 GameObject:
   m_ObjectHideFlags: 0
@@ -15568,7 +15702,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 3589235375562402397, guid: d877e5208d19e2e448be4224230f5ecf, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 2c0271093b25c7345b8395d3bdff63d8, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 2b6125c61dea15640b7e307af0ea8b92, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -18231,6 +18365,7 @@ MonoBehaviour:
   nextDialogo: {fileID: 0}
   nextRespuesta: {fileID: 0}
   puedeAvanzarDialogo: 1
+  "desplegarpesta\xF1as": {fileID: 0}
 --- !u!114 &1412460606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18677,6 +18812,7 @@ MonoBehaviour:
   optionsManager: {fileID: 0}
   interactableObjects: {fileID: 0}
   audioTecleo: {fileID: 0}
+  "desplegarpesta\xF1as": {fileID: 0}
   imagenInicioDia: {fileID: 0}
   imagenesNiveles: []
 --- !u!114 &1493280884
@@ -19091,6 +19227,7 @@ MonoBehaviour:
   optionsManager: {fileID: 0}
   interactableObjects: {fileID: 0}
   audioTecleo: {fileID: 0}
+  "desplegarpesta\xF1as": {fileID: 0}
   imagenInicioDia: {fileID: 0}
   imagenesNiveles: []
 --- !u!114 &1515895188
@@ -19287,6 +19424,7 @@ MonoBehaviour:
   botonSintomas: {fileID: 212331604}
   interactableObjects: {fileID: 1825495188}
   zoomManager: {fileID: 944450476}
+  "desplegarpesta\xF1as": {fileID: 1128534294}
 --- !u!1001 &1540513120
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20924,6 +21062,7 @@ MonoBehaviour:
   optionsManager: {fileID: 1528108909}
   interactableObjects: {fileID: 1825495188}
   audioTecleo: {fileID: 152417382}
+  "desplegarpesta\xF1as": {fileID: 1128534294}
   imagenInicioDia: {fileID: 472027197}
   imagenesNiveles:
   - {fileID: 21300000, guid: 24a9d259e2fbb514c824368df51497d7, type: 3}
@@ -21060,6 +21199,7 @@ MonoBehaviour:
   optionsManager: {fileID: 0}
   interactableObjects: {fileID: 0}
   audioTecleo: {fileID: 0}
+  "desplegarpesta\xF1as": {fileID: 0}
   imagenInicioDia: {fileID: 0}
   imagenesNiveles: []
 --- !u!1 &1727551767
@@ -22190,7 +22330,6 @@ GameObject:
   - component: {fileID: 1877490139}
   - component: {fileID: 1877490141}
   - component: {fileID: 1877490140}
-  - component: {fileID: 1877490142}
   m_Layer: 0
   m_Name: nubes2
   m_TagString: Untagged
@@ -22284,102 +22423,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!82 &1877490142
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1877490138}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 64209f10eb4784b4ea4b23f57be655e2, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!1 &1888796263
 GameObject:
   m_ObjectHideFlags: 0
@@ -22506,7 +22549,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 3589235375562402397, guid: d877e5208d19e2e448be4224230f5ecf, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 77821a1b38e050744abfa604a01423d6, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 7bc850b45b823c74cbeb6e2d40415e1b, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -24399,7 +24442,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -859.99994, y: 318.33}
+  m_AnchoredPosition: {x: -860, y: 318.33}
   m_SizeDelta: {x: -1741.51, y: -636.65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2023095411
@@ -24785,6 +24828,7 @@ MonoBehaviour:
   optionsManager: {fileID: 0}
   interactableObjects: {fileID: 0}
   audioTecleo: {fileID: 0}
+  "desplegarpesta\xF1as": {fileID: 0}
   imagenInicioDia: {fileID: 0}
   imagenesNiveles: []
 --- !u!114 &2067811278
@@ -24876,6 +24920,7 @@ MonoBehaviour:
   nextDialogo: {fileID: 181519034}
   nextRespuesta: {fileID: 307729110}
   puedeAvanzarDialogo: 1
+  "desplegarpesta\xF1as": {fileID: 1128534294}
 --- !u!4 &2085731923
 Transform:
   m_ObjectHideFlags: 0
