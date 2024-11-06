@@ -8,7 +8,7 @@ public class ReproducirCinematicas : MonoBehaviour
 {
 
     public float duracionFadeOut = 2f;
-    public Image pantallaNegra;
+      public SpriteRenderer pantallaNegra; 
     public float duracionFadePantalla = 2f;
     public AudioSource desplegarpestañas;
 
@@ -53,7 +53,7 @@ public class ReproducirCinematicas : MonoBehaviour
         GameData.NivelActual = 1; 
     }
 
-    private IEnumerator FadeOutPantalla()
+   private IEnumerator FadeOutPantalla()
     {
         pantallaNegra.gameObject.SetActive(true);
 
