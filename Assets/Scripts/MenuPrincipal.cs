@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MenuPrincipal : MonoBehaviour
 {
@@ -43,5 +44,17 @@ public class MenuPrincipal : MonoBehaviour
         UnityEditor.EditorApplication.isPlaying = false;
         #endif
     }
+
+
+public void IniciarJuego()
+{
+    sonidoCerrar.Play();
+    ChangeScene("Cinematica"); 
+}
+
+public void ChangeScene(string name)
+{
+    SceneManager.LoadScene(name);
+}
 
 }
