@@ -54,6 +54,8 @@ public class DialogueManager : MonoBehaviour
     public bool puedeAvanzarDialogo = true;
     private bool esDialogoFinal = false;
 
+    public AudioSource desplegarpestañas;
+
     //private Character character; // Variable para almacenar el personaje
 
 
@@ -390,6 +392,7 @@ public class DialogueManager : MonoBehaviour
 
     public void PanelRespuestasClick()
     {
+         desplegarpestañas.Play();
         nextRespuesta.gameObject.SetActive(false);
         if (mostrandoRespuestas)
         {
@@ -401,7 +404,7 @@ public class DialogueManager : MonoBehaviour
 
     public void PanelDialogoClick()
     {
-
+         desplegarpestañas.Play();
         nextDialogo.gameObject.SetActive(false);
 
         if (mostrandoRespuestas && indexRespuestas < respuestasActuales.Count)
@@ -438,7 +441,7 @@ public class DialogueManager : MonoBehaviour
 
         panelSiguiente.gameObject.SetActive(true);
 
-        if (!medicoUsado)
+        if (!medicoUsado && !esDialogoFinal)
         {
             checkCondition.botonMedico.interactable = true;
         }

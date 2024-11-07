@@ -21,7 +21,7 @@ public class Cinematica : MonoBehaviour
 
     public AudioClip[] sonidos;
     public AudioSource audioSource;
-
+    public AudioSource sonidoCerrar;
 
     private void Start()
     {
@@ -102,6 +102,7 @@ public class Cinematica : MonoBehaviour
 
     public void CerrarCinematica()
     {
+        sonidoCerrar.Play();
         StartCoroutine(CerrarCinematicaCoroutine());
     }
 
