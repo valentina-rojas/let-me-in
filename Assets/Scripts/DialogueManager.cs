@@ -441,7 +441,7 @@ public class DialogueManager : MonoBehaviour
 
         panelSiguiente.gameObject.SetActive(true);
 
-        if (!medicoUsado)
+        if (!medicoUsado && !esDialogoFinal)
         {
             checkCondition.botonMedico.interactable = true;
         }
