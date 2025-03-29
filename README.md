@@ -8,4 +8,4 @@ Let me in es un juego de simulación con toma de decisiones ambientado en un fut
   <img src="./Assets/Resources/Logo/image53.png" alt="Logo del proyecto" width="300">
 </p>
 
-
+Link al juego: https://pawsgames.itch.io/let-me-in
