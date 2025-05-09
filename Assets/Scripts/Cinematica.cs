@@ -102,6 +102,19 @@ public class Cinematica : MonoBehaviour
 
     public void CerrarCinematica()
     {
+        //evento CinSkkiped false
+        Debug.Log("CinSkkiped");
+
+
+        sonidoCerrar.Play();
+        StartCoroutine(CerrarCinematicaCoroutine());
+    }
+
+    public void OmitirCinematica()
+    {
+        //evento CinSkkiped true
+        Debug.Log("CinSkkiped");
+
         sonidoCerrar.Play();
         StartCoroutine(CerrarCinematicaCoroutine());
     }
