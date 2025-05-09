@@ -5,11 +5,20 @@ using UnityEngine.SceneManagement;
 
 public class MenuPrincipal : MonoBehaviour
 {
+    public static MenuPrincipal instance;
 
     public RectTransform panelCreditos;
     public RectTransform panelAyuda;
     public AudioSource sonidoCerrar;
 
+private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(gameObject);
+    }
+    
     public void AbrirCreditos()
     {
         sonidoCerrar.Play();

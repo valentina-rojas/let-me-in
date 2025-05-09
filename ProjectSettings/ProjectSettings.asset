@@ -741,7 +741,13 @@ PlayerSettings:
   XboxOneOverrideIdentityPublisher: 
   vrEditorSettings: {}
   cloudServicesEnabled:
+    Build: 0
+    Game Performance: 0
+    Legacy Analytics: 0
+    Purchasing: 0
+    UDP: 0
     UNet: 1
+    Unity Ads: 0
   luminIcon:
     m_Name: 
     m_ModelFolderPath: 
@@ -761,10 +767,10 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: 51f44664-cd3f-452a-ae28-217eef373d3e
+  cloudProjectId: c39e965a-c706-4855-952c-42377432e826
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: LET_ME_IN
+  projectName: LET ME IN (1)
   organizationId: valentinarojas
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
