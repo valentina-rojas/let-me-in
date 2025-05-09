@@ -5,7 +5,99 @@ using AnalyticsEvent = Unity.Services.Analytics.Event;
 
 public class EventManager : MonoBehaviour
 {
-   
 
+    public class LevelStartEvent : AnalyticsEvent
+    {
+        public LevelStartEvent() : base("LevelStart")
+        {
+        }
+
+        public int level { set { SetParameter("level", value); } }
+    }
+
+    public class LevelCompleteEvent : AnalyticsEvent
+    {
+        public LevelCompleteEvent() : base("LevelComplete")
+        {
+        }
+
+        public int level { set { SetParameter("level", value); } }
+
+        public int time { set { SetParameter("time", value); } }
+
+        public int strikes { set { SetParameter("strikes", value); } }
+
+        public int dlgSkipped { set { SetParameter("dlgSkipped", value); } }
+    }
+
+    public class GameOverEvent : AnalyticsEvent
+    {
+        public GameOverEvent() : base("GameOver")
+        {
+        }
+
+        public int level { set { SetParameter("level", value); } }
+
+        public string reason { set { SetParameter("reason", value); } }
+
+    }
+
+
+    public class GameFinishedEvent : AnalyticsEvent
+    {
+        public GameFinishedEvent() : base("GameFinished")
+        {
+        }
+
+        public int level { set { SetParameter("level", value); } }
+
+        public int strikes { set { SetParameter("strikes", value); } }
+    }
+
+
+    public class QuitEvent : AnalyticsEvent
+    {
+        public QuitEvent() : base("Quit")
+        {
+        }
+
+        public int level { set { SetParameter("level", value); } }
+
+        public int charIndex { set { SetParameter("charIndex", value); } }
+    }
+
+
+    public class ScanUsedEvent : AnalyticsEvent
+    {
+        public ScanUsedEvent() : base("ScanUsed")
+        {
+        }
+
+        public int level { set { SetParameter("level", value); } }
+
+        public int charIndex { set { SetParameter("charIndex", value); } }
+    }
+
+
+
+    public class SecurityCalledEvent : AnalyticsEvent
+    {
+        public SecurityCalledEvent() : base("SecurityCalled")
+        {
+        }
+
+        public int reactionTime { set { SetParameter("reactionTime", value); } }
+
+    }
+
+    public class CinSkippedEvent : AnalyticsEvent
+    {
+        public CinSkippedEvent() : base("CinSkipped")
+        {
+        }
+
+        public bool cinSkipped { set { SetParameter("cinSkipped", value); } }
+
+    }
 
 }
