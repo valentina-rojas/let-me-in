@@ -98,23 +98,23 @@ public class StressBar : MonoBehaviour
 
         if (porcentajeEstres <= 0.2f)
         {
-            fillBarImage.color = colorVerdeClaro;  // Hasta 20%
+            fillBarImage.color = colorVerdeClaro;  
         }
         else if (porcentajeEstres <= 0.4f)
         {
-            fillBarImage.color = colorVerdeOscuro; // 20% - 40%
+            fillBarImage.color = colorVerdeOscuro; 
         }
         else if (porcentajeEstres <= 0.6f)
         {
-            fillBarImage.color = colorAmarillo;    // 40% - 60%
+            fillBarImage.color = colorAmarillo;    
         }
         else if (porcentajeEstres <= 0.8f)
         {
-            fillBarImage.color = colorNaranja;     // 60% - 80%
+            fillBarImage.color = colorNaranja;    
         }
         else
         {
-            fillBarImage.color = colorRojo;        // Más del 80%
+            fillBarImage.color = colorRojo;     
         }
     }
 
@@ -122,13 +122,15 @@ public class StressBar : MonoBehaviour
 
     public void PerderJuego()
     {
+
+        // evento GameOver con parametro reason "quit"
+
         CharactersManager charactersManager = FindObjectOfType<CharactersManager>();
         if (charactersManager != null)
         {
-            charactersManager.DetenerPersonajes();  // Detener la aparición de personajes
+            charactersManager.DetenerPersonajes();  
         }
 
-        // Mostrar el panel de perder o cualquier otra lógica
         panelPerdiste.SetActive(true);
     }
 

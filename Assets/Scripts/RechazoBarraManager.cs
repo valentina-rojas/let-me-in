@@ -57,33 +57,35 @@ public class RechazoBarraManager : MonoBehaviour
         }
     }
 
-    // Método para actualizar el color de la barra según el número de rechazos
+   
     private void ActualizarColorBarraRechazo()
     {
         float porcentajeRechazo = rechazosActuales / maxRechazos;
 
         if (porcentajeRechazo <= 0.34f)
         {
-            fillBarImageRechazo.color = colorVerde;  // Hasta 33% verde
+            fillBarImageRechazo.color = colorVerde;  
         }
         else if (porcentajeRechazo <= 0.67f)
         {
-            fillBarImageRechazo.color = colorAmarillo;  // Entre 33% y 66% amarillo
+            fillBarImageRechazo.color = colorAmarillo;  
         }
         else
         {
-            fillBarImageRechazo.color = colorRojo;  // Más del 66% rojo
+            fillBarImageRechazo.color = colorRojo;  
         }
     }
 
 
-    // Método para manejar la pérdida del juego
     private void Perder()
     {
+        // evento GameOver con parametro reason "fired"
+        Debug.Log("GameOver fired");
+
         CharactersManager charactersManager = FindObjectOfType<CharactersManager>();
         if (charactersManager != null)
         {
-            charactersManager.DetenerPersonajes();  // Detener la aparición de personajes
+            charactersManager.DetenerPersonajes();  
         }
 
 

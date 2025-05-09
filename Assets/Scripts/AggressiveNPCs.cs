@@ -117,8 +117,8 @@ public class AggressiveNPCs : MonoBehaviour
 
     public void MostrarComportamientoAgresivo()
     {
-        Debug.Log("¡El personaje está actuando de manera agresiva!");
 
+        Debug.Log("¡El personaje está actuando de manera agresiva!");
 
         if (temporizadorActivo)
         {
@@ -169,6 +169,9 @@ public class AggressiveNPCs : MonoBehaviour
 
     void FinTemporizador()
     {
+        // evento GameOver con parametro reason "riot"
+        Debug.Log("GameOver riot" );
+
         DetenerPeligro();
         panelPerdiste.SetActive(true);
     }
@@ -208,6 +211,10 @@ public class AggressiveNPCs : MonoBehaviour
 
     public void DetenerPeligro()
     {
+
+        // evento SecurityCalled con el parametro de tiempo que tardo en reaccionar 
+        Debug.Log("SecurityCalled");
+
         if (toggleCoroutine != null)
         {
             StopCoroutine(toggleCoroutine);
@@ -217,7 +224,7 @@ public class AggressiveNPCs : MonoBehaviour
             audioSeguridad.Stop();
         }
 
-        // Detener el temblor de la cámara
+    
         if (shakeCoroutine != null)
         {
             StopCoroutine(shakeCoroutine);
@@ -309,23 +316,19 @@ public class AggressiveNPCs : MonoBehaviour
 
         stressBar.ActualizarEstres(1);
 
-        // Asegúrate de obtener la escala actual del personaje
         Vector3 escalaOriginal = seguridadInstance.transform.localScale;
 
-        // Si el personaje está mirando hacia la izquierda (eje X positivo), invierte el valor
         if (escalaOriginal.x > 0)
         {
             seguridadInstance.transform.localScale = new Vector3(-escalaOriginal.x, escalaOriginal.y, escalaOriginal.z);
         }
 
-        // Mover al personaje de seguridad de vuelta a su punto de spawn
         while (Vector3.Distance(seguridadInstance.transform.position, spawnPointSeguridad.position) > 0.1f)
         {
             seguridadInstance.transform.position = Vector3.MoveTowards(seguridadInstance.transform.position, spawnPointSeguridad.position, Time.deltaTime * velocidadSeguridad);
             yield return null;
         }
 
-        // Destruir al personaje de seguridad después de llegar al spawn point
         if (seguridadInstance != null)
         {
             Destroy(seguridadInstance);

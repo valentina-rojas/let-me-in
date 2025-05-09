@@ -24,12 +24,12 @@ public class RadioManager : MonoBehaviour
     private bool estaEscribiendo = false;
 
     public Slider barraContaminacion;
-    public float maxContaminacion = 3f;  // Máximo nivel de contaminación
-    private float nivelContaminacion = 0f;  // Nivel actual de contaminación
+    public float maxContaminacion = 3f;  
+    private float nivelContaminacion = 0f;  
     public Image fillBarImage;
 
     public Color colorAmarillo = Color.yellow;
-    public Color colorNaranja = new Color(1f, 0.5f, 0f); // Color naranja
+    public Color colorNaranja = new Color(1f, 0.5f, 0f);
     public Color colorRojo = Color.red;
 
     public RectTransform panelPerdiste;
@@ -47,13 +47,11 @@ public class RadioManager : MonoBehaviour
 
     void Start()
     {
-        // Inicializar la barra con 0 contaminación
         if (barraContaminacion != null)
         {
             barraContaminacion.maxValue = maxContaminacion;
             barraContaminacion.value = nivelContaminacion;
         }
-
 
     }
 
@@ -81,17 +79,15 @@ public class RadioManager : MonoBehaviour
         ruidosDisturbios.Play();
         audioSeguridad.Play();
 
-        panelDialogo.SetActive(true);  // Activar el panel
+        panelDialogo.SetActive(true);  
         StartCoroutine(EscribirTexto(mensajesDisturbios[indiceMensajeActual]));
 
 
-        // Esperar hasta que el mensaje haya sido completamente escrito
         while (estaEscribiendo)
         {
             yield return null;
         }
 
-        // Mantener el panel visible por un tiempo antes de ocultarlo
         yield return new WaitForSeconds(duracionMensaje);
 
         panelDialogo.SetActive(false);
@@ -105,7 +101,7 @@ public class RadioManager : MonoBehaviour
 
         if (radioAnimator != null)
         {
-            radioAnimator.SetTrigger("IdleRadio"); // Asumiendo que tienes un estado 'idle' en tu animación
+            radioAnimator.SetTrigger("IdleRadio"); 
         }
 
         indiceMensajeActual = (indiceMensajeActual + 1) % mensajesDisturbios.Count;
@@ -143,7 +139,7 @@ public class RadioManager : MonoBehaviour
             nivelContaminacion = maxContaminacion;
         }
 
-        // Actualizar la barra visualmente
+       
         if (barraContaminacion != null)
         {
             barraContaminacion.value = nivelContaminacion;
@@ -151,13 +147,13 @@ public class RadioManager : MonoBehaviour
             loadingBar.Play();
         }
 
-        // Puedes agregar lógica adicional si el nivel de contaminación llega al máximo (perder el juego, etc.)
         if (nivelContaminacion >= maxContaminacion)
         {
 
-
             Debug.Log("¡El búnker está completamente contaminado! Has perdido.");
-            // Lógica para manejar la pérdida del juego
+            
+             Perder();
+                   
         }
     }
 
@@ -168,25 +164,29 @@ public class RadioManager : MonoBehaviour
 
         if (porcentajeContaminacion <= 0.34f)
         {
-            fillBarImage.color = colorAmarillo;  // Hasta 33% amarillo
+            fillBarImage.color = colorAmarillo; 
         }
         else if (porcentajeContaminacion <= 0.67f)
         {
-            fillBarImage.color = colorNaranja;  // Entre 33% y 66% naranja
+            fillBarImage.color = colorNaranja; 
         }
         else
         {
-            fillBarImage.color = colorRojo;  // Más del 66% rojo
+            fillBarImage.color = colorRojo; 
         }
     }
 
 
     private void Perder()
     {
+        //evento GameOver con parametro reason fired
+        Debug.Log("GameOver fired");
+
+
         CharactersManager charactersManager = FindObjectOfType<CharactersManager>();
         if (charactersManager != null)
         {
-            charactersManager.DetenerPersonajes();  // Detener la aparición de personajes
+            charactersManager.DetenerPersonajes();  
         }
 
 

@@ -43,6 +43,9 @@ public class s_GameManager : MonoBehaviour
 
     void Start()
     {
+        //se inicia nivel LevelStart con parametro nivel
+        Debug.Log("LevelStart");
+
         NivelActual = GameData.NivelActual;
         ruidoAmbiente.Play();
 
@@ -173,7 +176,7 @@ public class s_GameManager : MonoBehaviour
         Vector3 posicionInicial = capaPuerta.transform.position;
         Vector3 posicionFinal = new Vector3(posicionInicial.x, posicionInicial.y + alturaMovimiento, posicionInicial.z);
 
-        // Levantar la capaPuerta hacia arriba
+
         float tiempoTranscurrido = 0f;
         while (tiempoTranscurrido < tiempoMovimiento)
         {
@@ -183,11 +186,11 @@ public class s_GameManager : MonoBehaviour
         }
         capaPuerta.transform.position = posicionFinal;
 
-        // Esperar el tiempo extendido o el tiempo por defecto
+     
         float tiempoEsperaActual = tiempoEsperaExtendido ?? tiempoEspera;
         yield return new WaitForSeconds(tiempoEsperaActual);
 
-        // Devolver la capa a su posición original
+        
         tiempoTranscurrido = 0f;
         while (tiempoTranscurrido < tiempoMovimiento)
         {
@@ -198,7 +201,6 @@ public class s_GameManager : MonoBehaviour
         capaPuerta.transform.position = posicionInicial;
     }
 
-
     private IEnumerator DetenerSonidoPuerta(float delay)
     {
         yield return new WaitForSeconds(delay);
@@ -207,8 +209,6 @@ public class s_GameManager : MonoBehaviour
             puertaAbriendose.Stop();
         }
     }
-
-
 
 
     public void VerificarEstadoPersonaje(bool esIngreso)
@@ -271,12 +271,13 @@ public class s_GameManager : MonoBehaviour
 
     public void MostrarMensaje()
     {
-        // Mostrar mensaje según la cantidad de enfermos ingresados
+        //creo que aca va el LevelComplete con parametros de nivel, tiempo y strikes
+           Debug.Log("LevelComplete");
+
         if (enfermosIngresados == 0 && sanosRechazados == 0)
         {
             uiManager.mensajeReporte.text = "¡Buen trabajo!";
 
-            //modificacion temporal para que no pase al nivel 3
             if (NivelActual == 1)
             {
                 uiManager.botonSiguienteNivel.gameObject.SetActive(true);
@@ -295,7 +296,6 @@ public class s_GameManager : MonoBehaviour
             // GameData.Faltas++;
 
 
-            //modificacion temporal para que no pase al nivel 3
             if (NivelActual == 1)
             {
                 uiManager.botonSiguienteNivel.gameObject.SetActive(true);
@@ -335,9 +335,7 @@ public class s_GameManager : MonoBehaviour
 
     public void ActualizarTextoStrikes()
     {
-
         textoStrikes.text = "FALTAS: " + strikes;
-
     }
 
 

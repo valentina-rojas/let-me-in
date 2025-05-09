@@ -6,15 +6,15 @@ using UnityEngine.UI;
 public class CheckCondition : MonoBehaviour
 {
     public GameObject medicoPrefab;
-    public GameObject cartelSanoPrefab;  
-    public GameObject cartelEnfermoPrefab; 
-    public GameObject luzEscanerPrefab; 
+    public GameObject cartelSanoPrefab;
+    public GameObject cartelEnfermoPrefab;
+    public GameObject luzEscanerPrefab;
     public Transform spawnPointMedico;
     public Transform centroPantalla;
     public Transform puntoSalidaMedico;
-    public Transform spawnPointIngreso;     
-    public Transform spawnPointRechazo;   
-    public Transform spawnPointLuzEscaner;  
+    public Transform spawnPointIngreso;
+    public Transform spawnPointRechazo;
+    public Transform spawnPointLuzEscaner;
     public CharactersManager charactersManager;
     public DialogueManager dialogueManager;
     public s_GameManager gameManager;
@@ -36,7 +36,11 @@ public class CheckCondition : MonoBehaviour
 
     public void EvaluarSalud()
     {
-     sonidoBoton.Play();
+
+        //  MedicalScanUsed
+        Debug.Log("MedicalScanUsed");
+
+        sonidoBoton.Play();
         if (medicoInstance == null)
         {
             medicoInstance = Instantiate(medicoPrefab, spawnPointMedico.position, Quaternion.identity);
@@ -50,11 +54,7 @@ public class CheckCondition : MonoBehaviour
 
     private IEnumerator MedicoEvaluacionRoutine()
     {
-        
-
         leverController.DesactivarPalanca();
-
-       // StartCoroutine(gameManager.AbrirPuerta(12f));
 
         brazoMecanico.Play();
         yield return StartCoroutine(MoverPersonaje(medicoInstance.transform, centroPantalla.position));
@@ -71,10 +71,7 @@ public class CheckCondition : MonoBehaviour
         brazoMecanico.Stop();
         Destroy(medicoInstance);
 
-       // dialogueManager.botonIngreso.interactable = true;
-       // dialogueManager.botonRechazo.interactable = true;
-
-       leverController.ActivarPalanca();
+        leverController.ActivarPalanca();
     }
 
     private IEnumerator MoverPersonaje(Transform personaje, Vector3 destino)
@@ -92,40 +89,37 @@ public class CheckCondition : MonoBehaviour
     {
         Character personajeActual = charactersManager.GetCharacter(charactersManager.CurrentCharacterIndex);
 
-       if (personajeActual != null)
-    {
-        // Instancia la luz del escáner
-        StartCoroutine(MostrarLuzEscanerYCartel(personajeActual));
+        if (personajeActual != null)
+        {
+            StartCoroutine(MostrarLuzEscanerYCartel(personajeActual));
+        }
     }
-    }
-
 
     private IEnumerator MostrarLuzEscanerYCartel(Character personajeActual)
-{
-    // Crear la instancia de la luz del escáner
-    GameObject luzEscanerInstance = Instantiate(luzEscanerPrefab, spawnPointLuzEscaner.position, Quaternion.identity);
-    luzEscaner.Play();
+    {
    
-    yield return new WaitForSeconds(3f);
-    luzEscaner.Stop();
+        GameObject luzEscanerInstance = Instantiate(luzEscanerPrefab, spawnPointLuzEscaner.position, Quaternion.identity);
+        luzEscaner.Play();
 
-    // Destruir la luz del escáner
-    Destroy(luzEscanerInstance);
- yield return new WaitForSeconds(2f);
-    // Mostrar el cartel según el estado del personaje
-    if (personajeActual.estado == CharacterState.Sano)
-    {
-        Debug.Log("El personaje está sano.");
-        StartCoroutine(MostrarCartel(cartelSanoPrefab, spawnPointIngreso));
-    }
-    else if (personajeActual.estado == CharacterState.Enfermo)
-    {
-        Debug.Log("El personaje está enfermo.");
-        StartCoroutine(MostrarCartel(cartelEnfermoPrefab, spawnPointRechazo));
-    }
-}
+        yield return new WaitForSeconds(3f);
+        luzEscaner.Stop();
 
-  private IEnumerator MostrarCartel(GameObject cartelPrefab, Transform spawnPoint)
+        Destroy(luzEscanerInstance);
+        yield return new WaitForSeconds(2f);
+       
+        if (personajeActual.estado == CharacterState.Sano)
+        {
+            Debug.Log("El personaje está sano.");
+            StartCoroutine(MostrarCartel(cartelSanoPrefab, spawnPointIngreso));
+        }
+        else if (personajeActual.estado == CharacterState.Enfermo)
+        {
+            Debug.Log("El personaje está enfermo.");
+            StartCoroutine(MostrarCartel(cartelEnfermoPrefab, spawnPointRechazo));
+        }
+    }
+
+    private IEnumerator MostrarCartel(GameObject cartelPrefab, Transform spawnPoint)
     {
         GameObject cartelInstance = Instantiate(cartelPrefab, spawnPoint.position, Quaternion.identity);
         beepEscaner.Play();
@@ -135,7 +129,7 @@ public class CheckCondition : MonoBehaviour
 
     public void ReiniciarNivel()
     {
-        // Resetea la variable para permitir el uso del médico en el próximo nivel
+       
         dialogueManager.medicoUsado = false;
     }
 }

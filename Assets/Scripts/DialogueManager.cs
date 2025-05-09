@@ -65,20 +65,10 @@ public class DialogueManager : MonoBehaviour
     }
 
 
-
-    /*public void IniciarDialogo()
-    {
-        character = charactersManager.GetCharacter(charactersManager.CurrentCharacterIndex);
-        // Aquí puedes llamar a ComenzarDialogo o lo que necesites hacer con el personaje
-    }*/
-
-
     void Update()
     {
         if (dialogoVisible)
         {
-
-
             // Detecta si el usuario presiona Espacio para adelantar un diálogo
             if (Input.GetKeyDown(KeyCode.Space))
             {
@@ -92,7 +82,6 @@ public class DialogueManager : MonoBehaviour
                     SaltarTodosLosDialogos();
                 }
             }
-
         }
     }
 
@@ -107,6 +96,9 @@ public class DialogueManager : MonoBehaviour
 
     public void SaltarTodosLosDialogos()
     {
+        //dialogueSkipped
+           Debug.Log("DialogueSkkiped");
+           
         StopAllCoroutines();
         panelDialogo.gameObject.SetActive(false);
         panelRespuestas.gameObject.SetActive(false);
@@ -133,8 +125,8 @@ public class DialogueManager : MonoBehaviour
 
     public bool DialogoEstaOculto()
     {
-        // Aquí puedes agregar la lógica para verificar si el diálogo está oculto
-        return !panelDialogo.gameObject.activeSelf; // Por ejemplo, si el diálogo está representado por un panel que se oculta
+        
+        return !panelDialogo.gameObject.activeSelf; 
     }
 
     public void PausarVoces()
