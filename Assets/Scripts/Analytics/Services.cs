@@ -1,18 +1,35 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
+using Unity.Services.Core;
+using Unity.Services.Analytics;
 using UnityEngine;
 
 public class Services : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+   [SerializeField] private MenuPrincipal menuPrincipal;
+
+    async void Awake()
     {
-        
+        try
+        {
+            await UnityServices.InitializeAsync();
+        }
+
+        catch (Exception e)
+        {
+            Debug.LogException(e);
+        }
+
+    }
+    public void StartDataCollection()
+    {
+        AnalyticsService.Instance.StartDataCollection();
+
+        menuPrincipal.IniciarJuego();
     }
 
-    // Update is called once per frame
-    void Update()
+
+    public void StopDataCollection()
     {
-        
+        menuPrincipal.IniciarJuego();
     }
 }
