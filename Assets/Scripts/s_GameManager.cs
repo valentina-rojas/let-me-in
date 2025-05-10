@@ -4,9 +4,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using Unity.Services.Analytics; 
+using static EventManager;
 
 public class s_GameManager : MonoBehaviour
 {
+
     public UI_Manager uiManager;
     public CharactersManager charactersManager;
     public DialogueManager dialogueManager;
@@ -41,11 +44,12 @@ public class s_GameManager : MonoBehaviour
     public int NivelActual { get; private set; }
 
 
-    void Start()
-    {
-        //se inicia nivel LevelStart con parametro nivel
-        Debug.Log("LevelStart");
 
+   void Start()
+    {
+        // Llamar al evento LevelStart
+        RegisterLevelStartEvent();
+        
         NivelActual = GameData.NivelActual;
         ruidoAmbiente.Play();
 
@@ -60,6 +64,22 @@ public class s_GameManager : MonoBehaviour
         }
     }
 
+    private void RegisterLevelStartEvent()
+    {
+        // Debug para verificar
+        Debug.Log($"LevelStart - Nivel: {GameData.NivelActual}");
+        
+        // Crear y configurar el evento
+        LevelStartEvent levelStart = new LevelStartEvent();
+        levelStart.level = GameData.NivelActual;
+        
+        // Grabar el evento 
+        #if !UNITY_EDITOR
+            AnalyticsService.Instance.RecordEvent(levelStart);
+        #else
+            Debug.Log("[ANALYTICS] Evento LevelStart registrado");
+        #endif
+    }
 
     public void ChangeScene(string name)
     {
