@@ -44,9 +44,8 @@ public class DialogueManager : MonoBehaviour
     public AudioSource vozGuardia;
     public AudioSource vozPersonaje;
 
-    private bool dialogoVisible = false;  // Verifica si hay un diálogo en pantalla
-
-    public RectTransform areaClickable; // Asigna este panel como área clickable
+    private bool dialogoVisible = false;  
+    public RectTransform areaClickable; 
 
     public Button nextDialogo;
     public Button nextRespuesta;
@@ -55,6 +54,9 @@ public class DialogueManager : MonoBehaviour
     private bool esDialogoFinal = false;
 
     public AudioSource desplegarpestañas;
+
+    public int dialogosOmitidos = 0;
+
 
     //private Character character; // Variable para almacenar el personaje
 
@@ -96,8 +98,7 @@ public class DialogueManager : MonoBehaviour
 
     public void SaltarTodosLosDialogos()
     {
-        //dialogueSkipped
-           Debug.Log("DialogueSkkiped");
+         dialogosOmitidos++;
            
         StopAllCoroutines();
         panelDialogo.gameObject.SetActive(false);

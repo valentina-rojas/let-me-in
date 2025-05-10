@@ -43,10 +43,13 @@ public class s_GameManager : MonoBehaviour
     private int totalEnfermos;
     public int NivelActual { get; private set; }
 
+    private float tiempoNivel;
 
 
    void Start()
     {
+        tiempoNivel = 0f;
+
         // Llamar al evento LevelStart
         RegisterLevelStartEvent();
         
@@ -63,6 +66,12 @@ public class s_GameManager : MonoBehaviour
             Debug.LogError("UI_Manager o CharactersManager no están asignados en GameController.");
         }
     }
+     
+     void Update()
+    {
+        tiempoNivel += Time.deltaTime;
+    }
+
 
     private void RegisterLevelStartEvent()
     {
@@ -291,8 +300,7 @@ public class s_GameManager : MonoBehaviour
 
     public void MostrarMensaje()
     {
-        //creo que aca va el LevelComplete con parametros de nivel, tiempo y strikes
-           Debug.Log("LevelComplete");
+       RegisterLevelCompleteEvent();
 
         if (enfermosIngresados == 0 && sanosRechazados == 0)
         {
@@ -329,6 +337,30 @@ public class s_GameManager : MonoBehaviour
         }
     
     }
+
+  private void RegisterLevelCompleteEvent()
+    {
+        // Debug para verificar
+        // Debug para verificar todos los valores
+    Debug.Log($"LevelComplete - Nivel: {GameData.NivelActual}, Tiempo: {Mathf.RoundToInt(tiempoNivel)}, Strikes: {strikes}, Diálogos Omitidos: {dialogueManager.dialogosOmitidos}");
+        
+        // Crear y configurar el evento
+        LevelCompleteEvent  levelComplete = new  LevelCompleteEvent();
+        levelComplete.level = GameData.NivelActual;
+        levelComplete.time = Mathf.RoundToInt(tiempoNivel);
+        levelComplete.strikes = strikes;
+        levelComplete.dlgSkipped = dialogueManager.dialogosOmitidos;
+
+        
+        // Grabar el evento 
+        #if !UNITY_EDITOR
+            AnalyticsService.Instance.RecordEvent( levelComplete);
+        #else
+            Debug.Log("[ANALYTICS] Evento  LevelCompleteEvent registrado");
+        #endif
+    }
+
+
 
 
     public void OnBotonSiguienteNivel()
