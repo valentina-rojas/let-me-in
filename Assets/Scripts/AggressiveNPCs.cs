@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using Unity.Services.Analytics; 
+using static EventManager;
 
 public class AggressiveNPCs : MonoBehaviour
 {
@@ -44,6 +46,8 @@ public class AggressiveNPCs : MonoBehaviour
     private Vector3 originalCameraPosition;
     private bool isShaking = false;
     private Coroutine shakeCoroutine;
+
+    private float tiempoInicioAgresion;
 
 
     void Start()
@@ -119,6 +123,8 @@ public class AggressiveNPCs : MonoBehaviour
     {
 
         Debug.Log("¡El personaje está actuando de manera agresiva!");
+
+          tiempoInicioAgresion = Time.time; 
 
         if (temporizadorActivo)
         {
@@ -212,8 +218,7 @@ public class AggressiveNPCs : MonoBehaviour
     public void DetenerPeligro()
     {
 
-        // evento SecurityCalled con el parametro de tiempo que tardo en reaccionar 
-        Debug.Log("SecurityCalled");
+        RegisterSecurityCalledEvent();
 
         if (toggleCoroutine != null)
         {
@@ -240,6 +245,26 @@ public class AggressiveNPCs : MonoBehaviour
             animController?.StopDangerAnimation();
         }
     }
+
+
+   private void RegisterSecurityCalledEvent()
+{
+    float tiempoReaccion = Time.time - tiempoInicioAgresion;
+
+    Debug.Log($"Tiempo de reacción: {tiempoReaccion:F2}s");
+
+    // Crear y configurar el evento
+    SecurityCalledEvent securityCalled = new SecurityCalledEvent();
+   securityCalled.reactionTime = Mathf.RoundToInt(tiempoReaccion);
+
+    // Grabar el evento 
+    #if !UNITY_EDITOR
+        AnalyticsService.Instance.RecordEvent(securityCalled);
+    #else
+        Debug.Log("[ANALYTICS] Evento SecurityCalledEvent registrado");
+    #endif
+}
+
 
     public void LlamarSeguridad()
     {
