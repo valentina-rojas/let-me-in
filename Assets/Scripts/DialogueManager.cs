@@ -99,6 +99,7 @@ public class DialogueManager : MonoBehaviour
     public void SaltarTodosLosDialogos()
     {
          dialogosOmitidos++;
+         gameManager.dialogosOmitidosTotal++;
            
         StopAllCoroutines();
         panelDialogo.gameObject.SetActive(false);

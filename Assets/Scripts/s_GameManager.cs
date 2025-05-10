@@ -9,6 +9,8 @@ using static EventManager;
 
 public class s_GameManager : MonoBehaviour
 {
+    public static s_GameManager Instance { get; private set; }
+
 
     public UI_Manager uiManager;
     public CharactersManager charactersManager;
@@ -47,14 +49,31 @@ public class s_GameManager : MonoBehaviour
 
     private float tiempoTotalJuego = 0f;
     private int strikesAcumulados = 0;
+    public int dialogosOmitidosTotal = 0;
 
-
+  void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+    }
 
 
    void Start()
     {
-        strikes = 0;
+
         tiempoNivel = 0f;
+        strikes = GameData.Faltas;  
+        dialogosOmitidosTotal = GameData.DialogosOmitidos;
+        tiempoTotalJuego = GameData.TiempoTotal;
+
+
 
         // Llamar al evento LevelStart
         RegisterLevelStartEvent();
@@ -76,6 +95,7 @@ public class s_GameManager : MonoBehaviour
      void Update()
     {
         tiempoNivel += Time.deltaTime;
+        tiempoTotalJuego += Time.deltaTime;
     }
 
 
@@ -296,19 +316,14 @@ public class s_GameManager : MonoBehaviour
     {
         ruidoAmbiente.Stop();
 
-        if (GameData.Faltas <= 0)
-        {
-            uiManager.ActualizarPanelReporte(sanosIngresados, enfermosIngresados, sanosRechazados, enfermosRechazados);
-        }
-        else
-        {
-            uiManager.PanelReporte();
-        }
+  uiManager.ActualizarPanelReporte(sanosIngresados, enfermosIngresados, sanosRechazados, enfermosRechazados);
+
     }
 
     public void MostrarMensaje()
     {
-       RegisterLevelCompleteEvent();
+        GameData.TiempoTotal = tiempoTotalJuego;
+        RegisterLevelCompleteEvent();
 
         if (enfermosIngresados == 0 && sanosRechazados == 0)
         {
@@ -370,14 +385,14 @@ public class s_GameManager : MonoBehaviour
 
 private void RegisterGameFinishedEvent()
     {
-        // Debug para verificar
-        Debug.Log($"LevelComplete - Nivel: {GameData.NivelActual}, Tiempo: {Mathf.RoundToInt(tiempoNivel)}, Strikes: {strikes}, Diálogos Omitidos: {dialogueManager.dialogosOmitidos}");
-        
+
+         // Debug para verificar todos los parámetros (usando directamente las fuentes originales)
+        Debug.Log($"[DEBUG] GameFinishedEvent - Nivel: {GameData.NivelActual}, Tiempo Total: {Mathf.RoundToInt(tiempoTotalJuego)}s, Strikes: {strikes}, Diálogos Omitidos (Totales): {dialogosOmitidosTotal}");
+
         // Crear y configurar el evento
         GameFinishedEvent  gameFinished = new  GameFinishedEvent();
         gameFinished.time = Mathf.RoundToInt(tiempoTotalJuego);
         gameFinished.strikes = strikes;
-
         
         // Grabar el evento 
         #if !UNITY_EDITOR
@@ -394,6 +409,8 @@ private void RegisterGameFinishedEvent()
         Debug.Log("Botón Siguiente Nivel presionado");
         NivelActual++;
         GameData.NivelActual = NivelActual; // Guardar el nivel actual en la clase GameData
+         GameData.Faltas = strikes;
+        GameData.DialogosOmitidos = dialogosOmitidosTotal;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
