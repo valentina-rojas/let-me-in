@@ -67,9 +67,9 @@ public class s_GameManager : MonoBehaviour
 
    void Start()
     {
-
+        strikes = 0;
         tiempoNivel = 0f;
-        strikes = GameData.Faltas;  
+        strikesAcumulados = GameData.Faltas;  
         dialogosOmitidosTotal = GameData.DialogosOmitidos;
         tiempoTotalJuego = GameData.TiempoTotal;
 
@@ -387,12 +387,12 @@ private void RegisterGameFinishedEvent()
     {
 
          // Debug para verificar todos los parámetros (usando directamente las fuentes originales)
-        Debug.Log($"[DEBUG] GameFinishedEvent - Nivel: {GameData.NivelActual}, Tiempo Total: {Mathf.RoundToInt(tiempoTotalJuego)}s, Strikes: {strikes}, Diálogos Omitidos (Totales): {dialogosOmitidosTotal}");
+        Debug.Log($"[DEBUG] GameFinishedEvent - Nivel: {GameData.NivelActual}, Tiempo Total: {Mathf.RoundToInt(tiempoTotalJuego)}s, Strikes: {strikesAcumulados}, Diálogos Omitidos (Totales): {dialogosOmitidosTotal}");
 
         // Crear y configurar el evento
         GameFinishedEvent  gameFinished = new  GameFinishedEvent();
         gameFinished.time = Mathf.RoundToInt(tiempoTotalJuego);
-        gameFinished.strikes = strikes;
+        gameFinished.strikes = strikesAcumulados;
         
         // Grabar el evento 
         #if !UNITY_EDITOR
@@ -402,14 +402,12 @@ private void RegisterGameFinishedEvent()
         #endif
     }
 
-
-
     public void OnBotonSiguienteNivel()
     {
         Debug.Log("Botón Siguiente Nivel presionado");
         NivelActual++;
         GameData.NivelActual = NivelActual; // Guardar el nivel actual en la clase GameData
-         GameData.Faltas = strikes;
+        GameData.Faltas = strikesAcumulados;
         GameData.DialogosOmitidos = dialogosOmitidosTotal;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
