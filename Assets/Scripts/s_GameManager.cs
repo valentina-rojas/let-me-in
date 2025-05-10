@@ -45,9 +45,15 @@ public class s_GameManager : MonoBehaviour
 
     private float tiempoNivel;
 
+    private float tiempoTotalJuego = 0f;
+    private int strikesAcumulados = 0;
+
+
+
 
    void Start()
     {
+        strikes = 0;
         tiempoNivel = 0f;
 
         // Llamar al evento LevelStart
@@ -258,6 +264,7 @@ public class s_GameManager : MonoBehaviour
                     Debug.Log("¡Elección incorrecta! Personaje enfermo ingresado.");
                     enfermosIngresados++;
                     strikes++;
+                    strikesAcumulados++;
                 }
             }
             else
@@ -267,6 +274,7 @@ public class s_GameManager : MonoBehaviour
                     Debug.Log("¡Elección incorrecta! Personaje sano rechazado.");
                     sanosRechazados++;
                     strikes++;
+                    strikesAcumulados++;
                 }
                 else if (personajeActual.estado == CharacterState.Enfermo)
                 {
@@ -313,8 +321,8 @@ public class s_GameManager : MonoBehaviour
 
             if (NivelActual == 2)
             {
-
                 uiManager.botonGanaste.gameObject.SetActive(true);
+                RegisterGameFinishedEvent();
             }
 
         }
@@ -331,18 +339,18 @@ public class s_GameManager : MonoBehaviour
 
             if (NivelActual == 2)
             {
-
                 uiManager.botonGanaste.gameObject.SetActive(true);
+                RegisterGameFinishedEvent();
             }
         }
     
+      tiempoTotalJuego += tiempoNivel;
     }
 
   private void RegisterLevelCompleteEvent()
     {
         // Debug para verificar
-        // Debug para verificar todos los valores
-    Debug.Log($"LevelComplete - Nivel: {GameData.NivelActual}, Tiempo: {Mathf.RoundToInt(tiempoNivel)}, Strikes: {strikes}, Diálogos Omitidos: {dialogueManager.dialogosOmitidos}");
+        Debug.Log($"LevelComplete - Nivel: {GameData.NivelActual}, Tiempo: {Mathf.RoundToInt(tiempoNivel)}, Strikes: {strikes}, Diálogos Omitidos: {dialogueManager.dialogosOmitidos}");
         
         // Crear y configurar el evento
         LevelCompleteEvent  levelComplete = new  LevelCompleteEvent();
@@ -360,6 +368,24 @@ public class s_GameManager : MonoBehaviour
         #endif
     }
 
+private void RegisterGameFinishedEvent()
+    {
+        // Debug para verificar
+        Debug.Log($"LevelComplete - Nivel: {GameData.NivelActual}, Tiempo: {Mathf.RoundToInt(tiempoNivel)}, Strikes: {strikes}, Diálogos Omitidos: {dialogueManager.dialogosOmitidos}");
+        
+        // Crear y configurar el evento
+        GameFinishedEvent  gameFinished = new  GameFinishedEvent();
+        gameFinished.time = Mathf.RoundToInt(tiempoTotalJuego);
+        gameFinished.strikes = strikes;
+
+        
+        // Grabar el evento 
+        #if !UNITY_EDITOR
+            AnalyticsService.Instance.RecordEvent(gameFinished);
+        #else
+            Debug.Log("[ANALYTICS] Evento  GameFinishedEvent registrado");
+        #endif
+    }
 
 
 

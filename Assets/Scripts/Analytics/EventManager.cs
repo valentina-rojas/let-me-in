@@ -49,7 +49,7 @@ public class EventManager : MonoBehaviour
         {
         }
 
-        public int level { set { SetParameter("level", value); } }
+        public int time { set { SetParameter("time", value); } }
 
         public int strikes { set { SetParameter("strikes", value); } }
     }
