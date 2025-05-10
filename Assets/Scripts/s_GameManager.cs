@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
-using Unity.Services.Analytics; 
+using Unity.Services.Analytics;
 using static EventManager;
 
 public class s_GameManager : MonoBehaviour
@@ -51,7 +51,7 @@ public class s_GameManager : MonoBehaviour
     private int strikesAcumulados = 0;
     public int dialogosOmitidosTotal = 0;
 
-  void Awake()
+    void Awake()
     {
         if (Instance != null && Instance != this)
         {
@@ -65,11 +65,11 @@ public class s_GameManager : MonoBehaviour
     }
 
 
-   void Start()
+    void Start()
     {
         strikes = 0;
         tiempoNivel = 0f;
-        strikesAcumulados = GameData.Faltas;  
+        strikesAcumulados = GameData.Faltas;
         dialogosOmitidosTotal = GameData.DialogosOmitidos;
         tiempoTotalJuego = GameData.TiempoTotal;
 
@@ -77,7 +77,7 @@ public class s_GameManager : MonoBehaviour
 
         // Llamar al evento LevelStart
         RegisterLevelStartEvent();
-        
+
         NivelActual = GameData.NivelActual;
         ruidoAmbiente.Play();
 
@@ -91,8 +91,8 @@ public class s_GameManager : MonoBehaviour
             Debug.LogError("UI_Manager o CharactersManager no están asignados en GameController.");
         }
     }
-     
-     void Update()
+
+    void Update()
     {
         tiempoNivel += Time.deltaTime;
         tiempoTotalJuego += Time.deltaTime;
@@ -103,17 +103,17 @@ public class s_GameManager : MonoBehaviour
     {
         // Debug para verificar
         Debug.Log($"LevelStart - Nivel: {GameData.NivelActual}");
-        
+
         // Crear y configurar el evento
         LevelStartEvent levelStart = new LevelStartEvent();
         levelStart.level = GameData.NivelActual;
-        
+
         // Grabar el evento 
-        #if !UNITY_EDITOR
-            AnalyticsService.Instance.RecordEvent(levelStart);
-        #else
+#if !UNITY_EDITOR
+        AnalyticsService.Instance.RecordEvent(levelStart);
+#else
             Debug.Log("[ANALYTICS] Evento LevelStart registrado");
-        #endif
+#endif
     }
 
     public void ChangeScene(string name)
@@ -161,7 +161,7 @@ public class s_GameManager : MonoBehaviour
 
         yield return new WaitUntil(() => dialogueManager.DialogoEstaOculto());
 
-       // charactersManager.TerminoHablar();
+        // charactersManager.TerminoHablar();
 
         charactersManager.MoverPersonajeAlPunto(charactersManager.exitPoint.position);
         StartCoroutine(AbrirPuerta());
@@ -219,7 +219,7 @@ public class s_GameManager : MonoBehaviour
 
         NextCharacter();
 
-  
+
 
         yield break;
     }
@@ -241,11 +241,11 @@ public class s_GameManager : MonoBehaviour
         }
         capaPuerta.transform.position = posicionFinal;
 
-     
+
         float tiempoEsperaActual = tiempoEsperaExtendido ?? tiempoEspera;
         yield return new WaitForSeconds(tiempoEsperaActual);
 
-        
+
         tiempoTranscurrido = 0f;
         while (tiempoTranscurrido < tiempoMovimiento)
         {
@@ -316,7 +316,7 @@ public class s_GameManager : MonoBehaviour
     {
         ruidoAmbiente.Stop();
 
-  uiManager.ActualizarPanelReporte(sanosIngresados, enfermosIngresados, sanosRechazados, enfermosRechazados);
+        uiManager.ActualizarPanelReporte(sanosIngresados, enfermosIngresados, sanosRechazados, enfermosRechazados);
 
     }
 
@@ -332,16 +332,17 @@ public class s_GameManager : MonoBehaviour
             if (NivelActual == 1)
             {
                 uiManager.botonSiguienteNivel.gameObject.SetActive(true);
-            };
+            }
+            ;
 
             if (NivelActual == 2)
             {
                 uiManager.botonGanaste.gameObject.SetActive(true);
-                RegisterGameFinishedEvent();
+               // RegisterGameFinishedEvent();
             }
 
         }
-        else 
+        else
         {
             uiManager.mensajeReporte.text = "Más cuidado la próxima vez...";
             // GameData.Faltas++;
@@ -350,57 +351,58 @@ public class s_GameManager : MonoBehaviour
             if (NivelActual == 1)
             {
                 uiManager.botonSiguienteNivel.gameObject.SetActive(true);
-            };
+            }
+            ;
 
             if (NivelActual == 2)
             {
                 uiManager.botonGanaste.gameObject.SetActive(true);
-                RegisterGameFinishedEvent();
+              //  RegisterGameFinishedEvent();
             }
         }
-    
-      tiempoTotalJuego += tiempoNivel;
+
+        tiempoTotalJuego += tiempoNivel;
     }
 
-  private void RegisterLevelCompleteEvent()
+    private void RegisterLevelCompleteEvent()
     {
         // Debug para verificar
         Debug.Log($"LevelComplete - Nivel: {GameData.NivelActual}, Tiempo: {Mathf.RoundToInt(tiempoNivel)}, Strikes: {strikes}, Diálogos Omitidos: {dialogueManager.dialogosOmitidos}");
-        
+
         // Crear y configurar el evento
-        LevelCompleteEvent  levelComplete = new  LevelCompleteEvent();
+        LevelCompleteEvent levelComplete = new LevelCompleteEvent();
         levelComplete.level = GameData.NivelActual;
         levelComplete.time = Mathf.RoundToInt(tiempoNivel);
         levelComplete.strikes = strikes;
         levelComplete.dlgSkipped = dialogueManager.dialogosOmitidos;
 
-        
+
         // Grabar el evento 
-        #if !UNITY_EDITOR
-            AnalyticsService.Instance.RecordEvent( levelComplete);
-        #else
+#if !UNITY_EDITOR
+        AnalyticsService.Instance.RecordEvent(levelComplete);
+#else
             Debug.Log("[ANALYTICS] Evento  LevelCompleteEvent registrado");
-        #endif
+#endif
     }
 
-private void RegisterGameFinishedEvent()
+   /* private void RegisterGameFinishedEvent()
     {
 
-         // Debug para verificar todos los parámetros (usando directamente las fuentes originales)
+        // Debug para verificar todos los parámetros (usando directamente las fuentes originales)
         Debug.Log($"[DEBUG] GameFinishedEvent - Nivel: {GameData.NivelActual}, Tiempo Total: {Mathf.RoundToInt(tiempoTotalJuego)}s, Strikes: {strikesAcumulados}, Diálogos Omitidos (Totales): {dialogosOmitidosTotal}");
 
         // Crear y configurar el evento
-        GameFinishedEvent  gameFinished = new  GameFinishedEvent();
+        GameFinishedEvent gameFinished = new GameFinishedEvent();
         gameFinished.time = Mathf.RoundToInt(tiempoTotalJuego);
         gameFinished.strikes = strikesAcumulados;
-        
-        // Grabar el evento 
-        #if !UNITY_EDITOR
+
+            // Grabar el evento 
+    #if !UNITY_EDITOR
             AnalyticsService.Instance.RecordEvent(gameFinished);
-        #else
-            Debug.Log("[ANALYTICS] Evento  GameFinishedEvent registrado");
-        #endif
-    }
+    #else
+                Debug.Log("[ANALYTICS] Evento  GameFinishedEvent registrado");
+    #endif
+        }*/
 
     public void OnBotonSiguienteNivel()
     {
@@ -432,27 +434,27 @@ private void RegisterGameFinishedEvent()
     }
 
 
-void OnApplicationQuit()
-{
-    RegisterQuitEvent();
-}
+    void OnApplicationQuit()
+    {
+        RegisterQuitEvent();
+    }
 
 
-private void RegisterQuitEvent()
-{
+    private void RegisterQuitEvent()
+    {
 
-    Debug.Log($"[DEBUG] QuitEvent - Nivel: {GameData.NivelActual}, Personaje actual: {charactersManager.GetCurrentIndex()}");
+        Debug.Log($"[DEBUG] QuitEvent - Nivel: {GameData.NivelActual}, Personaje actual: {charactersManager.GetCurrentIndex()}");
 
-    QuitEvent quitEvent = new QuitEvent();
-    quitEvent.level = GameData.NivelActual;
-    quitEvent.charIndex = charactersManager.GetCurrentIndex();
+        QuitEvent quitEvent = new QuitEvent();
+        quitEvent.level = GameData.NivelActual;
+        quitEvent.charIndex = charactersManager.GetCurrentIndex();
 
-    #if !UNITY_EDITOR
+#if !UNITY_EDITOR
         AnalyticsService.Instance.RecordEvent(quitEvent);
-    #else
+#else
         Debug.Log("[ANALYTICS] Evento QuitEvent registrado");
-    #endif
-}
+#endif
+    }
 
 
 }

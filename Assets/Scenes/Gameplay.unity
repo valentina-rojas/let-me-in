@@ -9097,6 +9097,7 @@ MonoBehaviour:
   nextRespuesta: {fileID: 0}
   puedeAvanzarDialogo: 1
   "desplegarpesta\xF1as": {fileID: 0}
+  dialogosOmitidos: 0
 --- !u!1 &712981492
 GameObject:
   m_ObjectHideFlags: 0
@@ -11815,6 +11816,7 @@ MonoBehaviour:
   alturaMovimiento: 7
   tiempoMovimiento: 1
   tiempoEspera: 3
+  dialogosOmitidosTotal: 0
 --- !u!4 &926031997
 Transform:
   m_ObjectHideFlags: 0
@@ -13155,6 +13157,7 @@ MonoBehaviour:
   nextRespuesta: {fileID: 0}
   puedeAvanzarDialogo: 1
   "desplegarpesta\xF1as": {fileID: 0}
+  dialogosOmitidos: 0
 --- !u!114 &992450832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18421,6 +18424,7 @@ MonoBehaviour:
   nextRespuesta: {fileID: 0}
   puedeAvanzarDialogo: 1
   "desplegarpesta\xF1as": {fileID: 0}
+  dialogosOmitidos: 0
 --- !u!114 &1412460606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25089,7 +25093,7 @@ MonoBehaviour:
   botonRechazo: {fileID: 1941776353}
   panelSiguiente: {fileID: 1947946919}
   velocidadTexto: 0.04
-  gameManager: {fileID: 0}
+  gameManager: {fileID: 926031996}
   audioManager: {fileID: 1168009879}
   aggressiveNPCs: {fileID: 1727551768}
   checkCondition: {fileID: 341145152}
@@ -25104,6 +25108,7 @@ MonoBehaviour:
   nextRespuesta: {fileID: 307729110}
   puedeAvanzarDialogo: 1
   "desplegarpesta\xF1as": {fileID: 1128534294}
+  dialogosOmitidos: 0
 --- !u!4 &2085731923
 Transform:
   m_ObjectHideFlags: 0

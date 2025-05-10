@@ -235,7 +235,7 @@ public class AggressiveNPCs : MonoBehaviour
     public void DetenerPeligro()
     {
 
-        RegisterSecurityCalledEvent();
+        RegisterSEndRiotEvent();
 
         if (toggleCoroutine != null)
         {
@@ -264,21 +264,21 @@ public class AggressiveNPCs : MonoBehaviour
     }
 
 
-   private void RegisterSecurityCalledEvent()
+   private void RegisterSEndRiotEvent()
 {
     float tiempoReaccion = Time.time - tiempoInicioAgresion;
 
     Debug.Log($"Tiempo de reacción: {tiempoReaccion:F2}s");
 
     // Crear y configurar el evento
-    SecurityCalledEvent securityCalled = new SecurityCalledEvent();
-   securityCalled.reactionTime = Mathf.RoundToInt(tiempoReaccion);
+    EndRiotEvent endRiot = new EndRiotEvent();
+    endRiot.reactionTime = Mathf.RoundToInt(tiempoReaccion);
 
     // Grabar el evento 
     #if !UNITY_EDITOR
-        AnalyticsService.Instance.RecordEvent(securityCalled);
+        AnalyticsService.Instance.RecordEvent(endRiot);
     #else
-        Debug.Log("[ANALYTICS] Evento SecurityCalledEvent registrado");
+        Debug.Log("[ANALYTICS] Evento EndRiotEvent registrado");
     #endif
 }
 

@@ -3,7 +3,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using Unity.Services.Analytics; 
+using Unity.Services.Analytics;
 using static EventManager;
 
 
@@ -24,6 +24,9 @@ public class Cinematica : MonoBehaviour
     public AudioClip[] sonidos;
     public AudioSource audioSource;
     public AudioSource sonidoCerrar;
+
+    private bool cinematicaCerrada = false;
+
 
     private void Start()
     {
@@ -102,41 +105,40 @@ public class Cinematica : MonoBehaviour
         pantallaNegra.color = colorFinal;
     }
 
-    public void CerrarCinematica()
-    {
-        //evento CinSkkiped false
-        Debug.Log("CinSkkiped");
-
-
-        sonidoCerrar.Play();
-        StartCoroutine(CerrarCinematicaCoroutine());
-    }
-
     public void OmitirCinematica()
     {
-        // Llamar al evento CinSkkiped
-        RegisterCinSkkipedEvent();
-        
+        if (cinematicaCerrada) return;
+        cinematicaCerrada = true;
+
+        RegisterEndCinEvent(true);
+        sonidoCerrar.Play();
+        StartCoroutine(CerrarCinematicaCoroutine());
+    }
+
+    public void CerrarCinematica()
+    {
+        if (cinematicaCerrada) return;
+        cinematicaCerrada = true;
+
+        RegisterEndCinEvent(false);
         sonidoCerrar.Play();
         StartCoroutine(CerrarCinematicaCoroutine());
     }
 
 
-    private void RegisterCinSkkipedEvent()
+
+    private void RegisterEndCinEvent(bool cinSkipped)
     {
-        // Debug para verificar
-        Debug.Log("CinSkkiped");
-        
-        // Crear y configurar el evento
-        CinSkippedEvent cinSkipped = new CinSkippedEvent();
-        cinSkipped.cinSkipped = true;
-        
-        // Grabar el evento 
-        #if !UNITY_EDITOR
-            AnalyticsService.Instance.RecordEvent(cinSkipped);
-        #else
-            Debug.Log("[ANALYTICS] Evento CinSkkiped registrado");
-        #endif
+        Debug.Log("EndCinEvent");
+
+        EndCinEvent endCin = new EndCinEvent();
+        endCin.cinSkipped = cinSkipped;
+
+#if !UNITY_EDITOR
+        AnalyticsService.Instance.RecordEvent(endCin);
+#else
+        Debug.Log($"[ANALYTICS] Evento EndCinEvent registrado con cinSkipped = {cinSkipped}");
+#endif
     }
 
 

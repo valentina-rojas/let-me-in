@@ -80,9 +80,9 @@ public class EventManager : MonoBehaviour
 
 
 
-    public class SecurityCalledEvent : AnalyticsEvent
+    public class EndRiotEvent : AnalyticsEvent
     {
-        public SecurityCalledEvent() : base("SecurityCalled")
+        public EndRiotEvent() : base("EndRiot")
         {
         }
 
@@ -90,9 +90,9 @@ public class EventManager : MonoBehaviour
 
     }
 
-    public class CinSkippedEvent : AnalyticsEvent
+    public class EndCinEvent : AnalyticsEvent
     {
-        public CinSkippedEvent() : base("CinSkipped")
+        public EndCinEvent() : base("EndCin")
         {
         }
 
