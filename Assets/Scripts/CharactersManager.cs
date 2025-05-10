@@ -478,5 +478,9 @@ public void ActivarReaccionRechazo()
    
 }
 
+public int GetCurrentIndex()
+{
+    return index - 1; // Devuelve el índice del personaje que actualmente está siendo evaluado
+}
 
 }

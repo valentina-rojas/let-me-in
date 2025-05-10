@@ -3,6 +3,8 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Unity.Services.Analytics; 
+using static EventManager;
 
 
 public class Cinematica : MonoBehaviour
@@ -112,12 +114,31 @@ public class Cinematica : MonoBehaviour
 
     public void OmitirCinematica()
     {
-        //evento CinSkkiped true
-        Debug.Log("CinSkkiped");
-
+        // Llamar al evento CinSkkiped
+        RegisterCinSkkipedEvent();
+        
         sonidoCerrar.Play();
         StartCoroutine(CerrarCinematicaCoroutine());
     }
+
+
+    private void RegisterCinSkkipedEvent()
+    {
+        // Debug para verificar
+        Debug.Log("CinSkkiped");
+        
+        // Crear y configurar el evento
+        CinSkippedEvent cinSkipped = new CinSkippedEvent();
+        cinSkipped.cinSkipped = true;
+        
+        // Grabar el evento 
+        #if !UNITY_EDITOR
+            AnalyticsService.Instance.RecordEvent(cinSkipped);
+        #else
+            Debug.Log("[ANALYTICS] Evento CinSkkiped registrado");
+        #endif
+    }
+
 
     private IEnumerator CerrarCinematicaCoroutine()
     {
