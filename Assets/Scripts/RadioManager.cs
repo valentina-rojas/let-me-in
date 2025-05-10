@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.Services.Analytics; 
+using static EventManager;
 
 public class RadioManager : MonoBehaviour
 {
@@ -179,9 +181,8 @@ public class RadioManager : MonoBehaviour
 
     private void Perder()
     {
-        //evento GameOver con parametro reason fired
-        Debug.Log("GameOver fired");
-
+    
+       RegisterGameOverEvent();
 
         CharactersManager charactersManager = FindObjectOfType<CharactersManager>();
         if (charactersManager != null)
@@ -193,6 +194,23 @@ public class RadioManager : MonoBehaviour
         panelPerdiste.gameObject.SetActive(true);
     }
 
+       private void RegisterGameOverEvent()
+{
+     // Debug para verificars
+    Debug.Log($"[DEBUG] GameOver registrado - Nivel: {GameData.NivelActual}, Razón: Fired");
+
+    // Crear y configurar el evento
+    GameOverEvent gameOver = new GameOverEvent();
+    gameOver.level = GameData.NivelActual;
+    gameOver.reason = "Fired";
+
+    // Grabar el evento 
+    #if !UNITY_EDITOR
+        AnalyticsService.Instance.RecordEvent(gameOver);
+    #else
+        Debug.Log("[ANALYTICS] Evento GameOverEvent registrado");
+    #endif
+}
 
     public void PantallaRadio()
     {

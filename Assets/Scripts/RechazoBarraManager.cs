@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Unity.Services.Analytics; 
+using static EventManager;
 
 public class RechazoBarraManager : MonoBehaviour
 {
@@ -79,8 +81,7 @@ public class RechazoBarraManager : MonoBehaviour
 
     private void Perder()
     {
-        // evento GameOver con parametro reason "fired"
-        Debug.Log("GameOver fired");
+        RegisterGameOverEvent();
 
         CharactersManager charactersManager = FindObjectOfType<CharactersManager>();
         if (charactersManager != null)
@@ -91,4 +92,22 @@ public class RechazoBarraManager : MonoBehaviour
 
         panelPerdiste.gameObject.SetActive(true);
     }
+
+      private void RegisterGameOverEvent()
+{
+     // Debug para verificars
+    Debug.Log($"[DEBUG] GameOver registrado - Nivel: {GameData.NivelActual}, Razón: Fired");
+
+    // Crear y configurar el evento
+    GameOverEvent gameOver = new GameOverEvent();
+    gameOver.level = GameData.NivelActual;
+    gameOver.reason = "Fired";
+
+    // Grabar el evento 
+    #if !UNITY_EDITOR
+        AnalyticsService.Instance.RecordEvent(gameOver);
+    #else
+        Debug.Log("[ANALYTICS] Evento GameOverEvent registrado");
+    #endif
+}
 }

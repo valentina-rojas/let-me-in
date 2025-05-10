@@ -175,12 +175,29 @@ public class AggressiveNPCs : MonoBehaviour
 
     void FinTemporizador()
     {
-        // evento GameOver con parametro reason "riot"
-        Debug.Log("GameOver riot" );
+        RegisterGameOverEvent();
 
         DetenerPeligro();
         panelPerdiste.SetActive(true);
     }
+
+       private void RegisterGameOverEvent()
+{
+     // Debug para verificars
+    Debug.Log($"[DEBUG] GameOver registrado - Nivel: {GameData.NivelActual}, Razón: Riot");
+
+    // Crear y configurar el evento
+    GameOverEvent gameOver = new GameOverEvent();
+    gameOver.level = GameData.NivelActual;
+    gameOver.reason = "Riot";
+
+    // Grabar el evento 
+    #if !UNITY_EDITOR
+        AnalyticsService.Instance.RecordEvent(gameOver);
+    #else
+        Debug.Log("[ANALYTICS] Evento GameOverEvent registrado");
+    #endif
+}
 
     public void Peligro()
     {

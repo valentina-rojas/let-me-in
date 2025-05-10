@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Unity.Services.Analytics; 
+using static EventManager;
 
 public class StressBar : MonoBehaviour
 {
@@ -123,7 +125,7 @@ public class StressBar : MonoBehaviour
     public void PerderJuego()
     {
 
-        // evento GameOver con parametro reason "quit"
+        RegisterGameOverEvent();
 
         CharactersManager charactersManager = FindObjectOfType<CharactersManager>();
         if (charactersManager != null)
@@ -134,4 +136,22 @@ public class StressBar : MonoBehaviour
         panelPerdiste.SetActive(true);
     }
 
+
+   private void RegisterGameOverEvent()
+{
+     // Debug para verificars
+    Debug.Log($"[DEBUG] GameOver registrado - Nivel: {GameData.NivelActual}, Razón: Quit");
+
+    // Crear y configurar el evento
+    GameOverEvent gameOver = new GameOverEvent();
+    gameOver.level = GameData.NivelActual;
+    gameOver.reason = "Quit";
+
+    // Grabar el evento 
+    #if !UNITY_EDITOR
+        AnalyticsService.Instance.RecordEvent(gameOver);
+    #else
+        Debug.Log("[ANALYTICS] Evento GameOverEvent registrado");
+    #endif
+}
 }
