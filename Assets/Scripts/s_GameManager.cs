@@ -432,4 +432,27 @@ private void RegisterGameFinishedEvent()
     }
 
 
+void OnApplicationQuit()
+{
+    RegisterQuitEvent();
+}
+
+
+private void RegisterQuitEvent()
+{
+
+    Debug.Log($"[DEBUG] QuitEvent - Nivel: {GameData.NivelActual}, Personaje actual: {charactersManager.GetCurrentIndex()}");
+
+    QuitEvent quitEvent = new QuitEvent();
+    quitEvent.level = GameData.NivelActual;
+    quitEvent.charIndex = charactersManager.GetCurrentIndex();
+
+    #if !UNITY_EDITOR
+        AnalyticsService.Instance.RecordEvent(quitEvent);
+    #else
+        Debug.Log("[ANALYTICS] Evento QuitEvent registrado");
+    #endif
+}
+
+
 }
