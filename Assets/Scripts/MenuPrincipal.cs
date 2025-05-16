@@ -9,16 +9,17 @@ public class MenuPrincipal : MonoBehaviour
 
     public RectTransform panelCreditos;
     public RectTransform panelAyuda;
+    public RectTransform panelAnalytics;
     public AudioSource sonidoCerrar;
 
-private void Awake()
+    private void Awake()
     {
         if (instance == null)
             instance = this;
         else
             Destroy(gameObject);
     }
-    
+
     public void AbrirCreditos()
     {
         sonidoCerrar.Play();
@@ -49,21 +50,27 @@ private void Awake()
     {
         Application.Quit();
 
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
-        #endif
+#endif
     }
 
 
-public void IniciarJuego()
-{
-    sonidoCerrar.Play();
-    ChangeScene("Cinematica"); 
-}
+    public void IniciarJuego()
+    {
+        sonidoCerrar.Play();
+        ChangeScene("Cinematica");
+    }
 
-public void ChangeScene(string name)
-{
-    SceneManager.LoadScene(name);
-}
+    public void ChangeScene(string name)
+    {
+        SceneManager.LoadScene(name);
+    }
+
+    public void ActivarPanelAnalytics()
+    {
+        sonidoCerrar.Play();
+        panelAnalytics.gameObject.SetActive(true);
+    }
 
 }
