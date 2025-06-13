@@ -73,31 +73,53 @@ public class CharactersManager : MonoBehaviour
     }
 
     public void ConfigurarPersonajesParaNivel(int nivel)
+{
+    charactersForCurrentLevel.Clear();
+
+    // Filtrar personajes que pertenecen al nivel actual
+    List<Character> personajesDelNivel = new List<Character>();
+    foreach (var character in characters)
     {
-        charactersForCurrentLevel.Clear();
-
-        // Filtra los personajes para el nivel actual
-        foreach (var character in characters)
+        if (character.nivel == nivel)
         {
-            if (character.nivel == nivel)
-            {
-                charactersForCurrentLevel.Add(character);
-            }
+            personajesDelNivel.Add(character);
         }
-
-        Debug.Log($"Número de personajes para el nivel {nivel}: {charactersForCurrentLevel.Count}");
-
-        // Asegúrate de que la cantidad de personajes por nivel no exceda el número total de personajes configurados
-        if (charactersForCurrentLevel.Count > personajesPorNivel)
-        {
-            charactersForCurrentLevel = charactersForCurrentLevel.GetRange(0, personajesPorNivel);
-        }
-
-        contadorPersonas.text = charactersForCurrentLevel.Count.ToString();
-
-        // Mezcla la lista de personajes
-        Shuffle(charactersForCurrentLevel);
     }
+
+    // Separar personajes agresivos y no agresivos
+    List<Character> agresivos = personajesDelNivel.FindAll(c => c.esAgresivo);
+    List<Character> noAgresivos = personajesDelNivel.FindAll(c => !c.esAgresivo);
+
+    Debug.Log($"Nivel {nivel} tiene {agresivos.Count} agresivos y {noAgresivos.Count} no agresivos.");
+
+    // Asegurar que haya suficientes personajes para completar los 6
+    int cantidadFinal = 6;
+    if (agresivos.Count > cantidadFinal)
+    {
+        // Si hay más de 6 agresivos, tomar solo 6 de ellos al azar
+        Shuffle(agresivos);
+        charactersForCurrentLevel = agresivos.GetRange(0, cantidadFinal);
+    }
+    else
+    {
+        // Tomar todos los agresivos y completar el resto con personajes no agresivos aleatorios
+        int faltantes = cantidadFinal - agresivos.Count;
+
+        Shuffle(noAgresivos);
+        List<Character> seleccionados = new List<Character>();
+        seleccionados.AddRange(agresivos);
+        seleccionados.AddRange(noAgresivos.GetRange(0, Mathf.Min(faltantes, noAgresivos.Count)));
+
+        charactersForCurrentLevel = seleccionados;
+    }
+
+    // Mezclar el orden final de los personajes para que no salgan todos los agresivos juntos, por ejemplo
+    Shuffle(charactersForCurrentLevel);
+
+    // Actualizar UI
+    contadorPersonas.text = charactersForCurrentLevel.Count.ToString();
+}
+
 
     public void Shuffle<T>(List<T> list)
     {
