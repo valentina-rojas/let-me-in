@@ -11,7 +11,6 @@ public class s_GameManager : MonoBehaviour
 {
     public static s_GameManager Instance { get; private set; }
 
-
     public UI_Manager uiManager;
     public CharactersManager charactersManager;
     public DialogueManager dialogueManager;
@@ -212,10 +211,10 @@ public class s_GameManager : MonoBehaviour
 
 
         Character personajeActual = charactersManager.GetCharacter(charactersManager.CurrentCharacterIndex);
-        if (personajeActual.estado == CharacterState.Sano)
+       /* if (personajeActual.estado == CharacterState.Sano)
         {
             rechazoBarraManager.RechazarSano();
-        }
+        }*/
 
         NextCharacter();
 
@@ -284,6 +283,8 @@ public class s_GameManager : MonoBehaviour
                     Debug.Log("¡Elección incorrecta! Personaje enfermo ingresado.");
                     enfermosIngresados++;
                     strikes++;
+
+                     rechazoBarraManager.RechazarSano();  // o un nombre más general como ActualizarBarraStrikes();
                     strikesAcumulados++;
                 }
             }
@@ -294,6 +295,9 @@ public class s_GameManager : MonoBehaviour
                     Debug.Log("¡Elección incorrecta! Personaje sano rechazado.");
                     sanosRechazados++;
                     strikes++;
+                    
+                    rechazoBarraManager.RechazarSano();  // o un nombre más general como ActualizarBarraStrikes();
+
                     strikesAcumulados++;
                 }
                 else if (personajeActual.estado == CharacterState.Enfermo)

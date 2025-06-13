@@ -26,7 +26,7 @@ public class RadioManager : MonoBehaviour
     private bool estaEscribiendo = false;
 
     public Slider barraContaminacion;
-    public float maxContaminacion = 3f;  
+    public float maxContaminacion = 3f;   
     private float nivelContaminacion = 0f;  
     public Image fillBarImage;
 
@@ -67,7 +67,7 @@ public class RadioManager : MonoBehaviour
 
         yield return new WaitForSeconds(10f);
 
-        ActualizarContaminacion(1);
+        //ActualizarContaminacion(1);
 
         if (radioAnimator != null)
         {

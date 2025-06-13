@@ -33,31 +33,31 @@ public class RechazoBarraManager : MonoBehaviour
 
     // Método para actualizar la barra cuando rechazas a un personaje sano
     public void RechazarSano()
+{
+    // Obtener el valor de strikes del GameManager
+    rechazosActuales = s_GameManager.Instance.strikes;
+
+    // Asegurarse de no exceder el nivel máximo de rechazos
+    if (rechazosActuales > maxRechazos)
     {
-        // Incrementa los rechazos
-        rechazosActuales += 1;
-
-        // Asegurarse de no exceder el nivel máximo de rechazos
-        if (rechazosActuales > maxRechazos)
-        {
-            rechazosActuales = maxRechazos;
-        }
-
-        // Actualizar la barra visualmente
-        if (barraRechazoSanos != null)
-        {
-            barraRechazoSanos.value = rechazosActuales;
-            ActualizarColorBarraRechazo();
-            loadingBar.Play();
-        }
-
-        // Puedes agregar lógica adicional si el nivel de rechazos llega al máximo
-        if (rechazosActuales >= maxRechazos)
-        {
-            Debug.Log("¡Has rechazado demasiados sanos! Has perdido.");
-            Perder();
-        }
+        rechazosActuales = maxRechazos;
     }
+
+    // Actualizar la barra visualmente
+    if (barraRechazoSanos != null)
+    {
+        barraRechazoSanos.value = rechazosActuales;
+        ActualizarColorBarraRechazo();
+        loadingBar.Play();
+    }
+
+    // Verificar condición de derrota
+    if (rechazosActuales >= maxRechazos)
+    {
+        Debug.Log("¡Has alcanzado el máximo de strikes! Has perdido.");
+        Perder();
+    }
+}
 
    
     private void ActualizarColorBarraRechazo()
