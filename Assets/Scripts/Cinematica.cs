@@ -13,12 +13,15 @@ public class Cinematica : MonoBehaviour
     public TextMeshProUGUI texto;
     public Sprite[] imagenes;
     public string[] textos;
-    public float duracionPorImagen = 5f;
+    public float duracionPorImagen = 2f;
     public float velocidadDeTipeo = 0.05f;
     public AudioSource musica;
-    public float duracionFadeOut = 2f;
+    //public float duracionFadeOut = 1f;
     public Image pantallaNegra;
-    public float duracionFadePantalla = 2f;
+    //public float duracionFadePantalla = 1f;
+
+public float duracionFadeOut = 0.3f;
+public float duracionFadePantalla = 0.3f;
 
 
     public AudioClip[] sonidos;
@@ -35,11 +38,11 @@ public class Cinematica : MonoBehaviour
 
     private IEnumerator ReproducirCinematica()
     {
-        if (imagenes.Length != textos.Length)
+       /* if (imagenes.Length != textos.Length)
         {
             Debug.LogError("El número de imágenes y textos no coincide.");
             yield break;
-        }
+        }*/
 
         for (int i = 0; i < imagenes.Length; i++)
         {
@@ -55,7 +58,7 @@ public class Cinematica : MonoBehaviour
             }
 
 
-            yield return StartCoroutine(TipearTexto(textos[i]));
+           // yield return StartCoroutine(TipearTexto(textos[i]));
 
             yield return new WaitForSeconds(duracionPorImagen);
         }
