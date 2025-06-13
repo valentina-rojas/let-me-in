@@ -8,7 +8,7 @@ using static EventManager;
 public class StressBar : MonoBehaviour
 {
     public Slider barraEstres;
-    public float maxEstres = 5f;
+    public float maxEstres = 3f;
     private float nivelEstres = 0f;
     public Image fillBarImage;
     public GameObject panelPerdiste;
@@ -94,31 +94,26 @@ public class StressBar : MonoBehaviour
     }
 
 
-    private void ActualizarColorBarra()
+  private void ActualizarColorBarra()
+{
+    if (nivelEstres <= 0f)
     {
-        float porcentajeEstres = nivelEstres / maxEstres;
-
-        if (porcentajeEstres <= 0.2f)
-        {
-            fillBarImage.color = colorVerdeClaro;  
-        }
-        else if (porcentajeEstres <= 0.4f)
-        {
-            fillBarImage.color = colorVerdeOscuro; 
-        }
-        else if (porcentajeEstres <= 0.6f)
-        {
-            fillBarImage.color = colorAmarillo;    
-        }
-        else if (porcentajeEstres <= 0.8f)
-        {
-            fillBarImage.color = colorNaranja;    
-        }
-        else
-        {
-            fillBarImage.color = colorRojo;     
-        }
+        fillBarImage.color = colorVerdeClaro;
     }
+    else if (nivelEstres == 1f)
+    {
+        fillBarImage.color = colorVerdeOscuro;
+    }
+    else if (nivelEstres == 2f)
+    {
+        fillBarImage.color = colorAmarillo;
+    }
+    else if (nivelEstres == 3f)
+    {
+        fillBarImage.color = colorRojo;
+    }
+}
+
 
 
 
