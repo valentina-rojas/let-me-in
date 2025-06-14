@@ -50,6 +50,9 @@ public class s_GameManager : MonoBehaviour
     private int strikesAcumulados = 0;
     public int dialogosOmitidosTotal = 0;
 
+    private bool errorCometido = false;
+
+
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -122,6 +125,11 @@ public class s_GameManager : MonoBehaviour
 
     public void NextCharacter()
     {
+          if (errorCometido)
+    {
+        rechazoBarraManager.RechazarSano(); // o ActualizarBarraStrikes();
+    }
+
         charactersManager.AparecerSiguientePersonaje();
 
         stressBar.ActualizarEstres(1);
@@ -284,7 +292,9 @@ public class s_GameManager : MonoBehaviour
                     enfermosIngresados++;
                     strikes++;
 
-                     rechazoBarraManager.RechazarSano();  // o un nombre más general como ActualizarBarraStrikes();
+                    // rechazoBarraManager.RechazarSano();  // o un nombre más general como ActualizarBarraStrikes();
+
+                        errorCometido = true; // Hubo error
                     strikesAcumulados++;
                 }
             }
@@ -296,7 +306,9 @@ public class s_GameManager : MonoBehaviour
                     sanosRechazados++;
                     strikes++;
                     
-                    rechazoBarraManager.RechazarSano();  // o un nombre más general como ActualizarBarraStrikes();
+                  //  rechazoBarraManager.RechazarSano();  // o un nombre más general como ActualizarBarraStrikes();
+
+                      errorCometido = true; // Hubo error
 
                     strikesAcumulados++;
                 }
